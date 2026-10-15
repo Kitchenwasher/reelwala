@@ -1951,3 +1951,38 @@ dialog {
   display: block;
   color: var(--orange);
 }
+
+/* Hero AeroShards WebGPU 3D Background */
+.hero-aero-shards {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1 !important;
+  overflow: hidden !important;
+  pointer-events: auto !important;
+}
+
+.hero-aero-shards .aero-shards,
+.hero-aero-shards .aero-shards-canvas {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.hero-grid {
+  z-index: 2 !important;
+}
+
+.hero-copy {
+  z-index: 6 !important;
+}
+
+.hero-scene {
+  z-index: 4 !important;
+}
+
+.hero-foot {
+  z-index: 6 !important;
+}

@@ -81,6 +81,26 @@ async function build() {
       }
     });
     console.log('TechText logo bundled successfully into site/dist/logo-tech-text.bundle.js');
+
+    // 5. Bundle Hero AeroShards
+    await esbuild.build({
+      entryPoints: ['src/hero-aero-shards.jsx'],
+      bundle: true,
+      outfile: 'site/dist/hero-aero-shards.bundle.js',
+      format: 'esm',
+      minify: true,
+      sourcemap: true,
+      jsx: 'automatic',
+      loader: {
+        '.js': 'jsx',
+        '.jsx': 'jsx',
+        '.css': 'css'
+      },
+      define: {
+        'process.env.NODE_ENV': '"production"'
+      }
+    });
+    console.log('Hero AeroShards bundled successfully into site/dist/hero-aero-shards.bundle.js');
   } catch (error) {
     console.error('Bundle failed:', error);
     process.exit(1);
