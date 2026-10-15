@@ -17,14 +17,24 @@ photoInput.addEventListener('change',()=>photoInput.setCustomValidity(photoInput
 videoInput.addEventListener('change',()=>videoInput.setCustomValidity(videoInput.files.length <= 2?'':'Please choose no more than two videos.'));
 const imagePath = name => (name && (name.startsWith('http://') || name.startsWith('https://'))) ? name : `assets/${name}.webp`;
 const menu = $('.menu-toggle');
-menu.addEventListener('click', () => {
-  const open = menu.getAttribute('aria-expanded') !== 'true';
-  menu.setAttribute('aria-expanded', String(open));
-  menu.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-  $('#navigation').classList.toggle('open', open);
-});
-function closeMenu() {menu.setAttribute('aria-expanded', 'false');menu.setAttribute('aria-label', 'Open menu');$('#navigation').classList.remove('open');}
-$$('#navigation a').forEach(a => a.addEventListener('click', closeMenu));
+if (menu) {
+  menu.addEventListener('click', () => {
+    const open = menu.getAttribute('aria-expanded') !== 'true';
+    menu.setAttribute('aria-expanded', String(open));
+    menu.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    const nav = $('#navigation');
+    if (nav) nav.classList.toggle('open', open);
+  });
+}
+function closeMenu() {
+  if (menu) {
+    menu.setAttribute('aria-expanded', 'false');
+    menu.setAttribute('aria-label', 'Open menu');
+  }
+  const nav = $('#navigation');
+  if (nav) nav.classList.remove('open');
+}
+$$('#navigation a, .nav-left a, .nav-right a').forEach(a => a.addEventListener('click', closeMenu));
 $$('[data-open]').forEach(button => button.addEventListener('click', () => {closeMenu();document.getElementById(button.dataset.open).showModal();}));
 $$('dialog').forEach(dialog => {
   $('.dialog-close', dialog).addEventListener('click', () => dialog.close());
@@ -377,7 +387,7 @@ const ReelWalaBooking = {
       if (nameEl) nameEl.textContent = 'The Reel Wala Team Match';
       if (descEl) descEl.textContent = 'We pair you with the best available director for your occasion & city.';
       if (badgeEl) badgeEl.textContent = 'Recommended';
-      if (avatarWrap) avatarWrap.innerHTML = `<span class="team-sparkle">✨</span>`;
+      if (avatarWrap) avatarWrap.innerHTML = `<span class="team-sparkle"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.4 7.6 7.6 2.4-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4L12 2z"/></svg></span>`;
       if (hiddenCreator) hiddenCreator.value = 'The Reel Wala Team Match';
     }
     this.renderBlueprint();
@@ -465,24 +475,33 @@ const ReelWalaBooking = {
       'Something else': 'Bespoke Celebration'
     };
 
+    const icons = {
+      ring: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></svg>`,
+      pkg: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>`,
+      cam: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>`,
+      clapper: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8"/><path d="m4 11h16"/><path d="m4 11 1.6-4.8a1 1 0 0 1 .95-.68h10.9a1 1 0 0 1 .95.68L20 11"/></svg>`,
+      cal: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>`,
+      pin: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`
+    };
+
     const chips = [
-      { icon: '💍', text: occasionLabels[this.state.occasion] || this.state.occasion },
-      { icon: '📦', text: `${this.state.package} Tier` },
-      { icon: '🎥', text: this.state.creator ? this.state.creator.name : 'Team Match (Best Fit)' }
+      { icon: icons.ring, text: occasionLabels[this.state.occasion] || this.state.occasion },
+      { icon: icons.pkg, text: `${this.state.package} Tier` },
+      { icon: icons.cam, text: this.state.creator ? this.state.creator.name : 'Team Match (Best Fit)' }
     ];
 
     if (this.state.inspiration) {
-      chips.push({ icon: '🎬', text: `Inspired: ${this.state.inspiration.title}` });
+      chips.push({ icon: icons.clapper, text: `Inspired: ${this.state.inspiration.title}` });
     }
 
     if (this.state.isDateFlexible) {
-      chips.push({ icon: '🗓️', text: 'Timing: Flexible planning' });
+      chips.push({ icon: icons.cal, text: 'Timing: Flexible planning' });
     } else if (this.state.date) {
-      chips.push({ icon: '🗓️', text: `Date: ${this.state.date}` });
+      chips.push({ icon: icons.cal, text: `Date: ${this.state.date}` });
     }
 
     if (this.state.locality) {
-      chips.push({ icon: '📍', text: `City: ${this.state.locality}` });
+      chips.push({ icon: icons.pin, text: `City: ${this.state.locality}` });
     }
 
     itemsEl.innerHTML = chips.map(c => `

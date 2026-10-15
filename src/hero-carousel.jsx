@@ -109,23 +109,6 @@ function HeroCarouselScene() {
         />
       </div>
 
-      {/* Floating Instagram-Style Social Reactions */}
-      <div className="ig-floating-reactions" aria-hidden="true">
-        <div className="ig-badge ig-badge-sound">
-          <span>🔊</span>
-          <small>Reel sound</small>
-        </div>
-        <div className="ig-badge ig-badge-heart">
-          <span>🤍</span>
-        </div>
-        <div className="ig-badge ig-badge-sparkles">
-          <span>✨</span>
-        </div>
-        <div className="ig-badge ig-badge-whiteheart">
-          <span>🤍</span>
-        </div>
-      </div>
-
       {/* The Central Handheld Phone & Gimbal Stand */}
       <div className="hero-gimbal-holder">
         <div className="device-shadow"></div>
@@ -173,7 +156,10 @@ function HeroCarouselScene() {
                 onClick={handleLike}
                 aria-label="Like this reel"
               >
-                {liked ? '❤️' : '🤍'} <span>{likeCount}</span>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill={liked ? "#f35422" : "none"} stroke={liked ? "#f35422" : "currentColor"} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+                </svg>
+                <span>{likeCount}</span>
               </button>
               <span className="phone-ig-share">↗</span>
             </div>

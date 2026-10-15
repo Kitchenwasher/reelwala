@@ -34,18 +34,9 @@
 .phone-ig-heart:hover{transform:scale(1.05)}
 .phone-ig-heart.liked{background:rgba(243,84,34,.85)}
 .phone-ig-share{font-size:10px;opacity:.9}
-.ig-floating-reactions{position:absolute;inset:0;pointer-events:none;z-index:7}
-.ig-badge{position:absolute;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border:1px solid rgba(217,211,199,.8);border-radius:24px;box-shadow:0 10px 24px rgba(60,40,20,.12);font-size:11px;font-family:var(--sans);font-weight:600;color:var(--ink);animation:floatSticker 4s ease-in-out infinite alternate}
-.ig-badge span{font-size:14px}
-.ig-badge-sound{top:10%;left:6%;animation-delay:0s}
-.ig-badge-heart{top:10%;right:10%;background:#ff334b;color:#fff;border-color:#ff334b;padding:8px 12px;border-radius:50%;animation-delay:1.2s}
-.ig-badge-sparkles{bottom:20%;left:4%;background:#fff;padding:8px 12px;border-radius:50%;animation-delay:.7s}
-.ig-badge-whiteheart{bottom:16%;right:8%;background:#fff;padding:8px 12px;border-radius:50%;animation-delay:1.9s}
-@keyframes floatSticker{0%{transform:translateY(0px) rotate(0deg)}100%{transform:translateY(-8px) rotate(2deg)}}
 @media (max-width:700px){
   .hero-scene{position:relative;top:auto;right:auto;width:100%;height:480px;margin-top:20px}
   .hero-gimbal-holder{width:300px;height:450px}
-  .ig-badge{padding:5px 9px;font-size:9px}
 }
 /* === ULTRA-PREMIUM WORK SECTION (FULL-BLEED CINEMATIC SHOWCASE) === */
 .work {
@@ -1737,4 +1728,205 @@ dialog {
     align-items: flex-start !important;
     padding: 16px !important;
   }
+}
+
+/* =====================================================================
+   SPLIT 3-COLUMN NAVBAR WITH BIG CENTERED BRANDING & MOBILE DRAWER
+   ===================================================================== */
+.header {
+  height: 96px !important;
+  padding: 0 4.3% !important;
+  display: grid !important;
+  grid-template-columns: 1fr auto 1fr !important;
+  align-items: center !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 50 !important;
+  border-bottom: 1px solid rgba(217, 211, 199, 0.45) !important;
+  background: rgba(245, 241, 233, 0.85) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+}
+
+.nav-left {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 36px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.3px !important;
+}
+
+.wordmark-center {
+  font: 600 clamp(30px, 3.2vw, 44px) / 1 'Oswald', sans-serif !important;
+  letter-spacing: -1.4px !important;
+  text-transform: uppercase !important;
+  color: var(--ink) !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  padding: 0 28px !important;
+  margin: 0 auto !important;
+  transition: color 0.2s ease, transform 0.2s ease !important;
+  text-decoration: none !important;
+}
+
+.wordmark-center:hover {
+  color: var(--orange) !important;
+}
+
+.header-right {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 30px !important;
+}
+
+.nav-right {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 32px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.3px !important;
+}
+
+.nav-left a,
+.nav-right a,
+.nav-right .text-button {
+  position: relative !important;
+  color: var(--ink) !important;
+  text-decoration: none !important;
+  transition: color 0.25s ease !important;
+}
+
+.nav-left a:hover,
+.nav-right a:hover,
+.nav-right .text-button:hover {
+  color: var(--orange) !important;
+}
+
+.nav-left a::after,
+.nav-right a::after,
+.nav-right .text-button::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: -6px !important;
+  left: 0 !important;
+  width: 0 !important;
+  height: 2px !important;
+  border-radius: 2px !important;
+  background: var(--orange) !important;
+  transition: width 0.25s ease !important;
+}
+
+.nav-left a:hover::after,
+.nav-right a:hover::after,
+.nav-right .text-button:hover::after {
+  width: 100% !important;
+}
+
+.nav-cta {
+  margin: 0 !important;
+  white-space: nowrap !important;
+}
+
+.mobile-nav {
+  display: none !important;
+}
+
+.menu-toggle {
+  display: none !important;
+}
+
+/* Mobile & Tablet Split Navbar */
+@media (max-width: 900px) {
+  .header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    height: 76px !important;
+    padding: 0 5% !important;
+  }
+
+  .desktop-nav {
+    display: none !important;
+  }
+
+  .header-right {
+    gap: 14px !important;
+  }
+
+  .wordmark-center {
+    font-size: clamp(23px, 6vw, 30px) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .menu-toggle {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: none !important;
+    border: none !important;
+    font-size: 26px !important;
+    padding: 6px !important;
+    color: var(--ink) !important;
+    cursor: pointer !important;
+    line-height: 1 !important;
+  }
+
+  .mobile-nav {
+    display: none !important;
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: 76px !important;
+    background: rgba(245, 241, 233, 0.98) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    padding: 26px 6% 34px !important;
+    flex-direction: column !important;
+    gap: 18px !important;
+    border-bottom: 1px solid var(--line) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  .mobile-nav.open {
+    display: flex !important;
+  }
+
+  .mobile-nav a,
+  .mobile-nav .text-button {
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    padding: 6px 0 !important;
+    text-align: left !important;
+    color: var(--ink) !important;
+  }
+
+  .mobile-nav .button {
+    width: max-content !important;
+    margin-top: 8px !important;
+  }
+}
+
+/* Blueprint and Icon Alignments */
+.bp-icon svg,
+.chip-icon svg {
+  display: block;
+}
+
+.team-sparkle svg {
+  display: block;
+  color: var(--orange);
+}
+
+.picker-team-sparkle svg {
+  display: block;
+  color: var(--orange);
 }
