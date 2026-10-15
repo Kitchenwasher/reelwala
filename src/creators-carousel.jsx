@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import FlexCarousel from './components/FlexCarousel.jsx';
 
@@ -54,6 +54,9 @@ const CREATOR_ITEMS = [
 ];
 
 function CreatorsShowcase() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeCreator = CREATOR_ITEMS[activeIndex] || CREATOR_ITEMS[0];
+
   return (
     <div className="creators-showcase-wrapper">
       <div className="creators-carousel-container" style={{ width: '100%', height: '560px', position: 'relative' }}>
@@ -68,7 +71,33 @@ function CreatorsShowcase() {
           squeeze={0.25}
           focusOnClick
           captions
+          onSelect={(index) => setActiveIndex(index)}
         />
+      </div>
+
+      <div className="creators-dock">
+        <div className="creators-dock-left">
+          <span className="creators-dock-tag">Featured Director</span>
+          <strong className="creators-dock-name">{activeCreator.title}</strong>
+          <span className="creators-dock-sub">{activeCreator.subtitle}</span>
+        </div>
+        <a
+          href="#book"
+          className="button small"
+          onClick={() => {
+            if (window.ReelWalaBooking) {
+              window.ReelWalaBooking.setCreator({
+                id: activeCreator.title.toLowerCase().replace(/\s+/g, '-'),
+                name: activeCreator.title,
+                role: activeCreator.subtitle.split(' · ')[0],
+                city: activeCreator.subtitle.split(' · ')[1] || '',
+                avatar: activeCreator.src
+              });
+            }
+          }}
+        >
+          Book with {activeCreator.title.split(' ')[0]} <span>↗</span>
+        </a>
       </div>
 
       <div className="creators-hint">

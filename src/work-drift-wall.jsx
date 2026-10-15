@@ -292,13 +292,21 @@ function WorkDriftWallShowcase() {
                   href="#book"
                   className="reel-cinema-cta"
                   onClick={() => {
+                    let occasionVal = 'Wedding / private celebration';
+                    if (activeReel.category === 'weddings') occasionVal = 'Wedding / private celebration';
+                    else if (activeReel.category === 'festivals') occasionVal = 'Social / cultural event';
+                    else if (activeReel.category === 'nightlife') occasionVal = 'Social / cultural event';
+                    else occasionVal = 'Something else';
+
+                    window.ReelWalaBooking?.setInspiration({
+                      title: activeReel.title,
+                      subtitle: activeReel.subtitle,
+                      tag: activeReel.tag,
+                      category: activeReel.category,
+                      image: activeReel.image,
+                      occasion: occasionVal
+                    });
                     setActiveReel(null);
-                    const occasionSelect = document.querySelector('select[name="occasion"]');
-                    if (occasionSelect) {
-                      if (activeReel.category === 'weddings') occasionSelect.value = 'Wedding / private celebration';
-                      else if (activeReel.category === 'festivals') occasionSelect.value = 'Social / cultural event';
-                      else occasionSelect.value = 'Wedding / private celebration';
-                    }
                   }}
                 >
                   Book a reel like this <span>↗</span>
