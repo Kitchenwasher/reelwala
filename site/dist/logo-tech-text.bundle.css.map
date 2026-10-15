@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/TechText.css"],
+  "sourcesContent": [".tech-text {\n  position: relative;\n  width: 100%;\n  height: 100%;\n  touch-action: pan-y;\n  user-select: none;\n}\n\n.tech-text-canvas {\n  display: block;\n  width: 100%;\n  height: 100%;\n}\n"],
+  "mappings": "AAAA,CAAC,UACC,SAAU,SACV,MAAO,KACP,OAAQ,KACR,aAAc,MACd,YAAa,IACf,CAEA,CAAC,iBACC,QAAS,MACT,MAAO,KACP,OAAQ,IACV",
+  "names": []
+}

@@ -1762,20 +1762,33 @@ dialog {
 }
 
 .wordmark-center {
-  font: 600 clamp(30px, 3.2vw, 44px) / 1 'Oswald', sans-serif !important;
-  letter-spacing: -1.4px !important;
-  text-transform: uppercase !important;
-  color: var(--ink) !important;
-  text-align: center !important;
-  white-space: nowrap !important;
-  padding: 0 28px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 14px !important;
   margin: 0 auto !important;
-  transition: color 0.2s ease, transform 0.2s ease !important;
   text-decoration: none !important;
+  transition: color 0.2s ease, transform 0.2s ease !important;
 }
 
-.wordmark-center:hover {
-  color: var(--orange) !important;
+.logo-tech-text-wrap {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: clamp(230px, 24vw, 320px) !important;
+  height: 52px !important;
+  position: relative !important;
+  font: 600 clamp(28px, 2.7vw, 38px) / 1 'Oswald', sans-serif !important;
+  letter-spacing: -1.2px !important;
+  text-transform: uppercase !important;
+  color: var(--ink) !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+}
+
+.logo-tech-text-wrap .tech-text {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .header-right {
@@ -1866,9 +1879,13 @@ dialog {
   }
 
   .wordmark-center {
-    font-size: clamp(23px, 6vw, 30px) !important;
     padding: 0 !important;
     margin: 0 !important;
+  }
+
+  .logo-tech-text-wrap {
+    width: clamp(190px, 50vw, 250px) !important;
+    height: 44px !important;
   }
 
   .menu-toggle {
