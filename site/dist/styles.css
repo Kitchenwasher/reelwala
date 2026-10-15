@@ -1954,6 +1954,7 @@ dialog {
 
 /* Hero AeroShards 3D Background (WebGPU + High-Fidelity 3D Canvas) */
 .hero-aero-shards {
+  opacity: 0.18;
   position: absolute !important;
   inset: 0 !important;
   width: 100% !important;
