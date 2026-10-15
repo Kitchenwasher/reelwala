@@ -105,20 +105,22 @@ function renderScroll() {
     const p = Math.max(0,Math.min(1,(y-start)/range));
     const smooth = p*p*(3-2*p);
     const frame = $('.reel-window');
-    frame.style.width = `${26+74*smooth}%`;
-    frame.style.height = `${76+24*smooth}%`;
-    frame.style.borderRadius = `${38*(1-smooth)}px`;
-    frame.style.borderWidth = `${8*(1-smooth)}px`;
-    $('.phone-island').style.opacity=String(Math.max(0,1-p*3));
-    $('.reel-overlay').style.opacity=String(Math.max(0,(p-.35)/.65));
-    $('.immersive-prompt').style.opacity=String(1-p);
+    if (frame) {
+      frame.style.width = `${26+74*smooth}%`;
+      frame.style.height = `${76+24*smooth}%`;
+      frame.style.borderRadius = `${38*(1-smooth)}px`;
+      frame.style.borderWidth = `${8*(1-smooth)}px`;
+    }
+    const pi = $('.phone-island'); if (pi) pi.style.opacity=String(Math.max(0,1-p*3));
+    const ro = $('.reel-overlay'); if (ro) ro.style.opacity=String(Math.max(0,(p-.35)/.65));
+    const ip = $('.immersive-prompt'); if (ip) ip.style.opacity=String(1-p);
   }
   if (!reducedMotion.matches && y < hero.offsetHeight) {
     const p = Math.min(y/hero.offsetHeight,1);
-    $('.gimbal').style.transform = `translateY(${p*35}px) rotate(${p*-8}deg) rotateY(${p*12}deg)`;
-    $('.photo-one').style.transform = `translateY(${p*-85}px) rotate(${-10+p*5}deg)`;
-    $('.photo-two').style.transform = `translateY(${p*-45}px) rotate(${9-p*5}deg)`;
-    $('.photo-three').style.transform = `translateY(${p*-100}px) rotate(${-7+p*4}deg)`;
+    const gm = $('.gimbal'); if (gm) gm.style.transform = `translateY(${p*35}px) rotate(${p*-8}deg) rotateY(${p*12}deg)`;
+    const p1 = $('.photo-one'); if (p1) p1.style.transform = `translateY(${p*-85}px) rotate(${-10+p*5}deg)`;
+    const p2 = $('.photo-two'); if (p2) p2.style.transform = `translateY(${p*-45}px) rotate(${9-p*5}deg)`;
+    const p3 = $('.photo-three'); if (p3) p3.style.transform = `translateY(${p*-100}px) rotate(${-7+p*4}deg)`;
   }
   if (!mobile.matches && !reducedMotion.matches) {
     const section = $('#story');
