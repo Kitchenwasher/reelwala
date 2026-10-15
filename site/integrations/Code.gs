@@ -9,10 +9,11 @@ function doPost(event) {
     if(!event || !event.postData || event.postData.length>36000000) throw new Error('The submission is too large.');
     const body=JSON.parse(event.postData.contents);
     if(body.website) throw new Error('Unable to accept this submission.');
-    if(!['booking','creator'].includes(body.kind))throw new Error('Unknown submission type.');
+    if(!['booking','creator','edit'].includes(body.kind))throw new Error('Unknown submission type.');
     if(!/^[0-9a-f-]{36}$/i.test(body.submissionId||''))throw new Error('Missing submission ID.');
     const data=body.data||{};
-    required_(data,'name',100);required_(data,'email',254);required_(data,'phone',20);required_(data,'locality',150);
+    required_(data,'name',100);required_(data,'email',254);required_(data,'phone',20);
+    if(body.kind!=='edit')required_(data,'locality',150);
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))throw new Error('Enter a valid email.');
     if(!/^[+0-9()\s-]{7,20}$/.test(data.phone))throw new Error('Enter a valid phone number.');
     if(body.kind==='booking'){
@@ -23,24 +24,33 @@ function doPost(event) {
       if(!['Help me choose','Standard','Extended','Custom / Premium'].includes(data.package))throw new Error('Select a package.');
       if(String(data.notes||'').length>2000)throw new Error('Please shorten your notes.');
       if((body.uploads||[]).length)throw new Error('Booking enquiries do not accept files.');
-    } else {
+    } else if(body.kind==='creator') {
       if(!MODELS.includes(data.device))throw new Error('Select a supported iPhone.');
       if(data.portfolio&&!/^https?:\/\//i.test(data.portfolio))throw new Error('Enter a valid portfolio link.');
     }
+    if(body.kind==='edit'&&String(data.notes||'').length>2000)throw new Error('Please shorten your editing brief.');
     const uploads=body.uploads||[];
     const photos=uploads.filter(file=>file.kind==='photo');const videos=uploads.filter(file=>file.kind==='video');
     if(body.kind==='creator'&&(photos.length!==5||videos.length>2||photos.length+videos.length!==uploads.length))throw new Error('Choose five photos and up to two optional videos.');
+    if(body.kind==='edit'&&(videos.length<3||videos.length>4||videos.length!==uploads.length))throw new Error('Choose three or four videos.');
     const decoded=[];let totalBytes=0;
     for(const file of uploads){
       const allowed=file.kind==='photo'?['image/jpeg','image/png','image/webp','image/heic','image/heif']:['video/mp4','video/quicktime','video/webm'];
-      if(!allowed.includes(file.mime)||typeof file.data!=='string')throw new Error('Unsupported portfolio file type.');
+      if(!allowed.includes(file.mime)||typeof file.data!=='string')throw new Error('Unsupported file type.');
       const bytes=Utilities.base64Decode(file.data);const limit=file.kind==='photo'?4000000:10000000;
       if(bytes.length>limit||bytes.length===0)throw new Error('Photos must be under 4 MB and videos under 10 MB.');
-      totalBytes+=bytes.length;if(totalBytes>25000000)throw new Error('Keep all portfolio files under 25 MB combined.');
+      totalBytes+=bytes.length;if(totalBytes>25000000)throw new Error('Keep all selected files under 25 MB combined.');
       decoded.push({file,bytes});
     }
     lock=LockService.getScriptLock();if(!lock.tryLock(20000))throw new Error('The team is receiving another request. Please try again shortly.');
-    const book=SpreadsheetApp.openById(SPREADSHEET_ID);const sheet=book.getSheetByName(body.kind==='booking'?'Bookings':'Creators');
+    const book=SpreadsheetApp.openById(SPREADSHEET_ID);
+    const sheetName=body.kind==='booking'?'Bookings':body.kind==='edit'?'Edits':'Creators';
+    let sheet=book.getSheetByName(sheetName);
+    if(!sheet&&body.kind==='edit'){
+      sheet=book.insertSheet('Edits');
+      sheet.appendRow(['Submission ID','Received','Name','Email','Phone','Video links','Editing brief','Status']);
+      sheet.setFrozenRows(1);
+    }
     if(!sheet)throw new Error('The intake sheet is unavailable.');
     const last=sheet.getLastRow();
     if(last>=2&&sheet.getRange(2,1,last-1,1).createTextFinder(body.submissionId).matchEntireCell(true).findNext())return output_({success:true,submissionId:body.submissionId,duplicate:true});
@@ -49,11 +59,11 @@ function doPost(event) {
     const recent=Number(cache.get(key)||0);if(recent>=3)throw new Error('You have already sent a few requests. Please try again in 10 minutes.');
     const urls={photo:[],video:[]};
     if(decoded.length){
-      folder=DriveApp.createFolder('Reel Wala portfolio '+body.submissionId);
+      folder=DriveApp.createFolder('Reel Wala '+(body.kind==='edit'?'edit clips ':'portfolio ')+body.submissionId);
       for(const {file,bytes} of decoded){const name=String(file.name||'portfolio').replace(/[^a-zA-Z0-9._ -]/g,'_').slice(0,100);const created=folder.createFile(Utilities.newBlob(bytes,file.mime,name));urls[file.kind].push(created.getUrl());}
     }
     const common=[body.submissionId,new Date(),cell_(data.name),cell_(data.email),cell_(data.phone)];
-    const row=body.kind==='booking'?[...common,cell_(data.occasion),new Date(data.date+'T12:00:00+05:30'),cell_(data.locality),cell_(data.package),cell_(data.notes),'New']:[...common,cell_(data.locality),cell_(data.device),cell_(data.portfolio),urls.photo.join('\n'),urls.video.join('\n'),'New'];
+    const row=body.kind==='booking'?[...common,cell_(data.occasion),new Date(data.date+'T12:00:00+05:30'),cell_(data.locality),cell_(data.package),cell_(data.notes),'New']:body.kind==='edit'?[...common,urls.video.join('\n'),cell_(data.notes),'New']:[...common,cell_(data.locality),cell_(data.device),cell_(data.portfolio),urls.photo.join('\n'),urls.video.join('\n'),'New'];
     sheet.appendRow(row);saved=true;cache.put(key,String(recent+1),600);
     return output_({success:true,submissionId:body.submissionId});
   }catch(error){

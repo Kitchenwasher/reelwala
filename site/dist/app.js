@@ -1,8 +1,6 @@
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
-const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const endpoint = window.REEL_WALA_CONFIG?.sheetsEndpoint || '';
-const mobile = matchMedia('(max-width: 700px)');
 const deviceInput = $('#creator-form input[name="device"]');
 const deviceSelect = document.createElement('select');
 deviceSelect.name = 'device';deviceSelect.required = true;
@@ -52,37 +50,6 @@ $$('.work-card').forEach(button => button.addEventListener('click', () => openIm
 $('#lightbox-book').addEventListener('click', () => imageDialog.close());
 const observer = new IntersectionObserver(entries => entries.forEach(entry => {if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}}),{threshold:.08});
 $$('.work .section-top,.work h2,.work-strip,.price-card,.booking-copy,.creator-banner h2').forEach(element => {element.classList.add('reveal');observer.observe(element);});
-const galleryData = [
-  {image:'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=900&q=80&auto=format&fit=crop',title:'Wedding'},
-  {image:'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=900&q=80&auto=format&fit=crop',title:'Corporate event'},
-  {image:'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=900&q=80&auto=format&fit=crop',title:'Reception'},
-  {image:'https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=900&q=80&auto=format&fit=crop',title:'Concert'},
-  {image:'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=900&q=80&auto=format&fit=crop',title:'Celebration'}
-];
-let galleryIndex = 2;
-const cardsRoot = $('.replay-cards');
-galleryData.forEach((item,i) => {const button = document.createElement('button');button.className='replay-card';button.setAttribute('aria-label',`View ${item.title}`);const img = document.createElement('img');img.src=imagePath(item.image);img.alt=item.title;img.loading='lazy';button.append(img);button.addEventListener('click',() => {if(didDrag)return;if(galleryIndex===i)openImage(item.image,item.title,'EVENT PREVIEW');else{galleryIndex=i;renderGallery();}});cardsRoot.append(button);});
-function renderGallery() {
-  $$('.replay-card').forEach((card,i) => {
-    let offset = (i-galleryIndex+5)%5;if(offset>2)offset-=5;
-    const angle = offset*(mobile.matches?34:31);const rad = angle*Math.PI/180;
-    const x = Math.sin(rad)*(mobile.matches?210:$('.replay-stage').clientWidth*.44);
-    const scale = 1-Math.abs(offset)*.17;
-    card.style.transform=`translateX(${x}px) translateY(${Math.abs(offset)*10}px) rotateY(${-angle*.7}deg) scale(${scale})`;
-    card.style.zIndex=String(5-Math.abs(offset));card.style.filter=`saturate(${1-Math.abs(offset)*.12})`;
-    card.setAttribute('aria-pressed',String(offset===0));
-  });
-  $('.replay-caption').textContent=galleryData[galleryIndex].title;
-}
-function moveGallery(direction){galleryIndex=(galleryIndex+direction+galleryData.length)%galleryData.length;renderGallery();}
-$('#replay-prev').addEventListener('click',()=>moveGallery(-1));$('#replay-next').addEventListener('click',()=>moveGallery(1));
-const stage=$('.replay-stage');let pointerStart=null,didDrag=false;
-stage.addEventListener('pointerdown',event=>{pointerStart={x:event.clientX,y:event.clientY};didDrag=false;});
-stage.addEventListener('pointerup',event=>{if(!pointerStart)return;const dx=event.clientX-pointerStart.x;const dy=event.clientY-pointerStart.y;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)){didDrag=true;moveGallery(dx<0?1:-1);setTimeout(()=>didDrag=false,100);}pointerStart=null;});
-stage.addEventListener('pointercancel',()=>pointerStart=null);
-stage.addEventListener('dragstart',event=>event.preventDefault());
-stage.addEventListener('keydown',event=>{if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();moveGallery(event.key==='ArrowRight'?1:-1);}});
-window.addEventListener('resize',renderGallery);renderGallery();
 // ============================================================================
 // Intelligent Self-Building Booking & Creator Selection Controller
 // ============================================================================
@@ -520,19 +487,19 @@ function downloadEnquiry(form, kind) {
   }
 
   // Ensure date has a value if flexible was selected
-  if (kind === 'booking' && ReelWalaBooking.state.isDateFlexible) {
+  if (kind === 'Shoot enquiry' && ReelWalaBooking.state.isDateFlexible) {
     data.date = `${data.date || 'TBD'} (Flexible planning)`;
   }
 
   // Enrich notes with creator, inspiration, and date flexibility
   let enrichedNotes = data.notes || '';
-  if (ReelWalaBooking.state.creator) {
+  if (kind === 'Shoot enquiry' && ReelWalaBooking.state.creator) {
     enrichedNotes = `[Director: ${ReelWalaBooking.state.creator.name} (${ReelWalaBooking.state.creator.role} · ${ReelWalaBooking.state.creator.city})]\n` + enrichedNotes;
   }
-  if (ReelWalaBooking.state.inspiration) {
+  if (kind === 'Shoot enquiry' && ReelWalaBooking.state.inspiration) {
     enrichedNotes = `[Inspiration: ${ReelWalaBooking.state.inspiration.title}]\n` + enrichedNotes;
   }
-  if (ReelWalaBooking.state.isDateFlexible) {
+  if (kind === 'Shoot enquiry' && ReelWalaBooking.state.isDateFlexible) {
     enrichedNotes = `[Timing: Date is flexible / planning ahead]\n` + enrichedNotes;
   }
   data.notes = enrichedNotes.trim();
@@ -553,7 +520,7 @@ function downloadEnquiry(form, kind) {
 }
 
 async function sendEnquiry(form, kind) {
-  if (!endpoint) return downloadEnquiry(form, kind === 'booking' ? 'Shoot enquiry' : 'Creator application');
+  if (!endpoint) return downloadEnquiry(form, kind === 'booking' ? 'Shoot enquiry' : kind === 'edit' ? 'Reel edit request' : 'Creator application');
   if (!form.reportValidity()) return;
   const button = $('button[type="submit"]', form);
   if (button.disabled) return;
@@ -593,7 +560,7 @@ async function sendEnquiry(form, kind) {
         const limit = fileKind === 'photo' ? 4000000 : 10000000;
         if (value.size > limit) throw new Error('Photos must be under 4 MB and videos under 10 MB.');
         total += value.size;
-        if (total > 25000000) throw new Error('Keep portfolio files under 25 MB combined.');
+        if (total > 25000000) throw new Error('Keep all selected files under 25 MB combined.');
         const base64 = await new Promise((resolve, reject) => {
           const reader = new FileReader();
           reader.onload = () => resolve(String(reader.result).split(',')[1]);
@@ -617,6 +584,7 @@ async function sendEnquiry(form, kind) {
     if (result.success !== true) throw new Error(result.error || 'Unable to save your request.');
     status.textContent = kind === 'booking'
       ? 'Your enquiry is saved. The team will follow up to confirm your shoot.'
+      : kind === 'edit' ? 'Your clips and request are saved. The team will confirm the price and delivery date.'
       : 'Your application is saved. The team will be in touch about the next step.';
     form.reset();
     delete form.dataset.submissionId;
@@ -637,7 +605,7 @@ if (endpoint) {
   $$('.portfolio-uploads small').forEach((small, i) => small.textContent = i === 0 ? 'Five photos, up to 4 MB each.' : 'Optional: up to two videos, 10 MB each. All files combined: 25 MB maximum.');
 }
 
-[$('#booking-form'), $('#creator-form')].forEach(form => {
+[$('#booking-form'), $('#creator-form'), $('#edit-form')].forEach(form => {
   if (!form) return;
   const trap = document.createElement('input');
   trap.name = 'website';
@@ -653,4 +621,42 @@ const bForm = $('#booking-form');
 if (bForm) bForm.addEventListener('submit', event => { event.preventDefault(); sendEnquiry(event.currentTarget, 'booking'); });
 const cForm = $('#creator-form');
 if (cForm) cForm.addEventListener('submit', event => { event.preventDefault(); sendEnquiry(event.currentTarget, 'creator'); });
+const editForm = $('#edit-form');
+if (editForm) {
+  const clips = $('#edit-clips');
+  const previews = $('#edit-clip-previews');
+  const note = $('#edit-files-note');
+  let previewUrls = [];
+  const clearPreviews = () => { previewUrls.forEach(url => URL.revokeObjectURL(url));previewUrls = [];previews.replaceChildren(); };
+  const validateClips = () => {
+    const files = [...clips.files];
+    let error = '';
+    if (files.length < 3 || files.length > 4) error = 'Choose three or four videos.';
+    else if (files.some(file => !['video/mp4', 'video/quicktime', 'video/webm'].includes(file.type))) error = 'Choose MP4, MOV or WebM videos.';
+    else if (files.some(file => !file.size || file.size > 10000000)) error = 'Each video must be under 10 MB and cannot be empty.';
+    else if (files.reduce((total, file) => total + file.size, 0) > 25000000) error = 'Keep the videos under 25 MB combined.';
+    clips.setCustomValidity(error);
+    note.textContent = error || files.length + ' clips selected';
+    return !error;
+  };
+  clips.addEventListener('change', () => {
+    delete editForm.dataset.submissionId;clearPreviews();
+    if (!validateClips()) return;
+    [...clips.files].forEach(file => {
+      const figure = document.createElement('figure');
+      const video = document.createElement('video');
+      const caption = document.createElement('figcaption');
+      video.src = URL.createObjectURL(file);previewUrls.push(video.src);
+      video.controls = true;video.preload = 'metadata';video.playsInline = true;
+      caption.textContent = file.name;figure.append(video,caption);previews.append(figure);
+    });
+  });
+  editForm.addEventListener('submit', event => { event.preventDefault();if (validateClips()) sendEnquiry(editForm,'edit');else clips.reportValidity(); });
+  editForm.addEventListener('reset', () => { clearPreviews();clips.setCustomValidity('');note.textContent = 'No clips selected'; });
+  window.addEventListener('pagehide',clearPreviews);
+  if (endpoint) {
+    $('button[type="submit"]',editForm).innerHTML = 'Send clips for editing <span>↗</span>';
+    $('.form-note',editForm).textContent = 'Your videos are sent privately to the Reel Wala team. We’ll confirm the price and delivery date before editing starts.';
+  }
+}
 $('#year').textContent=new Date().getFullYear();

@@ -17,3 +17,23 @@ assert.equal(rows[0][9].startsWith("'="),true);
 duplicate=true;assert.equal(invoke(valid).duplicate,true);assert.equal(rows.length,1);
 assert.equal(context.doPost({postData:{length:36000001,contents:'{}'}}).success,false);
 console.log('Intake checks passed: validation, file counts, formula escaping, duplicate handling, payload limit.');
+
+// Editing accepts three or four video clips without an event date or locality.
+duplicate=false;rows=[];
+Object.assign(context.Utilities,{
+  base64Decode:value=>Array.from(Buffer.from(value,'base64')),
+  newBlob:(bytes,mime,name)=>({bytes,mime,name})
+});
+context.DriveApp={createFolder:()=>({createFile:blob=>({getUrl:()=> 'https://drive.google.com/file/'+blob.name}),setTrashed(){}})};
+const clip={kind:'video',name:'clip.mp4',mime:'video/mp4',data:Buffer.from('sample video').toString('base64')};
+const edit={...valid,kind:'edit',data:{name:'Editor Client',email:'edit@example.com',phone:'+91 90000 00000',notes:'=brief'},uploads:[clip,clip,{...clip,name:'third.mp4'}]};
+assert.equal(invoke({...edit,uploads:[clip,clip]}).success,false);
+assert.equal(invoke({...edit,uploads:Array(5).fill(clip)}).success,false);
+assert.equal(invoke({...edit,uploads:[clip,clip,{...clip,mime:'image/jpeg'}]}).success,false);
+assert.equal(invoke({...edit,uploads:[clip,clip,{...clip,data:''}]}).success,false);
+assert.equal(invoke({...edit,data:{...edit.data,notes:'x'.repeat(2001)}}).success,false);
+assert.equal(invoke(edit).success,true);assert.equal(rows.length,1);
+assert.equal(rows[0][5].split('\n').length,3);assert.equal(rows[0][6],"'=brief");
+assert.equal(invoke({...edit,uploads:[...edit.uploads,{...clip,name:'fourth.mp4'}]}).success,true);
+assert.equal(rows[1][5].split('\n').length,4);
+console.log('Editing intake checks passed: clip counts, types, empty files, brief limits, saved links and formula escaping.');
