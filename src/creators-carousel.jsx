@@ -71,7 +71,7 @@ function CreatorsShowcase() {
           radius={12}
           squeeze={0.25}
           focusOnClick
-          captions
+          captions={false}
           onChange={(index) => setActiveIndex(index)}
           onSelect={(index) => setActiveIndex(index)}
         />
