@@ -354,11 +354,7 @@ const ReelWalaBooking = {
     const hiddenInspiration = $('#field-inspiration');
 
     if (reelObj && banner) {
-      if (thumb) {
-        thumb.style.display = reelObj.image ? '' : 'none';
-        if (reelObj.image) thumb.src = reelObj.image;
-        else thumb.removeAttribute('src');
-      }
+      if (thumb) thumb.src = reelObj.image || '';
       if (title) title.textContent = reelObj.title || 'Inspiration Reel';
       if (subtitle) subtitle.textContent = reelObj.subtitle || (reelObj.tag ? `Tag: ${reelObj.tag}` : '');
       if (hiddenInspiration) hiddenInspiration.value = `${reelObj.title} (${reelObj.subtitle || ''})`;

@@ -2484,6 +2484,3 @@ footer > a:not(.wordmark) {
 .edit-request-form .form-note,.edit-request-form .form-status{font-size:12px;line-height:1.7}
 @media(max-width:850px){.edit-service{grid-template-columns:1fr;gap:35px}.edit-service .edit-service-copy h2{font-size:64px}.edit-service-description{font-size:17px;max-width:none}.edit-service-steps{margin:25px 0}.edit-request-form{padding:24px}}
 @media(max-width:420px){.edit-request-form{padding:18px}.edit-request-form .form-grid{grid-template-columns:1fr}.edit-service .edit-service-copy h2{font-size:54px}.edit-upload{padding:20px 12px}}
-
-/* India event gallery: centered heading and clean photo-led layout. */
-.work .work-header{margin-bottom:28px}.work .work-heading-row{justify-content:center}.work #work-heading{text-align:center;max-width:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}

@@ -1,62 +1,315 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { createRoot } from 'react-dom/client';
-import { EVENT_ATLAS, EVENT_CATEGORIES, INDIA_EVENTS } from './india-events.mjs';
-import './IndiaEventGallery.css';
+import DriftWall from './components/DriftWall.jsx';
 
-function EventPhoto({ event }) {
-  const x = (event.cell % 4) * 3;
-  const y = Math.floor(event.cell / 4) * 4;
-  return <svg className="india-event-photo" viewBox={`${x} ${y} 3 4`} preserveAspectRatio="xMidYMid slice" role="img" aria-label={`${event.title} event inspiration`}>
-    <image href={EVENT_ATLAS} width="12" height="8" preserveAspectRatio="none" />
-  </svg>;
+const EDITED_REELS = [
+  {
+    image: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80&auto=format&fit=crop',
+    title: 'Haldi Petals & Laughter',
+    subtitle: 'Event photo preview',
+    tag: 'Haldi Ceremony',
+    category: 'weddings',
+    duration: '0:28'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80&auto=format&fit=crop',
+    title: 'The First Dance',
+    subtitle: 'Event photo preview',
+    tag: 'First Dance',
+    category: 'weddings',
+    duration: '0:45'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&q=80&auto=format&fit=crop',
+    title: 'Champagne & Toasts',
+    subtitle: 'Event photo preview',
+    tag: 'Reception Toast',
+    category: 'weddings',
+    duration: '0:22'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&q=80&auto=format&fit=crop',
+    title: 'Mehendi Beats & Henna',
+    subtitle: 'Event photo preview',
+    tag: 'Mehendi Night',
+    category: 'weddings',
+    duration: '0:31'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=800&q=80&auto=format&fit=crop',
+    title: 'Sangeet Night Energy',
+    subtitle: 'Event photo preview',
+    tag: 'Sangeet Dance',
+    category: 'weddings',
+    duration: '0:36'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80&auto=format&fit=crop',
+    title: 'Festival Flare & Cheers',
+    subtitle: 'Event photo preview',
+    tag: 'Live Festival',
+    category: 'festivals',
+    duration: '0:34'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&q=80&auto=format&fit=crop',
+    title: 'Keynote & Stage Momentum',
+    subtitle: 'Event photo preview',
+    tag: 'Global Summit',
+    category: 'festivals',
+    duration: '0:26'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=800&q=80&auto=format&fit=crop',
+    title: 'Sunburn Arena Beats',
+    subtitle: 'Event photo preview',
+    tag: 'Arena Concert',
+    category: 'festivals',
+    duration: '0:38'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?w=800&q=80&auto=format&fit=crop',
+    title: 'Gulal & Colors of Spring',
+    subtitle: 'Event photo preview',
+    tag: 'Holi Festival',
+    category: 'festivals',
+    duration: '0:30'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=800&q=80&auto=format&fit=crop',
+    title: 'Campus Fest Headline',
+    subtitle: 'Event photo preview',
+    tag: 'Cultural Fest',
+    category: 'festivals',
+    duration: '0:27'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1571266028243-3716f02d2d2e?w=800&q=80&auto=format&fit=crop',
+    title: 'Drop The Beat',
+    subtitle: 'Event photo preview',
+    tag: 'DJ Showcase',
+    category: 'nightlife',
+    duration: '0:33'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=800&q=80&auto=format&fit=crop',
+    title: 'Midnight Velvet Lounge',
+    subtitle: 'Event photo preview',
+    tag: 'Cocktail Club',
+    category: 'nightlife',
+    duration: '0:29'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=800&q=80&auto=format&fit=crop',
+    title: 'Rhythm & Brass Sessions',
+    subtitle: 'Event photo preview',
+    tag: 'Live Club',
+    category: 'nightlife',
+    duration: '0:35'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80&auto=format&fit=crop',
+    title: 'Himalayan Ridge Sunrise',
+    subtitle: 'Event photo preview',
+    tag: 'Scenic Adventure',
+    category: 'travel',
+    duration: '0:42'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=800&q=80&auto=format&fit=crop',
+    title: 'Dunes of Thar Golden Glow',
+    subtitle: 'Event photo preview',
+    tag: 'Desert Expedition',
+    category: 'travel',
+    duration: '0:40'
+  }
+];
+
+const CATEGORIES = [
+  { id: 'all', label: 'All Reels', count: 15 },
+  { id: 'weddings', label: 'Weddings & Celebrations', count: 5 },
+  { id: 'festivals', label: 'Festivals & Stages', count: 5 },
+  { id: 'nightlife', label: 'Nightlife & Beats', count: 3 },
+  { id: 'travel', label: 'Travel & Scenic', count: 2 }
+];
+
+function useResponsiveColumns() {
+  const [cols, setCols] = useState(6);
+  useEffect(() => {
+    const update = () => {
+      const w = window.innerWidth;
+      if (w < 640) setCols(3);
+      else if (w < 1050) setCols(5);
+      else if (w < 1500) setCols(6);
+      else setCols(7);
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+  return cols;
 }
 
-function WorkEventGallery() {
-  const [category, setCategory] = useState('all');
-  const [selected, setSelected] = useState(null);
-  const dialog = useRef(null);
-  const filtered = INDIA_EVENTS.filter(event => category === 'all' || event.category === category);
+function WorkDriftWallShowcase() {
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeReel, setActiveReel] = useState(null);
+  const columns = useResponsiveColumns();
+
+  const filteredReels = useMemo(() => {
+    if (activeCategory === 'all') return EDITED_REELS;
+    const filtered = EDITED_REELS.filter(r => r.category === activeCategory);
+    return filtered.length ? filtered : EDITED_REELS;
+  }, [activeCategory]);
+
+  const handleTileClick = useCallback((item) => {
+    setActiveReel(item);
+  }, []);
+
+  // Close cinema modal on Escape key
   useEffect(() => {
-    if (selected && !dialog.current.open) dialog.current.showModal();
-    if (!selected && dialog.current.open) dialog.current.close();
-  }, [selected]);
-  const card = event => <button className="india-event-card" key={event.id} type="button" onClick={() => setSelected(event)} aria-label={`View ${event.title.toLowerCase()} event inspiration`}>
-    <EventPhoto event={event} />
-    <span className="india-event-label">{event.title}</span>
-  </button>;
-  const columns = [[0], [1], [2, 5], [3, 6], [4], [7]];
-  return <>
-    <div className="india-event-filters" role="group" aria-label="Filter event reels">
-      {EVENT_CATEGORIES.map(item => <button key={item.id} type="button" aria-pressed={category === item.id} aria-controls="india-event-gallery" onClick={() => setCategory(item.id)}>{item.label}</button>)}
-    </div>
-    <div className={`india-event-gallery${category === 'all' ? '' : ' is-filtered'}`} id="india-event-gallery">
-      {category === 'all' ? columns.map((indices, index) => <div className="india-event-column" key={index}>{indices.map(i => card(INDIA_EVENTS[i]))}</div>) : filtered.map(card)}
-    </div>
-    <span className="sr-only" role="status">{filtered.length} event examples</span>
-    <dialog className="india-event-dialog" ref={dialog} onClose={() => setSelected(null)} onClick={event => { if (event.target === dialog.current) { const box = dialog.current.getBoundingClientRect();if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) setSelected(null); } }} aria-labelledby="event-preview-heading">
-      {selected && <>
-        <button className="india-event-dialog-close" aria-label="Close event preview" onClick={() => setSelected(null)}>×</button>
-        <EventPhoto event={selected} />
-        <div className="india-event-dialog-info">
-          <h3 id="event-preview-heading">{selected.title}</h3>
-          <p>Generated event inspiration</p>
-          <a className="button" href="#book" onClick={() => {
-            const occasion = selected.category === 'corporate' ? 'Corporate event' : ['birthdays','weddings'].includes(selected.category) ? 'Wedding / private celebration' : 'Social / cultural event';
-            window.ReelWalaBooking?.setInspiration({title:selected.title,subtitle:'Event inspiration',category:selected.category,occasion});
-            setSelected(null);
-          }}>Plan a shoot</a>
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setActiveReel(null);
+    };
+    if (activeReel) {
+      window.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [activeReel]);
+
+  return (
+    <div className="work-drift-wall-wrapper">
+      {/* Category Filter Chips Bar */}
+      <div className="work-filter-bar">
+        {CATEGORIES.map(cat => (
+          <button
+            key={cat.id}
+            className={`work-filter-chip ${activeCategory === cat.id ? 'active' : ''}`}
+            onClick={() => setActiveCategory(cat.id)}
+            type="button"
+          >
+            <span>{cat.label}</span>
+            <small style={{ opacity: 0.7, marginLeft: '6px' }}>({cat.count})</small>
+          </button>
+        ))}
+      </div>
+
+      {/* Full-Bleed Edge-to-Edge Drift Wall */}
+      <div className="work-drift-wall-container">
+        <DriftWall
+          items={filteredReels}
+          columns={columns}
+          tileWidth={210}
+          tileHeight={295}
+          gap={18}
+          tilt={12}
+          turn={-12}
+          roll={0}
+          perspective={1400}
+          depth={95}
+          speed={32}
+          direction="up"
+          variance={0.45}
+          parallax={0.55}
+          pauseOnHover={false}
+          lift={56}
+          fade={0.6}
+          dim={0.82}
+          overlayColor="#07060a"
+          radius={18}
+          onTileClick={handleTileClick}
+        />
+      </div>
+
+      {/* Event preview */}
+      {activeReel && (
+        <div className="reel-cinema-overlay" onClick={() => setActiveReel(null)} role="dialog" aria-modal="true" aria-label={activeReel.title}>
+          <div className="reel-cinema-card" onClick={e => e.stopPropagation()}>
+            <button className="reel-cinema-close" onClick={() => setActiveReel(null)} aria-label="Close cinema preview">✕</button>
+            
+            {/* Ambient Background Glow */}
+            <div className="reel-cinema-glow" style={{ backgroundImage: `url(${activeReel.image})` }}></div>
+
+            {/* Vertical Phone Screen Theatre Frame */}
+            <div className="reel-cinema-viewport">
+              <img src={activeReel.image} alt={activeReel.title} className="reel-cinema-media" />
+              <div className="reel-cinema-scrim"></div>
+
+              {/* Status Bar */}
+              <div className="reel-cinema-status-bar">
+                <span>09:41</span>
+                <div className="reel-cinema-island"></div>
+                <span>5G ●</span>
+              </div>
+
+              {/* Progress Bar */}
+              <div className="reel-cinema-progress">
+                <div className="reel-cinema-bar"></div>
+              </div>
+
+              {/* Category Tag */}
+              <div className="reel-cinema-badge">
+                <span className="dot"></span>
+                <span>{activeReel.tag}</span>
+              </div>
+
+              {/* Center Play Button Overlay */}
+              <div className="reel-cinema-center-action">
+                <div className="reel-cinema-play-btn" aria-hidden="true">▶</div>
+              </div>
+
+              {/* Reel Bottom Meta */}
+              <div className="reel-cinema-info">
+                <h3>{activeReel.title}</h3>
+                <p className="reel-cinema-tech">{activeReel.subtitle}</p>
+                <a
+                  href="#book"
+                  className="reel-cinema-cta"
+                  onClick={() => {
+                    let occasionVal = 'Wedding / private celebration';
+                    if (activeReel.category === 'weddings') occasionVal = 'Wedding / private celebration';
+                    else if (activeReel.category === 'festivals') occasionVal = 'Social / cultural event';
+                    else if (activeReel.category === 'nightlife') occasionVal = 'Social / cultural event';
+                    else occasionVal = 'Something else';
+
+                    window.ReelWalaBooking?.setInspiration({
+                      title: activeReel.title,
+                      subtitle: activeReel.subtitle,
+                      tag: activeReel.tag,
+                      category: activeReel.category,
+                      image: activeReel.image,
+                      occasion: occasionVal
+                    });
+                    setActiveReel(null);
+                  }}
+                >
+                  Book a reel like this <span>↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
-      </>}
-    </dialog>
-  </>;
+      )}
+    </div>
+  );
 }
 
 function mount() {
-  const container = document.getElementById('work-drift-wall-root');
-  if (container && !container._reactRoot) {
-    container._reactRoot = createRoot(container);
-    container._reactRoot.render(<WorkEventGallery />);
+  const rootElement = document.getElementById('work-drift-wall-root');
+  if (rootElement && !rootElement._reactRoot) {
+    const root = createRoot(rootElement);
+    rootElement._reactRoot = root;
+    root.render(<WorkDriftWallShowcase />);
   }
 }
-if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount);
-else mount();
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', mount);
+} else {
+  mount();
+}
