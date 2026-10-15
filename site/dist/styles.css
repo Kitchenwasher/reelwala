@@ -1990,3 +1990,455 @@ dialog {
   z-index: 6 !important;
 }
 
+/* ==========================================================================
+   GLOBAL READABILITY UPGRADES (CRISP, LEGIBLE TYPE SCALE ACROSS ENTIRE SITE)
+   ========================================================================== */
+
+/* 1. Base and Headings */
+body {
+  font-size: 16px;
+}
+
+.eyebrow {
+  font-size: 12px !important;
+  letter-spacing: 2px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+}
+
+.tiny-note {
+  font-size: 13px !important;
+  line-height: 1.7 !important;
+  color: var(--muted) !important;
+}
+
+.header nav {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+.text-button {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+/* 2. Hero Section Readability */
+.hero-copy > .eyebrow {
+  font-size: 13px !important;
+  letter-spacing: 2.2px !important;
+  font-weight: 700 !important;
+  color: #5d5950 !important;
+}
+
+.hero-description {
+  font-size: clamp(19px, 1.8vw, 24px) !important;
+  line-height: 1.6 !important;
+  color: #3b3a36 !important;
+}
+
+.hero-copy > .button {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  padding: 18px 28px !important;
+}
+
+.quiet-link,
+.hero-copy > .quiet-link {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+.hero-foot {
+  font-size: 12px !important;
+  letter-spacing: 1.8px !important;
+  font-weight: 700 !important;
+  color: #524e47 !important;
+}
+
+/* 3. Work Section Readability */
+.work-live-badge {
+  font-size: 12px !important;
+  letter-spacing: 1.3px !important;
+  font-weight: 700 !important;
+}
+
+.work-intro {
+  font-size: 16px !important;
+  line-height: 1.8 !important;
+  color: #5d5950 !important;
+}
+
+.card-caption > span {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+}
+
+.card-caption small {
+  font-size: 12px !important;
+  letter-spacing: 1.4px !important;
+  font-weight: 600 !important;
+  color: var(--muted) !important;
+}
+
+/* 4. Creators Section Readability */
+.creators-intro {
+  font-size: 16px !important;
+  line-height: 1.8 !important;
+  color: #5d5950 !important;
+}
+
+.creators-toolbar-label {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 1.8px !important;
+}
+
+.preset-pill {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  padding: 8px 16px !important;
+}
+
+.creators-hint {
+  font-size: 13px !important;
+  color: #5d5950 !important;
+}
+
+/* 5. Replay Gallery Readability */
+.drag-label {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  padding: 14px 24px !important;
+}
+
+.replay-caption {
+  font-size: 28px !important;
+}
+
+/* 6. Booking Blueprint & Form Readability */
+.booking-copy > p:not(.eyebrow) {
+  font-size: 20px !important;
+  line-height: 1.6 !important;
+}
+
+.booking-copy > p.booking-small {
+  font-size: 14px !important;
+  line-height: 1.7 !important;
+  color: #5d5950 !important;
+}
+
+.blueprint-badge {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+}
+
+.blueprint-status {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
+
+.blueprint-chip {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  padding: 8px 14px !important;
+}
+
+.group-label {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 1.8px !important;
+}
+
+.text-link-btn {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+
+.creator-card-name {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+}
+
+.creator-card-desc {
+  font-size: 13px !important;
+  line-height: 1.6 !important;
+  color: #5d5950 !important;
+}
+
+.creator-match-badge {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+
+.creator-change-btn {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+
+.occasion-chip .chip-title {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+.package-pill .pkg-top strong {
+  font-size: 16px !important;
+}
+
+.package-pill .pkg-tag {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+}
+
+.package-pill small {
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+  color: #5d5950 !important;
+}
+
+.city-chip {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
+
+.form-grid label {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 1.4px !important;
+}
+
+.form-grid input,
+.form-grid select,
+.form-grid textarea {
+  font-size: 15px !important;
+  padding: 12px 0 14px !important;
+}
+
+.form-note,
+.booking-note {
+  font-size: 13px !important;
+  line-height: 1.7 !important;
+  color: #5d5950 !important;
+}
+
+/* 7. Footer & Dialogs Readability */
+footer > p:not(.footer-note) {
+  font-size: 20px !important;
+}
+
+footer > span,
+footer > a:not(.wordmark) {
+  font-size: 13px !important;
+  color: #5d5950 !important;
+}
+
+.footer-note {
+  font-size: 13px !important;
+  line-height: 1.7 !important;
+  color: #5d5950 !important;
+}
+
+.creator-flow {
+  font-size: 13px !important;
+  line-height: 2 !important;
+}
+
+/* ==========================================================================
+   REACT BITS PIXEL CARD — PRICING SECTION
+   ========================================================================== */
+
+.pricing {
+  background: #eee8dd;
+  position: relative;
+}
+
+.pricing .section-top {
+  margin-bottom: 24px;
+}
+
+.pricing h2 {
+  margin-bottom: 40px;
+}
+
+.price-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: stretch;
+  width: 100%;
+}
+
+/* Base Pixel Card Container */
+.price-card.pixel-card {
+  position: relative !important;
+  overflow: hidden !important;
+  background: #ffffff !important;
+  border: 1px solid #d5cbbc !important;
+  border-radius: 28px !important;
+  padding: 42px 32px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  box-shadow: 0 12px 36px rgba(45, 30, 18, 0.05) !important;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease !important;
+  cursor: default;
+}
+
+.price-card.pixel-card:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 20px 48px rgba(45, 30, 18, 0.12) !important;
+  border-color: #beb29e !important;
+}
+
+/* Featured (Extended) Card */
+.price-card.pixel-card.featured {
+  border: 2px solid #171815 !important;
+  background: #ffffff !important;
+  box-shadow: 0 16px 44px rgba(243, 84, 34, 0.14) !important;
+}
+
+.price-card.pixel-card.featured:hover {
+  border-color: var(--orange) !important;
+  box-shadow: 0 24px 60px rgba(243, 84, 34, 0.24) !important;
+}
+
+/* Pixel Card Canvas */
+.pixel-card-canvas {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+  border-radius: inherit !important;
+  opacity: 0.85;
+}
+
+/* Pixel Card Content */
+.pixel-card-content {
+  position: relative !important;
+  z-index: 2 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  pointer-events: auto !important;
+}
+
+/* Pricing Card Typography */
+.price-card .card-eyebrow {
+  font-size: 12px !important;
+  letter-spacing: 2px !important;
+  font-weight: 700 !important;
+  color: var(--muted) !important;
+  text-transform: uppercase !important;
+  margin-bottom: 8px !important;
+  display: block !important;
+}
+
+.price-card.featured .card-eyebrow.featured-eyebrow {
+  color: var(--orange) !important;
+  font-weight: 800 !important;
+}
+
+.price-card h3 {
+  font-family: var(--serif) !important;
+  font-size: 46px !important;
+  letter-spacing: -1.2px !important;
+  line-height: 1.05 !important;
+  margin: 16px 0 14px !important;
+  color: var(--ink) !important;
+  font-weight: 400 !important;
+}
+
+.price-card p {
+  font-size: 15px !important;
+  line-height: 1.7 !important;
+  color: #55524b !important;
+  max-width: none !important;
+  margin-bottom: 20px !important;
+}
+
+.price-card ul {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 20px 0 32px !important;
+  flex: 1 !important;
+}
+
+.price-card li {
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+  padding: 13px 0 !important;
+  border-bottom: 1px solid #ebe4d8 !important;
+  color: var(--ink) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  font-weight: 500 !important;
+}
+
+.price-card li:before {
+  content: '↗' !important;
+  color: var(--orange) !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  display: inline-block !important;
+  flex-shrink: 0 !important;
+  margin-right: 0 !important;
+}
+
+.price-card .button {
+  width: 100% !important;
+  border-radius: 999px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  padding: 16px 24px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  transition: all 0.25s ease !important;
+  margin-top: auto !important;
+  cursor: pointer !important;
+}
+
+.price-card .button.outline {
+  background: transparent !important;
+  color: var(--ink) !important;
+  border: 1.5px solid #cfc6b6 !important;
+}
+
+.price-card .button.outline:hover {
+  background: #f7f3ec !important;
+  border-color: var(--ink) !important;
+}
+
+.price-card.featured .button {
+  background: var(--orange) !important;
+  color: #ffffff !important;
+  border: 1.5px solid var(--orange) !important;
+  box-shadow: 0 4px 14px rgba(243, 84, 34, 0.3) !important;
+}
+
+.price-card.featured .button:hover {
+  background: #de4414 !important;
+  border-color: #de4414 !important;
+  box-shadow: 0 6px 20px rgba(243, 84, 34, 0.45) !important;
+}
+
+.pricing-note {
+  font-size: 13px !important;
+  line-height: 1.8 !important;
+  color: #5d5950 !important;
+  margin-top: 28px !important;
+}
+
+@media (max-width: 950px) {
+  .price-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+}
+
+

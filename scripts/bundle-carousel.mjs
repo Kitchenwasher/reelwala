@@ -101,6 +101,26 @@ async function build() {
       }
     });
     console.log('Hero AeroShards bundled successfully into site/dist/hero-aero-shards.bundle.js');
+
+    // 6. Bundle Pricing PixelCards
+    await esbuild.build({
+      entryPoints: ['src/pricing-pixel-cards.jsx'],
+      bundle: true,
+      outfile: 'site/dist/pricing-pixel-cards.bundle.js',
+      format: 'esm',
+      minify: true,
+      sourcemap: true,
+      jsx: 'automatic',
+      loader: {
+        '.js': 'jsx',
+        '.jsx': 'jsx',
+        '.css': 'css'
+      },
+      define: {
+        'process.env.NODE_ENV': '"production"'
+      }
+    });
+    console.log('Pricing PixelCards bundled successfully into site/dist/pricing-pixel-cards.bundle.js');
   } catch (error) {
     console.error('Bundle failed:', error);
     process.exit(1);
