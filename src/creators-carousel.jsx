@@ -83,6 +83,8 @@ function CreatorsShowcase() {
           <strong className="creators-dock-name">{activeCreator.title}</strong>
           <span className="creators-dock-sub">{activeCreator.subtitle}</span>
         </div>
+        <div className="creators-dock-actions">
+        <a className="button small outline" href="creators.html">View all creators <span aria-hidden="true">↗</span></a>
         <a
           href="#book"
           className="button small"
@@ -100,10 +102,7 @@ function CreatorsShowcase() {
         >
           Book with {activeCreator.title.split(' ')[0]} <span>↗</span>
         </a>
-      </div>
-
-      <div className="creators-all-link">
-        <a className="button outline" href="creators.html">View all creators <span aria-hidden="true">↗</span></a>
+        </div>
       </div>
     </div>
   );
