@@ -1,7 +1,25 @@
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+const endpoint = window.REEL_WALA_CONFIG?.sheetsEndpoint || '';
 const mobile = matchMedia('(max-width: 700px)');
+const immersive = document.createElement('section');
+immersive.className = 'immersive';
+immersive.setAttribute('aria-label', 'Step into the moment');
+immersive.innerHTML = `<div class="immersive-sticky"><div class="immersive-backdrop"><span>Step into<br><em>the feeling.</em></span></div><div class="reel-window"><img src="assets/wedding.webp" alt="A wedding moment expands from a portrait frame as you scroll" loading="lazy"><div class="reel-overlay"><p class="eyebrow">A MOMENT CAN TAKE YOU RIGHT BACK.</p><h2>Be there.<br><em>All over again.</em></h2><a class="button light" href="#work">Discover the moments <span>↓</span></a></div><span class="phone-island" aria-hidden="true"></span></div><p class="immersive-prompt">SCROLL INTO THE MOMENT ↓</p></div>`;
+$('#work').before(immersive);
+const deviceInput = $('#creator-form input[name="device"]');
+const deviceSelect = document.createElement('select');
+deviceSelect.name = 'device';deviceSelect.required = true;
+const modelNames = ['iPhone 15','iPhone 15 Plus','iPhone 15 Pro','iPhone 15 Pro Max','iPhone 16','iPhone 16 Plus','iPhone 16 Pro','iPhone 16 Pro Max','iPhone 16e','iPhone 17','iPhone 17 Pro','iPhone 17 Pro Max','iPhone Air','iPhone 17e','iPhone 18 Pro','iPhone 18 Pro Max'];
+deviceSelect.append(new Option('Select your iPhone model',''), ...modelNames.map(name=>new Option(name,name)));
+deviceInput.replaceWith(deviceSelect);
+const uploadFields = document.createElement('div');uploadFields.className='portfolio-uploads full';
+uploadFields.innerHTML=`<label>Choose your best 5 photos<input type="file" name="photos" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" multiple required><small>Choose five photos. Preview selection only; files stay on your device.</small></label><label>Choose up to 2 edited videos <span class="optional">(optional)</span><input type="file" name="videos" accept="video/mp4,video/quicktime,video/webm" multiple><small>Optional: select one or two examples of your edits.</small></label>`;
+$('#creator-form .form-grid').append(uploadFields);
+const photoInput = $('#creator-form input[name="photos"]');const videoInput = $('#creator-form input[name="videos"]');
+photoInput.addEventListener('change',()=>photoInput.setCustomValidity(photoInput.files.length === 5?'':'Please choose exactly five photos.'));
+videoInput.addEventListener('change',()=>videoInput.setCustomValidity(videoInput.files.length <= 2?'':'Please choose no more than two videos.'));
 const imagePath = name => `assets/${name}.webp`;
 const menu = $('.menu-toggle');
 menu.addEventListener('click', () => {
@@ -70,6 +88,20 @@ let framePending = false;
 function renderScroll() {
   framePending = false;
   const hero = $('.hero');const y = scrollY;
+  if (!mobile.matches && !reducedMotion.matches) {
+    const start = immersive.offsetTop;
+    const range = immersive.offsetHeight-innerHeight;
+    const p = Math.max(0,Math.min(1,(y-start)/range));
+    const smooth = p*p*(3-2*p);
+    const frame = $('.reel-window');
+    frame.style.width = `${26+74*smooth}%`;
+    frame.style.height = `${76+24*smooth}%`;
+    frame.style.borderRadius = `${38*(1-smooth)}px`;
+    frame.style.borderWidth = `${8*(1-smooth)}px`;
+    $('.phone-island').style.opacity=String(Math.max(0,1-p*3));
+    $('.reel-overlay').style.opacity=String(Math.max(0,(p-.35)/.65));
+    $('.immersive-prompt').style.opacity=String(1-p);
+  }
   if (!reducedMotion.matches && y < hero.offsetHeight) {
     const p = Math.min(y/hero.offsetHeight,1);
     $('.gimbal').style.transform = `translateY(${p*35}px) rotate(${p*-8}deg) rotateY(${p*12}deg)`;
@@ -122,11 +154,53 @@ $$('[data-package]').forEach(link=>link.addEventListener('click',()=>{$('#bookin
 const dateInput=$('input[name="date"]');const today=new Date();const localDay=new Date(today.getTime()-today.getTimezoneOffset()*60000).toISOString().slice(0,10);dateInput.min=localDay;
 function downloadEnquiry(form,kind) {
   if(!form.reportValidity())return;
-  const data = Object.fromEntries(new FormData(form));
+  const data = {};
+  for(const [key,value] of new FormData(form)) {
+    if(value instanceof File) {if(value.name)data[key]=data[key]?`${data[key]}, ${value.name}`:value.name;}
+    else data[key]=value;
+  }
   const lines = [`THE REEL WALA — ${kind}`,'Prepared locally. Not submitted or confirmed.','',...Object.entries(data).map(([key,value])=>`${key}: ${value}`)];
   const url=URL.createObjectURL(new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'}));const link=document.createElement('a');link.href=url;link.download=`reel-wala-${kind.toLowerCase().replaceAll(' ','-')}.txt`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
   $('.form-status',form).textContent='Your draft has been downloaded. No information was sent. Keep it ready for the Reel Wala team.';
 }
-$('#booking-form').addEventListener('submit',event=>{event.preventDefault();downloadEnquiry(event.currentTarget,'Shoot enquiry');});
-$('#creator-form').addEventListener('submit',event=>{event.preventDefault();downloadEnquiry(event.currentTarget,'Creator application');});
+async function sendEnquiry(form,kind) {
+  if(!endpoint)return downloadEnquiry(form,kind==='booking'?'Shoot enquiry':'Creator application');
+  if(!form.reportValidity())return;
+  const button=$('button[type="submit"]',form);if(button.disabled)return;
+  const status=$('.form-status',form);const data={};const uploads=[];
+  const submissionId=form.dataset.submissionId||(form.dataset.submissionId=crypto.randomUUID());
+  button.disabled=true;status.textContent='Sending your details…';
+  try{
+    let total=0;
+    for(const [key,value] of new FormData(form)){
+      if(value instanceof File){
+        if(!value.name)continue;
+        const fileKind=key==='photos'?'photo':'video';const limit=fileKind==='photo'?4000000:10000000;
+        if(value.size>limit)throw new Error('Photos must be under 4 MB and videos under 10 MB.');
+        total+=value.size;if(total>25000000)throw new Error('Keep portfolio files under 25 MB combined.');
+        const base64=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result).split(',')[1]);reader.onerror=()=>reject(new Error('Unable to read a selected file.'));reader.readAsDataURL(value);});
+        uploads.push({name:value.name,mime:value.type,data:base64,kind:fileKind});
+      }else data[key]=value;
+    }
+    const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({kind,submissionId,data,uploads,website:data.website||''}),signal:AbortSignal.timeout(90000)});
+    if(!response.ok)throw new Error('Could not confirm delivery. Keep your details and try again.');
+    const result=await response.json();if(result.success!==true)throw new Error(result.error||'Unable to save your request.');
+    status.textContent=kind==='booking'?'Your enquiry is saved. The team will follow up to confirm your shoot.':'Your application is saved. The team will be in touch about the next step.';
+    form.reset();delete form.dataset.submissionId;
+  }catch(error){status.textContent=error.name==='TimeoutError'?'Delivery could not be confirmed. Try again with the same details; the submission ID prevents duplicates.':error.message;}
+  finally{button.disabled=false;}
+}
+if(endpoint){
+  $('#booking-form button[type="submit"]').innerHTML='Send my enquiry <span>↗</span>';
+  $('#creator-form button[type="submit"]').innerHTML='Send my application <span>↗</span>';
+  $('#booking-form .form-note').textContent='Your details are sent securely to the Reel Wala team. A booking is final only after confirmation.';
+  $('#creator-form .form-note').textContent='Your application and selected portfolio files are sent to the Reel Wala team for review.';
+  $$('.portfolio-uploads small').forEach((small,i)=>small.textContent=i===0?'Five photos, up to 4 MB each.':'Optional: up to two videos, 10 MB each. All files combined: 25 MB maximum.');
+}
+[$('#booking-form'),$('#creator-form')].forEach(form=>{
+  const trap=document.createElement('input');trap.name='website';trap.tabIndex=-1;trap.autocomplete='off';trap.className='honeypot';trap.setAttribute('aria-hidden','true');form.append(trap);
+  form.addEventListener('input',()=>{delete form.dataset.submissionId;});
+});
+$('#booking-form').addEventListener('submit',event=>{event.preventDefault();sendEnquiry(event.currentTarget,'booking');});
+$('#creator-form').addEventListener('submit',event=>{event.preventDefault();sendEnquiry(event.currentTarget,'creator');});
 $('#year').textContent=new Date().getFullYear();
