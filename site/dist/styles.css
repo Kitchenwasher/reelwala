@@ -47,3 +47,70 @@
   .hero-gimbal-holder{width:300px;height:450px}
   .ig-badge{padding:5px 9px;font-size:9px}
 }
+/* Drift Wall Work Showcase */
+.work-intro {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 650px;
+  margin: 18px 0 28px;
+}
+.work-drift-wall-wrapper {
+  position: relative;
+  width: 100%;
+}
+.work-drift-wall-container {
+  border-radius: 20px;
+  background: radial-gradient(ellipse at 50% 50%, #1a1722 0%, #0d0b12 100%);
+  border: 1px solid rgba(40, 35, 50, 0.4);
+  box-shadow: 0 24px 60px rgba(20, 15, 30, 0.12);
+  overflow: hidden;
+}
+.work-meta-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 22px;
+}
+.work-meta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 10px 22px;
+  border-radius: 30px;
+  background: #eee8dd;
+  border: 1px solid var(--line);
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--ink);
+  letter-spacing: 0.3px;
+  box-shadow: 0 4px 16px rgba(60, 40, 20, 0.05);
+}
+.work-meta-badge .apple-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+}
+.work-meta-badge .divider {
+  opacity: 0.4;
+}
+.work-meta-badge .orange-text {
+  color: var(--orange);
+  font-weight: 600;
+}
+@media (max-width: 700px) {
+  .work-intro {
+    font-size: 12px;
+    margin: 14px 0 22px;
+  }
+  .work-drift-wall-container {
+    height: 480px !important;
+  }
+  .work-meta-badge {
+    font-size: 9px;
+    padding: 8px 14px;
+    gap: 6px;
+  }
+}
