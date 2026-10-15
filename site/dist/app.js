@@ -5,6 +5,7 @@ const endpoint = window.REEL_WALA_CONFIG?.sheetsEndpoint || '';
 const mobile = matchMedia('(max-width: 700px)');
 const immersive = document.createElement('section');
 immersive.className = 'immersive';
+immersive.id = 'experience';
 immersive.setAttribute('aria-label', 'Step into the moment');
 immersive.innerHTML = `<div class="immersive-sticky"><div class="immersive-backdrop"><span>Step into<br><em>the feeling.</em></span></div><div class="reel-window"><img src="assets/wedding.webp" alt="A wedding moment expands from a portrait frame as you scroll" loading="lazy"><div class="reel-overlay"><p class="eyebrow">A MOMENT CAN TAKE YOU RIGHT BACK.</p><h2>Be there.<br><em>All over again.</em></h2><a class="button light" href="#work">Discover the moments <span>↓</span></a></div><span class="phone-island" aria-hidden="true"></span></div><p class="immersive-prompt">SCROLL INTO THE MOMENT ↓</p></div>`;
 $('#work').before(immersive);
