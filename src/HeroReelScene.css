@@ -1,4 +1,6 @@
 /* Keep the screen inside the phone bezel as the circular gallery orbits it. */
+.hero-interactive-scene .hero-gimbal-holder{position:absolute;top:20%;left:50%;transform:translateX(-50%);width:min(78%,500px);height:auto;aspect-ratio:2/3;max-height:none}
+.hero-interactive-scene .hero-circular-carousel-wrapper{inset:auto;left:var(--orbit-x,50%);top:var(--orbit-y,35%);width:100%;height:72%;transform:translate(-50%,-50%)}
 .hero-interactive-scene .phone-screen-glass{left:26.7%;top:2.9%;width:29.8%;height:42.8%;border-radius:clamp(13px,1.4vw,21px);background:#111;box-shadow:none;pointer-events:none}
 .hero-interactive-scene .phone-dynamic-island{top:3%;width:32%;height:4.5%;border-radius:20px;box-shadow:none}
-@media(max-width:700px){.hero-interactive-scene .phone-screen-glass{border-radius:14px}}
+@media(max-width:700px){.hero-interactive-scene .hero-gimbal-holder{top:12px;width:340px;max-width:95%}.hero-interactive-scene .phone-screen-glass{border-radius:14px}.hero-interactive-scene .hero-circular-carousel-wrapper{width:115%;height:85%}}
