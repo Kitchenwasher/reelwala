@@ -1952,27 +1952,30 @@ dialog {
   color: var(--orange);
 }
 
-/* Hero AeroShards WebGPU 3D Background */
+/* Hero AeroShards 3D Background (WebGPU + High-Fidelity 3D Canvas) */
 .hero-aero-shards {
   position: absolute !important;
   inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  z-index: 1 !important;
+  z-index: 2 !important;
   overflow: hidden !important;
-  pointer-events: auto !important;
+  pointer-events: none !important;
 }
 
 .hero-aero-shards .aero-shards,
-.hero-aero-shards .aero-shards-canvas {
+.hero-aero-shards .aero-shards-canvas,
+.hero-aero-shards-fallback-wrap,
+.hero-aero-shards-canvas-container {
   position: absolute !important;
   inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
+  pointer-events: none !important;
 }
 
 .hero-grid {
-  z-index: 2 !important;
+  z-index: 1 !important;
 }
 
 .hero-copy {
@@ -1986,3 +1989,4 @@ dialog {
 .hero-foot {
   z-index: 6 !important;
 }
+
