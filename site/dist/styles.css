@@ -591,7 +591,7 @@
   --minimal-shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.08);
 }
 
-/* 1. Minimalist Pill Buttons */
+/* 1. Minimalist Pill Buttons - Premium Plain Orange */
 .button,
 a.button,
 button.button,
@@ -599,17 +599,17 @@ form > .button {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  gap: 22px !important;
-  padding: 15px 30px !important;
-  background: #171513 !important;
+  gap: 20px !important;
+  padding: 15px 32px !important;
+  background: #f35422 !important; /* Plain premium solid orange */
   color: #ffffff !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  border-radius: 9999px !important; /* Elegant pill */
+  border: 1px solid #f35422 !important;
+  border-radius: 9999px !important; /* Round pill shape */
   font-family: var(--sans) !important;
   font-size: 13px !important;
   font-weight: 600 !important;
-  letter-spacing: 0.4px !important;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08) !important;
+  letter-spacing: 0.3px !important;
+  box-shadow: 0 4px 18px rgba(243, 84, 34, 0.28) !important; /* Soft warm glow, zero clay bevels */
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
   cursor: pointer !important;
   text-decoration: none !important;
@@ -619,20 +619,21 @@ form > .button {
 a.button span,
 button.button span,
 form > .button span {
-  color: #f35422 !important;
+  color: #ffffff !important;
   display: inline-block !important;
   transition: transform 0.2s ease !important;
+  font-weight: 700 !important;
 }
 
 .button:hover,
 a.button:hover,
 button.button:hover,
 form > .button:hover {
-  background: #27231f !important;
+  background: #de4414 !important; /* Rich deep orange */
   color: #ffffff !important;
+  border-color: #de4414 !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14) !important;
-  border-color: rgba(243, 84, 34, 0.4) !important;
+  box-shadow: 0 8px 26px rgba(243, 84, 34, 0.38) !important;
 }
 
 .button:hover span,
@@ -647,14 +648,22 @@ a.button:active,
 button.button:active,
 form > .button:active {
   transform: translateY(0px) scale(0.99) !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 2px 8px rgba(243, 84, 34, 0.2) !important;
 }
 
 .button.small {
-  padding: 10px 20px !important;
+  padding: 11px 22px !important;
   gap: 14px !important;
-  font-size: 11px !important;
+  font-size: 12px !important;
   border-radius: 9999px !important;
+  background: #f35422 !important;
+  color: #ffffff !important;
+  box-shadow: 0 3px 14px rgba(243, 84, 34, 0.24) !important;
+}
+
+.button.small:hover {
+  background: #de4414 !important;
+  box-shadow: 0 6px 20px rgba(243, 84, 34, 0.35) !important;
 }
 
 .button.outline {
@@ -821,20 +830,45 @@ dialog {
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.15) !important;
 }
 
-/* 7. Hero Floating Stickers */
+/* 7. Hero Floating Stickers & Round Orange Icons */
 .ig-badge {
   border-radius: 9999px !important;
-  background: rgba(255, 255, 255, 0.9) !important;
-  backdrop-filter: blur(8px) !important;
-  border: 1px solid rgba(0, 0, 0, 0.08) !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06) !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1.5px solid rgba(243, 84, 34, 0.22) !important;
+  box-shadow: 0 4px 18px rgba(60, 40, 20, 0.08) !important;
 }
 
 .ig-badge-heart {
-  background: #e8203c !important;
+  background: #f35422 !important; /* Plain solid orange round circle */
   color: #ffffff !important;
   border: none !important;
-  box-shadow: 0 6px 18px rgba(232, 32, 60, 0.28) !important;
+  border-radius: 50% !important;
+  box-shadow: 0 6px 20px rgba(243, 84, 34, 0.35) !important;
+}
+
+/* Home Page Round Orange Action Icons */
+.quiet-link span,
+.hero-foot a span {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 22px !important;
+  height: 22px !important;
+  border-radius: 50% !important; /* Round icon shape */
+  background: #f35422 !important;  /* Plain premium orange */
+  color: #ffffff !important;
+  font-size: 11px !important;
+  margin-left: 8px !important;
+  transition: transform 0.2s ease, background 0.2s ease !important;
+  box-shadow: 0 2px 8px rgba(243, 84, 34, 0.25) !important;
+}
+
+.quiet-link:hover span,
+.hero-foot a:hover span {
+  transform: translateY(2px) !important;
+  background: #de4414 !important;
+  box-shadow: 0 4px 14px rgba(243, 84, 34, 0.38) !important;
 }
 
 @media (max-width: 700px) {

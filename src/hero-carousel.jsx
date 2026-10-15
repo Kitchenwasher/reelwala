@@ -116,7 +116,7 @@ function HeroCarouselScene() {
           <small>Reel sound</small>
         </div>
         <div className="ig-badge ig-badge-heart">
-          <span>❤️</span>
+          <span>🤍</span>
         </div>
         <div className="ig-badge ig-badge-sparkles">
           <span>✨</span>
