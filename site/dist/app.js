@@ -3,12 +3,6 @@ const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const endpoint = window.REEL_WALA_CONFIG?.sheetsEndpoint || '';
 const mobile = matchMedia('(max-width: 700px)');
-const immersive = document.createElement('section');
-immersive.className = 'immersive';
-immersive.id = 'experience';
-immersive.setAttribute('aria-label', 'Step into the moment');
-immersive.innerHTML = `<div class="immersive-sticky"><div class="immersive-backdrop"><span>Step into<br><em>the feeling.</em></span></div><div class="reel-window"><img src="assets/wedding.webp" alt="A wedding moment expands from a portrait frame as you scroll" loading="lazy"><div class="reel-overlay"><p class="eyebrow">A MOMENT CAN TAKE YOU RIGHT BACK.</p><h2>Be there.<br><em>All over again.</em></h2><a class="button light" href="#work">Discover the moments <span>↓</span></a></div><span class="phone-island" aria-hidden="true"></span></div><p class="immersive-prompt">SCROLL INTO THE MOMENT ↓</p></div>`;
-$('#work').before(immersive);
 const deviceInput = $('#creator-form input[name="device"]');
 const deviceSelect = document.createElement('select');
 deviceSelect.name = 'device';deviceSelect.required = true;
@@ -46,111 +40,23 @@ function openImage(name, title, category) {
 }
 $$('.work-card').forEach(button => button.addEventListener('click', () => openImage(button.dataset.image,button.dataset.title,button.dataset.category)));
 $('#lightbox-book').addEventListener('click', () => imageDialog.close());
-const serviceData = [
-  {image:'wedding',label:'PRIVATE CELEBRATIONS',detail:'Weddings & receptions · Haldi, Mehendi & Sangeet · Birthdays & anniversaries · Proposals · Baby showers · Naming ceremonies & Annaprashan · Make-up shoots · Graduation days · Pet shoots · New car deliveries · Housewarmings · Family gatherings & home tours'},
-  {image:'corporate',label:'CORPORATE MOMENTS',detail:'Team outings, lunches & dinners · Corporate parties · Annual & quarterly meetups · Office celebrations · Company anniversaries · Product & store launches · Sports & corporate tournaments'},
-  {image:'culture',label:'CULTURE & COMMUNITY',detail:'Cultural fests & carnivals · Diwali, Holi, Eid, Christmas & Gudi Padwa · Community & society events · Music festivals & concerts · Stand-up comedy · Fashion shows & food festivals'}
-];
-let currentService = 0;
-function setService(index) {
-  if (index === currentService) return;
-  currentService = index;
-  const item = serviceData[index];
-  $$('.service-row').forEach((button, i) => {button.classList.toggle('active',i === index);button.setAttribute('aria-pressed',String(i === index));});
-  $('#service-image').src = imagePath(item.image);$('#service-image').alt = `${item.label.toLowerCase()} concept preview`;
-  $('#service-label').textContent = item.label;$('#service-detail').textContent = item.detail;
-}
-$('#service-detail').textContent = serviceData[0].detail;
-$$('.service-row').forEach(button => {button.addEventListener('click', () => setService(Number(button.dataset.service)));button.addEventListener('pointerenter', event => {if(event.pointerType === 'mouse')setService(Number(button.dataset.service));});});
-let currentStep = -1;
-function setStep(index) {
-  if (index === currentStep) return;
-  currentStep = index;
-  $$('.story-title').forEach((el, i) => {
-    el.classList.toggle('active', i === index);
-    el.classList.toggle('prev', i < index);
-  });
-  $$('.story-content-panel').forEach((el, i) => {
-    el.classList.toggle('active', i === index);
-    el.classList.toggle('prev', i < index);
-  });
-  $$('.story-slide').forEach((el, i) => {
-    el.classList.toggle('active', i === index);
-    el.classList.toggle('prev', i < index);
-  });
-  $$('.story-steps button').forEach((button, i) => {
-    const isActive = i === index;
-    button.classList.toggle('active', isActive);
-    if (isActive) button.setAttribute('aria-current', 'step');
-    else button.removeAttribute('aria-current');
-  });
-  const countEl = $('#story-count');
-  if (countEl) countEl.textContent = `0${index + 1}`;
-}
-setStep(0);
-$$('[data-step]').forEach(button => button.addEventListener('click', () => {
-  const step = Number(button.dataset.step);
-  if (mobile.matches || reducedMotion.matches) return setStep(step);
-  const section = $('#story');
-  const available = section.offsetHeight - innerHeight;
-  window.scrollTo({top: section.offsetTop + available * ((step + 0.5) / 3), behavior: 'smooth'});
-}));
 let framePending = false;
 function renderScroll() {
   framePending = false;
   const hero = $('.hero');const y = scrollY;
-  if (!mobile.matches && !reducedMotion.matches) {
-    const start = immersive.offsetTop;
-    const range = immersive.offsetHeight-innerHeight;
-    const p = Math.max(0,Math.min(1,(y-start)/range));
-    const smooth = p*p*(3-2*p);
-    const frame = $('.reel-window');
-    if (frame) {
-      frame.style.width = `${26+74*smooth}%`;
-      frame.style.height = `${76+24*smooth}%`;
-      frame.style.borderRadius = `${38*(1-smooth)}px`;
-      frame.style.borderWidth = `${8*(1-smooth)}px`;
-    }
-    const pi = $('.phone-island'); if (pi) pi.style.opacity=String(Math.max(0,1-p*3));
-    const ro = $('.reel-overlay'); if (ro) ro.style.opacity=String(Math.max(0,(p-.35)/.65));
-    const ip = $('.immersive-prompt'); if (ip) ip.style.opacity=String(1-p);
-  }
-  if (!reducedMotion.matches && y < hero.offsetHeight) {
+  if (!reducedMotion.matches && hero && y < hero.offsetHeight) {
     const p = Math.min(y/hero.offsetHeight,1);
     const gm = $('.gimbal'); if (gm) gm.style.transform = `translateY(${p*35}px) rotate(${p*-8}deg) rotateY(${p*12}deg)`;
     const p1 = $('.photo-one'); if (p1) p1.style.transform = `translateY(${p*-85}px) rotate(${-10+p*5}deg)`;
     const p2 = $('.photo-two'); if (p2) p2.style.transform = `translateY(${p*-45}px) rotate(${9-p*5}deg)`;
     const p3 = $('.photo-three'); if (p3) p3.style.transform = `translateY(${p*-100}px) rotate(${-7+p*4}deg)`;
   }
-  if (!mobile.matches && !reducedMotion.matches) {
-    const section = $('#story');
-    const available = section.offsetHeight - innerHeight;
-    const progress = Math.max(0, Math.min(1, (y - section.offsetTop) / available));
-    if (y >= section.offsetTop - innerHeight * 0.5 && y <= section.offsetTop + section.offsetHeight) {
-      const progressBar = $('.story-image-progress>span');
-      if (progressBar) progressBar.style.width = `${progress * 100}%`;
-      const heading = $('.story-heading');
-      const right = $('.story-right');
-      if (heading) heading.style.transform = `translateY(${(progress - 0.5) * -22}px)`;
-      if (right) right.style.transform = `translateY(${(progress - 0.5) * 18}px)`;
-      const activeSlideImg = $('.story-slide.active img');
-      if (activeSlideImg) {
-        const stepProgress = (progress * 3) % 1;
-        const drift = (stepProgress - 0.5) * -16;
-        activeSlideImg.style.setProperty('--slide-drift', `${drift}px`);
-      }
-      let step = 0;
-      if (progress >= 0.67) step = 2;
-      else if (progress >= 0.33) step = 1;
-      setStep(step);
-    }
-  }
 }
 window.addEventListener('scroll',() => {if(!framePending){framePending=true;requestAnimationFrame(renderScroll);}},{passive:true});
 window.addEventListener('resize',renderScroll);
 renderScroll();
 const observer = new IntersectionObserver(entries => entries.forEach(entry => {if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}}),{threshold:.08});
-$$('.work .section-top,.work h2,.work-strip,.services h2,.service-layout,.price-card,.booking-copy,.creator-banner h2').forEach(element => {element.classList.add('reveal');observer.observe(element);});
+$$('.work .section-top,.work h2,.work-strip,.price-card,.booking-copy,.creator-banner h2').forEach(element => {element.classList.add('reveal');observer.observe(element);});
 const galleryData = [
   {image:'culture',title:'A room full of energy'},
   {image:'corporate',title:'Celebrating the people behind it'},
