@@ -62,28 +62,38 @@ function setService(index) {
 }
 $('#service-detail').textContent = serviceData[0].detail;
 $$('.service-row').forEach(button => {button.addEventListener('click', () => setService(Number(button.dataset.service)));button.addEventListener('pointerenter', event => {if(event.pointerType === 'mouse')setService(Number(button.dataset.service));});});
-const storyData = [
-  {title:'You live<br><em>the moment.</em>',subtitle:'We catch the<br><em>little things.</em>',copy:'A glance. A laugh. The dance nobody planned. Your reeler is there for it all.',image:'wedding',label:'01 / THE SHOOT'},
-  {title:'A little cut.<br><em>A lot of feeling.</em>',subtitle:'Your story.<br><em>Found in the edit.</em>',copy:'The right moments, the right rhythm. We shape your day into something you’ll want to watch again.',image:'corporate',label:'02 / THE EDIT'},
-  {title:'The day ends.<br><em>The feeling stays.</em>',subtitle:'Ready to share.<br><em>Ready to relive.</em>',copy:'Your edited reels and photos, delivered within 24 hours through a secure download link.',image:'culture',label:'03 / THE DELIVERY'}
-];
 let currentStep = -1;
 function setStep(index) {
   if (index === currentStep) return;
   currentStep = index;
-  const item = storyData[index];
-  $('#story-title').innerHTML = item.title;$('#story-subtitle').innerHTML = item.subtitle;$('#story-copy').textContent = item.copy;
-  $('#story-image').src = imagePath(item.image);$('#story-image').alt = `${item.label.slice(5).toLowerCase()} — illustrative event moment`;
-  $('#story-image-label').textContent = item.label;$('#story-count').textContent = `0${index+1}`;
-  $('.story-image-progress>span').style.width = `${(index+1)/3*100}%`;
-  $$('.story-steps button').forEach((button,i) => {button.classList.toggle('active',index === i);if(index === i)button.setAttribute('aria-current','step');else button.removeAttribute('aria-current');});
+  $$('.story-title').forEach((el, i) => {
+    el.classList.toggle('active', i === index);
+    el.classList.toggle('prev', i < index);
+  });
+  $$('.story-content-panel').forEach((el, i) => {
+    el.classList.toggle('active', i === index);
+    el.classList.toggle('prev', i < index);
+  });
+  $$('.story-slide').forEach((el, i) => {
+    el.classList.toggle('active', i === index);
+    el.classList.toggle('prev', i < index);
+  });
+  $$('.story-steps button').forEach((button, i) => {
+    const isActive = i === index;
+    button.classList.toggle('active', isActive);
+    if (isActive) button.setAttribute('aria-current', 'step');
+    else button.removeAttribute('aria-current');
+  });
+  const countEl = $('#story-count');
+  if (countEl) countEl.textContent = `0${index + 1}`;
 }
 setStep(0);
 $$('[data-step]').forEach(button => button.addEventListener('click', () => {
   const step = Number(button.dataset.step);
   if (mobile.matches || reducedMotion.matches) return setStep(step);
-  const section = $('#story');const available = section.offsetHeight - innerHeight;
-  window.scrollTo({top:section.offsetTop + available * ((step+.3)/3),behavior:reducedMotion.matches?'instant':'smooth'});
+  const section = $('#story');
+  const available = section.offsetHeight - innerHeight;
+  window.scrollTo({top: section.offsetTop + available * ((step + 0.5) / 3), behavior: 'smooth'});
 }));
 let framePending = false;
 function renderScroll() {
@@ -111,8 +121,27 @@ function renderScroll() {
     $('.photo-three').style.transform = `translateY(${p*-100}px) rotate(${-7+p*4}deg)`;
   }
   if (!mobile.matches && !reducedMotion.matches) {
-    const section = $('#story');const progress = (y-section.offsetTop)/(section.offsetHeight-innerHeight);
-    if(progress >= -.15 && progress <= 1.15) setStep(Math.max(0,Math.min(2,Math.floor(progress*3))));
+    const section = $('#story');
+    const available = section.offsetHeight - innerHeight;
+    const progress = Math.max(0, Math.min(1, (y - section.offsetTop) / available));
+    if (y >= section.offsetTop - innerHeight * 0.5 && y <= section.offsetTop + section.offsetHeight) {
+      const progressBar = $('.story-image-progress>span');
+      if (progressBar) progressBar.style.width = `${progress * 100}%`;
+      const heading = $('.story-heading');
+      const right = $('.story-right');
+      if (heading) heading.style.transform = `translateY(${(progress - 0.5) * -22}px)`;
+      if (right) right.style.transform = `translateY(${(progress - 0.5) * 18}px)`;
+      const activeSlideImg = $('.story-slide.active img');
+      if (activeSlideImg) {
+        const stepProgress = (progress * 3) % 1;
+        const drift = (stepProgress - 0.5) * -16;
+        activeSlideImg.style.setProperty('--slide-drift', `${drift}px`);
+      }
+      let step = 0;
+      if (progress >= 0.67) step = 2;
+      else if (progress >= 0.33) step = 1;
+      setStep(step);
+    }
   }
 }
 window.addEventListener('scroll',() => {if(!framePending){framePending=true;requestAnimationFrame(renderScroll);}},{passive:true});
