@@ -1830,9 +1830,13 @@ dialog {
   width: 100% !important;
 }
 
-.nav-cta {
-  margin: 0 !important;
-  white-space: nowrap !important;
+.nav-book-link {
+  cursor: pointer !important;
+}
+
+.nav-book-link span,
+.text-button span {
+  margin-left: 5px !important;
 }
 
 .mobile-nav {
