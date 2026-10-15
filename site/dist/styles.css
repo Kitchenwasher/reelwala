@@ -1955,6 +1955,8 @@ dialog {
 /* Hero AeroShards 3D Background (WebGPU + High-Fidelity 3D Canvas) */
 .hero-aero-shards {
   opacity: 0.18;
+  /* Mirror the ribbon vertically so its sweep rises from the bottom. */
+  transform: scaleY(-1);
   position: absolute !important;
   inset: 0 !important;
   width: 100% !important;
