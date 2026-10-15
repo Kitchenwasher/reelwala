@@ -1,0 +1,16 @@
+.creators-all-link{display:flex;justify-content:center;margin-top:28px}
+.directory-header{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:30px 4.3%;border-bottom:1px solid var(--line)}
+.directory-header .wordmark{font-size:30px;letter-spacing:-1px}
+.directory-header nav{display:flex;gap:28px;align-items:center;font-size:14px}
+.directory-main{padding:65px 4.3% 90px;max-width:1800px;margin:auto}
+.directory-main h1{font:clamp(48px,6vw,88px)/1.1 var(--serif);letter-spacing:-2px;margin-bottom:40px}
+.creator-directory-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px 24px}
+.creator-directory-card{overflow:hidden;border:1px solid var(--line);border-radius:18px;background:#faf7f1}
+.creator-directory-card>img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}
+.creator-directory-info{padding:24px}
+.creator-directory-info h2{font:28px/1.2 var(--serif);letter-spacing:-.5px;margin:8px 0}
+.creator-directory-info p{font-size:13px;line-height:1.6;color:var(--muted)}
+.creator-directory-info .creator-directory-city{color:var(--orange);font-size:11px;text-transform:uppercase;letter-spacing:1.4px}
+.creator-directory-info .button{width:100%;margin-top:24px;padding:15px;gap:12px;font-size:12px}
+@media(max-width:1100px){.creator-directory-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.directory-header{padding:24px 6%;align-items:flex-start}.directory-header .wordmark{font-size:23px}.directory-header nav{gap:15px;font-size:12px}.directory-main{padding:40px 6% 60px}.creator-directory-grid{grid-template-columns:1fr;gap:24px}.creator-directory-info{padding:22px}.directory-main h1{margin-bottom:28px}}

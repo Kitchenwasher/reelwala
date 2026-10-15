@@ -504,6 +504,9 @@ const ReelWalaBooking = {
 
 window.ReelWalaBooking = ReelWalaBooking;
 ReelWalaBooking.init();
+const requestedCreatorId = new URLSearchParams(window.location.search).get('creator');
+const requestedCreator = CREATORS_LIST.find(creator => creator.id === requestedCreatorId);
+if (requestedCreator) ReelWalaBooking.setCreator(requestedCreator);
 
 function downloadEnquiry(form, kind) {
   if (!form.reportValidity()) return;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import FlexCarousel from './components/FlexCarousel.jsx';
+import './creators-directory.css';
 
 const CREATOR_ITEMS = [
   {
@@ -71,6 +72,7 @@ function CreatorsShowcase() {
           squeeze={0.25}
           focusOnClick
           captions
+          onChange={(index) => setActiveIndex(index)}
           onSelect={(index) => setActiveIndex(index)}
         />
       </div>
@@ -100,11 +102,31 @@ function CreatorsShowcase() {
         </a>
       </div>
 
-      <div className="creators-hint">
-        <span>Swipe to browse creators</span>
+      <div className="creators-all-link">
+        <a className="button outline" href="creators.html">View all creators <span aria-hidden="true">↗</span></a>
       </div>
     </div>
   );
+}
+
+function CreatorsDirectory() {
+  return <div className="creator-directory-grid">
+    {CREATOR_ITEMS.map(creator => {
+      const id = creator.title.toLowerCase().replace(/\s+/g, '-');
+      const [role, city] = creator.subtitle.split(' · ');
+      return <article className="creator-directory-card" key={id}>
+        <img src={creator.src} alt={creator.alt} loading="lazy" width="600" height="750" />
+        <div className="creator-directory-info">
+          <p className="creator-directory-city">{city}</p>
+          <h2>{creator.title}</h2>
+          <p>{role}</p>
+          <a className="button outline" href={`./?creator=${encodeURIComponent(id)}#book`}>
+            Book with {creator.title.split(' ')[0]} <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </article>;
+    })}
+  </div>;
 }
 
 function mount() {
@@ -113,6 +135,11 @@ function mount() {
     const root = createRoot(rootElement);
     rootElement._reactRoot = root;
     root.render(<CreatorsShowcase />);
+  }
+  const directory = document.getElementById('creators-directory-root');
+  if (directory && !directory._reactRoot) {
+    directory._reactRoot = createRoot(directory);
+    directory._reactRoot.render(<CreatorsDirectory />);
   }
 }
 
