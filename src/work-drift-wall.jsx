@@ -6,7 +6,7 @@ const EDITED_REELS = [
   {
     image: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80&auto=format&fit=crop',
     title: 'Haldi Petals & Laughter',
-    subtitle: 'Shot on iPhone 16 Pro · 4K 60fps HDR',
+    subtitle: 'Event photo preview',
     tag: 'Haldi Ceremony',
     category: 'weddings',
     duration: '0:28'
@@ -14,7 +14,7 @@ const EDITED_REELS = [
   {
     image: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80&auto=format&fit=crop',
     title: 'The First Dance',
-    subtitle: 'Shot on iPhone 16 Pro · Dolby Vision 24fps',
+    subtitle: 'Event photo preview',
     tag: 'First Dance',
     category: 'weddings',
     duration: '0:45'
@@ -22,7 +22,7 @@ const EDITED_REELS = [
   {
     image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&q=80&auto=format&fit=crop',
     title: 'Champagne & Toasts',
-    subtitle: 'Shot on iPhone 16 Pro · Cinematic 4K',
+    subtitle: 'Event photo preview',
     tag: 'Reception Toast',
     category: 'weddings',
     duration: '0:22'
@@ -30,7 +30,7 @@ const EDITED_REELS = [
   {
     image: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&q=80&auto=format&fit=crop',
     title: 'Mehendi Beats & Henna',
-    subtitle: 'Shot on iPhone 16 Pro · Macro 4K',
+    subtitle: 'Event photo preview',
     tag: 'Mehendi Night',
     category: 'weddings',
     duration: '0:31'
@@ -38,7 +38,7 @@ const EDITED_REELS = [
   {
     image: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=800&q=80&auto=format&fit=crop',
     title: 'Sangeet Night Energy',
-    subtitle: 'Shot on iPhone 16 Pro · Action Mode',
+    subtitle: 'Event photo preview',
     tag: 'Sangeet Dance',
     category: 'weddings',
     duration: '0:36'
@@ -46,7 +46,7 @@ const EDITED_REELS = [
   {
     image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80&auto=format&fit=crop',
     title: 'Festival Flare & Cheers',
-    subtitle: 'Shot on iPhone 16 Pro · Action Mode 60fps',
+    subtitle: 'Event photo preview',
     tag: 'Live Festival',
     category: 'festivals',
     duration: '0:34'
@@ -54,7 +54,7 @@ const EDITED_REELS = [
   {
     image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&q=80&auto=format&fit=crop',
     title: 'Keynote & Stage Momentum',
-    subtitle: 'Shot on iPhone 16 Pro · Telephoto 4K',
+    subtitle: 'Event photo preview',
     tag: 'Global Summit',
     category: 'festivals',
     duration: '0:26'
@@ -62,7 +62,7 @@ const EDITED_REELS = [
   {
     image: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=800&q=80&auto=format&fit=crop',
     title: 'Sunburn Arena Beats',
-    subtitle: 'Shot on iPhone 16 Pro · 4K 24fps Log',
+    subtitle: 'Event photo preview',
     tag: 'Arena Concert',
     category: 'festivals',
     duration: '0:38'
@@ -70,7 +70,7 @@ const EDITED_REELS = [
   {
     image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?w=800&q=80&auto=format&fit=crop',
     title: 'Gulal & Colors of Spring',
-    subtitle: 'Shot on iPhone 16 Pro · 120fps Slo-Mo',
+    subtitle: 'Event photo preview',
     tag: 'Holi Festival',
     category: 'festivals',
     duration: '0:30'
@@ -78,7 +78,7 @@ const EDITED_REELS = [
   {
     image: 'https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=800&q=80&auto=format&fit=crop',
     title: 'Campus Fest Headline',
-    subtitle: 'Shot on iPhone 16 Pro · Ultra-Wide 4K',
+    subtitle: 'Event photo preview',
     tag: 'Cultural Fest',
     category: 'festivals',
     duration: '0:27'
@@ -86,7 +86,7 @@ const EDITED_REELS = [
   {
     image: 'https://images.unsplash.com/photo-1571266028243-3716f02d2d2e?w=800&q=80&auto=format&fit=crop',
     title: 'Drop The Beat',
-    subtitle: 'Shot on iPhone 16 Pro · Low Light 4K',
+    subtitle: 'Event photo preview',
     tag: 'DJ Showcase',
     category: 'nightlife',
     duration: '0:33'
@@ -94,7 +94,7 @@ const EDITED_REELS = [
   {
     image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=800&q=80&auto=format&fit=crop',
     title: 'Midnight Velvet Lounge',
-    subtitle: 'Shot on iPhone 16 Pro · Cinematic Mode',
+    subtitle: 'Event photo preview',
     tag: 'Cocktail Club',
     category: 'nightlife',
     duration: '0:29'
@@ -102,7 +102,7 @@ const EDITED_REELS = [
   {
     image: 'https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=800&q=80&auto=format&fit=crop',
     title: 'Rhythm & Brass Sessions',
-    subtitle: 'Shot on iPhone 16 Pro · Spatial Audio',
+    subtitle: 'Event photo preview',
     tag: 'Live Club',
     category: 'nightlife',
     duration: '0:35'
@@ -110,7 +110,7 @@ const EDITED_REELS = [
   {
     image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80&auto=format&fit=crop',
     title: 'Himalayan Ridge Sunrise',
-    subtitle: 'Shot on iPhone 16 Pro · ProRes Log Graded',
+    subtitle: 'Event photo preview',
     tag: 'Scenic Adventure',
     category: 'travel',
     duration: '0:42'
@@ -118,7 +118,7 @@ const EDITED_REELS = [
   {
     image: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=800&q=80&auto=format&fit=crop',
     title: 'Dunes of Thar Golden Glow',
-    subtitle: 'Shot on iPhone 16 Pro · 4K 60fps',
+    subtitle: 'Event photo preview',
     tag: 'Desert Expedition',
     category: 'travel',
     duration: '0:40'
@@ -226,23 +226,7 @@ function WorkDriftWallShowcase() {
         />
       </div>
 
-      {/* Luxury Cinematic Tech Badge Strip */}
-      <div className="work-meta-strip">
-        <div className="work-meta-badge">
-          <span className="apple-dot"></span>
-          <strong>Shot on iPhone 16 Pro Max</strong>
-          <span className="divider">·</span>
-          <span>4K 60fps Dolby Vision HDR</span>
-          <span className="divider">·</span>
-          <span>Mobile Cinematography</span>
-          <span className="divider">·</span>
-          <span>Color Graded in DaVinci</span>
-          <span className="divider">·</span>
-          <span className="orange-text">Delivered within 24 Hours</span>
-        </div>
-      </div>
-
-      {/* Full-Screen Luxury Reel Cinema Theatre Modal */}
+      {/* Event preview */}
       {activeReel && (
         <div className="reel-cinema-overlay" onClick={() => setActiveReel(null)} role="dialog" aria-modal="true" aria-label={activeReel.title}>
           <div className="reel-cinema-card" onClick={e => e.stopPropagation()}>
@@ -283,11 +267,6 @@ function WorkDriftWallShowcase() {
               <div className="reel-cinema-info">
                 <h3>{activeReel.title}</h3>
                 <p className="reel-cinema-tech">{activeReel.subtitle}</p>
-                <div className="reel-cinema-specs">
-                  <span>● 4K 60fps HDR</span>
-                  <span>● DaVinci Graded</span>
-                  <span>● 24h Express Delivery</span>
-                </div>
                 <a
                   href="#book"
                   className="reel-cinema-cta"

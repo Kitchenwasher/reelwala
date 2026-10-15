@@ -77,7 +77,7 @@ function CreatorsShowcase() {
 
       <div className="creators-dock">
         <div className="creators-dock-left">
-          <span className="creators-dock-tag">Featured Director</span>
+          <span className="creators-dock-tag">Creator</span>
           <strong className="creators-dock-name">{activeCreator.title}</strong>
           <span className="creators-dock-sub">{activeCreator.subtitle}</span>
         </div>
@@ -101,7 +101,7 @@ function CreatorsShowcase() {
       </div>
 
       <div className="creators-hint">
-        <span>↔ Drag, swipe or use mouse wheel to explore creators · Click any card to focus</span>
+        <span>Swipe to browse creators</span>
       </div>
     </div>
   );

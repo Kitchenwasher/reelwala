@@ -50,33 +50,18 @@ function openImage(name, title, category) {
 }
 $$('.work-card').forEach(button => button.addEventListener('click', () => openImage(button.dataset.image,button.dataset.title,button.dataset.category)));
 $('#lightbox-book').addEventListener('click', () => imageDialog.close());
-let framePending = false;
-function renderScroll() {
-  framePending = false;
-  const hero = $('.hero');const y = scrollY;
-  if (!reducedMotion.matches && hero && y < hero.offsetHeight) {
-    const p = Math.min(y/hero.offsetHeight,1);
-    const gm = $('.gimbal'); if (gm) gm.style.transform = `translateY(${p*35}px) rotate(${p*-8}deg) rotateY(${p*12}deg)`;
-    const p1 = $('.photo-one'); if (p1) p1.style.transform = `translateY(${p*-85}px) rotate(${-10+p*5}deg)`;
-    const p2 = $('.photo-two'); if (p2) p2.style.transform = `translateY(${p*-45}px) rotate(${9-p*5}deg)`;
-    const p3 = $('.photo-three'); if (p3) p3.style.transform = `translateY(${p*-100}px) rotate(${-7+p*4}deg)`;
-  }
-}
-window.addEventListener('scroll',() => {if(!framePending){framePending=true;requestAnimationFrame(renderScroll);}},{passive:true});
-window.addEventListener('resize',renderScroll);
-renderScroll();
 const observer = new IntersectionObserver(entries => entries.forEach(entry => {if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}}),{threshold:.08});
 $$('.work .section-top,.work h2,.work-strip,.price-card,.booking-copy,.creator-banner h2').forEach(element => {element.classList.add('reveal');observer.observe(element);});
 const galleryData = [
-  {image:'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=900&q=80&auto=format&fit=crop',title:'Sunlit vows & dinner laughter'},
-  {image:'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=900&q=80&auto=format&fit=crop',title:'Celebrating the people behind it'},
-  {image:'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=900&q=80&auto=format&fit=crop',title:'The feeling you keep'},
-  {image:'https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=900&q=80&auto=format&fit=crop',title:'One more song. One more memory.'},
-  {image:'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=900&q=80&auto=format&fit=crop',title:'All your favourite people'}
+  {image:'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=900&q=80&auto=format&fit=crop',title:'Wedding'},
+  {image:'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=900&q=80&auto=format&fit=crop',title:'Corporate event'},
+  {image:'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=900&q=80&auto=format&fit=crop',title:'Reception'},
+  {image:'https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=900&q=80&auto=format&fit=crop',title:'Concert'},
+  {image:'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=900&q=80&auto=format&fit=crop',title:'Celebration'}
 ];
 let galleryIndex = 2;
 const cardsRoot = $('.replay-cards');
-galleryData.forEach((item,i) => {const button = document.createElement('button');button.className='replay-card';button.setAttribute('aria-label',`View ${item.title}`);const img = document.createElement('img');img.src=imagePath(item.image);img.alt=item.title;img.loading='lazy';button.append(img);button.addEventListener('click',() => {if(didDrag)return;if(galleryIndex===i)openImage(item.image,item.title,'THE FEELING, ON REPEAT');else{galleryIndex=i;renderGallery();}});cardsRoot.append(button);});
+galleryData.forEach((item,i) => {const button = document.createElement('button');button.className='replay-card';button.setAttribute('aria-label',`View ${item.title}`);const img = document.createElement('img');img.src=imagePath(item.image);img.alt=item.title;img.loading='lazy';button.append(img);button.addEventListener('click',() => {if(didDrag)return;if(galleryIndex===i)openImage(item.image,item.title,'EVENT PREVIEW');else{galleryIndex=i;renderGallery();}});cardsRoot.append(button);});
 function renderGallery() {
   $$('.replay-card').forEach((card,i) => {
     let offset = (i-galleryIndex+5)%5;if(offset>2)offset-=5;
@@ -385,7 +370,7 @@ const ReelWalaBooking = {
       if (hiddenCreator) hiddenCreator.value = `${creatorObj.name} (${creatorObj.role} · ${creatorObj.city})`;
     } else {
       if (nameEl) nameEl.textContent = 'The Reel Wala Team Match';
-      if (descEl) descEl.textContent = 'We pair you with the best available director for your occasion & city.';
+      if (descEl) descEl.textContent = 'We’ll assign an available creator for your event.';
       if (badgeEl) badgeEl.textContent = 'Recommended';
       if (avatarWrap) avatarWrap.innerHTML = `<span class="team-sparkle"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.4 7.6 7.6 2.4-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4L12 2z"/></svg></span>`;
       if (hiddenCreator) hiddenCreator.value = 'The Reel Wala Team Match';
@@ -472,7 +457,7 @@ const ReelWalaBooking = {
       'Wedding / private celebration': 'Wedding & Celebration',
       'Social / cultural event': 'Festival & Concert',
       'Corporate event': 'Corporate Event',
-      'Something else': 'Bespoke Celebration'
+      'Something else': 'Other event'
     };
 
     const icons = {
@@ -486,8 +471,8 @@ const ReelWalaBooking = {
 
     const chips = [
       { icon: icons.ring, text: occasionLabels[this.state.occasion] || this.state.occasion },
-      { icon: icons.pkg, text: `${this.state.package} Tier` },
-      { icon: icons.cam, text: this.state.creator ? this.state.creator.name : 'Team Match (Best Fit)' }
+      { icon: icons.pkg, text: `${this.state.package} package` },
+      { icon: icons.cam, text: this.state.creator ? this.state.creator.name : 'Assigned by the team' }
     ];
 
     if (this.state.inspiration) {
@@ -512,7 +497,7 @@ const ReelWalaBooking = {
     `).join('');
 
     if (statusEl) {
-      statusEl.textContent = `${chips.length} preferences active`;
+      statusEl.textContent = `${chips.length} selections`;
     }
   }
 };

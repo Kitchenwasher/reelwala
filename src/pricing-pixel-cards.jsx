@@ -18,9 +18,8 @@ function PricingPixelCards() {
         colors="#fdfbf7,#f5eee3,#fed7aa,#f97316"
         className="price-card-pixel-standard"
       >
-        <span className="eyebrow card-eyebrow">THE QUICK MOMENT</span>
         <h3>Standard</h3>
-        <p>Focused content for the moments you can’t wait to share.</p>
+        <p>Short event coverage with one creator.</p>
         <ul>
           <li>4 complimentary color-graded photos</li>
           <li>Edited reel delivery within 24 hours</li>
@@ -43,9 +42,8 @@ function PricingPixelCards() {
         colors="#ffedd5,#fed7aa,#fb923c,#f35422,#ea580c"
         className="featured price-card-pixel-extended"
       >
-        <span className="eyebrow card-eyebrow featured-eyebrow">STAY A LITTLE LONGER</span>
         <h3>Extended</h3>
-        <p>More time to capture the atmosphere, the people, and the details.</p>
+        <p>Up to four hours of event coverage.</p>
         <ul>
           <li>Up to 4 hours of shoot time</li>
           <li>7 complimentary color-graded photos</li>
@@ -68,9 +66,8 @@ function PricingPixelCards() {
         colors="#fdfbf7,#f5eee3,#fed7aa,#f97316"
         className="price-card-pixel-custom"
       >
-        <span className="eyebrow card-eyebrow">SOMETHING A LITTLE EXTRA</span>
         <h3>Your way</h3>
-        <p>A bigger celebration or a different idea? Tell us what you have in mind.</p>
+        <p>Ask us about longer or multi-day shoots.</p>
         <ul>
           <li>Discuss Premium coverage</li>
           <li>Extra shoot hour: ₹1,000</li>

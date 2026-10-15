@@ -1746,9 +1746,9 @@ dialog {
   width: 100% !important;
   z-index: 50 !important;
   border-bottom: 1px solid rgba(217, 211, 199, 0.45) !important;
-  background: rgba(245, 241, 233, 0.85) !important;
-  backdrop-filter: blur(14px) !important;
-  -webkit-backdrop-filter: blur(14px) !important;
+  background: rgba(245, 241, 233, 0.28) !important;
+  backdrop-filter: blur(5px) !important;
+  -webkit-backdrop-filter: blur(5px) !important;
 }
 
 .nav-left {
@@ -2442,3 +2442,6 @@ footer > a:not(.wordmark) {
 }
 
 
+
+/* Keep the mobile hero sized to its copy and device. */
+@media(max-width:700px){.hero{height:auto;min-height:0;padding:115px 6% 35px;display:block}.hero-scene{position:relative;inset:auto;width:100%;height:490px;margin:25px 0 0}}

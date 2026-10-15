@@ -1,6 +1,6 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
-import CircularCarousel from './components/CircularCarousel.jsx';
+import HeroReelScene from './HeroReelScene.jsx';
 
 const REEL_MOMENTS = [
   {
@@ -65,122 +65,13 @@ const REEL_MOMENTS = [
   }
 ];
 
-function HeroCarouselScene() {
-  const [activeItem, setActiveItem] = useState(REEL_MOMENTS[0]);
-  const [likeCount, setLikeCount] = useState(342);
-  const [liked, setLiked] = useState(true);
-
-  const handleActiveChange = useCallback((index) => {
-    if (typeof index === 'number' && REEL_MOMENTS[index]) {
-      setActiveItem(REEL_MOMENTS[index]);
-    }
-  }, []);
-
-  const handleLike = (e) => {
-    e.stopPropagation();
-    setLiked(prev => !prev);
-    setLikeCount(prev => (liked ? prev - 1 : prev + 1));
-  };
-
-  return (
-    <div className="hero-interactive-scene">
-      {/* 3D Circular Carousel Ring orbiting smoothly around the handheld phone stand */}
-      <div className="hero-circular-carousel-wrapper">
-        <CircularCarousel
-          items={REEL_MOMENTS}
-          preset="orbit"
-          tilt={-10}
-          cardWidth={115}
-          aspectRatio={9 / 16}
-          gap={20}
-          speed={13}
-          autoplay="drift"
-          direction="left"
-          pauseOnHover={false}
-          draggable={true}
-          momentum={0.7}
-          snap={false}
-          intro="none"
-          cornerRadius={16}
-          depthFade={0.3}
-          fadeColor="#f5f1e9"
-          captions={false}
-          onChange={handleActiveChange}
-        />
-      </div>
-
-      {/* The Central Handheld Phone & Gimbal Stand */}
-      <div className="hero-gimbal-holder">
-        <div className="device-shadow"></div>
-        <img
-          className="gimbal"
-          src="assets/gimbal.png"
-          alt="Professional smartphone gimbal camera stand"
-          fetchPriority="high"
-        />
-
-        {/* Dynamic Screen Overlay on the Gimbal Phone */}
-        <div className="phone-screen-glass">
-          <img
-            key={activeItem.src}
-            className="phone-screen-img"
-            src={activeItem.src}
-            alt={activeItem.title}
-          />
-          <div className="phone-screen-scrim"></div>
-          <div className="phone-dynamic-island"></div>
-
-          {/* Instagram Story / Reel Header UI */}
-          <div className="phone-ig-top">
-            <div className="phone-ig-progress">
-              <span className="active"></span>
-              <span></span>
-              <span></span>
-            </div>
-            <div className="phone-ig-author">
-              <span className="phone-ig-dot"></span>
-              <span className="phone-ig-username">thereelwala</span>
-              <span className="phone-ig-badge">PRO</span>
-              <span className="phone-ig-time">1h</span>
-            </div>
-          </div>
-
-          {/* Instagram Story / Reel Bottom Caption & Audio */}
-          <div className="phone-ig-bottom">
-            <p className="phone-ig-title">{activeItem.title}</p>
-            <p className="phone-ig-sub">♫ {activeItem.subtitle} · Original audio</p>
-            <div className="phone-ig-actions">
-              <button
-                type="button"
-                className={`phone-ig-heart ${liked ? 'liked' : ''}`}
-                onClick={handleLike}
-                aria-label="Like this reel"
-              >
-                <svg width="11" height="11" viewBox="0 0 24 24" fill={liked ? "#f35422" : "none"} stroke={liked ? "#f35422" : "currentColor"} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
-                </svg>
-                <span>{likeCount}</span>
-              </button>
-              <span className="phone-ig-share">↗</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function mount() {
-  const root = document.getElementById('hero-carousel-root');
-  if (root && !root._reactRoot) {
-    const reactRoot = createRoot(root);
-    root._reactRoot = reactRoot;
-    reactRoot.render(<HeroCarouselScene />);
+  const container = document.getElementById('hero-carousel-root');
+  if (container && !container._reactRoot) {
+    container._reactRoot = createRoot(container);
+    container._reactRoot.render(<HeroReelScene items={REEL_MOMENTS} />);
   }
 }
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', mount);
-} else {
-  mount();
-}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount);
+else mount();
