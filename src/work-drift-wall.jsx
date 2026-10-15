@@ -4,124 +4,124 @@ import DriftWall from './components/DriftWall.jsx';
 
 const EDITED_REELS = [
   {
-    image: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80&auto=format&fit=crop',
-    title: 'Haldi Sunlight & Joy',
+    image: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80&auto=format&fit=crop',
+    title: 'Haldi Petals & Laughter',
     subtitle: 'Shot on iPhone 16 Pro · 4K 60fps HDR',
-    tag: 'Private Celebration',
+    tag: 'Haldi Ceremony',
     category: 'weddings',
     duration: '0:28'
   },
   {
-    image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=80&auto=format&fit=crop',
-    title: 'Electric Stage Pulse',
-    subtitle: 'Shot on iPhone 16 Pro · Action Mode',
-    tag: 'Music Festival',
-    category: 'festivals',
-    duration: '0:35'
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=80&auto=format&fit=crop',
-    title: 'Rooftop Midnight Toast',
-    subtitle: 'Shot on iPhone 16 Pro · Cinematic 24fps',
-    tag: 'Celebration',
-    category: 'weddings',
-    duration: '0:22'
-  },
-  {
     image: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80&auto=format&fit=crop',
     title: 'The First Dance',
-    subtitle: 'Shot on iPhone 16 Pro · Dolby Vision',
-    tag: 'Wedding Moments',
+    subtitle: 'Shot on iPhone 16 Pro · Dolby Vision 24fps',
+    tag: 'First Dance',
     category: 'weddings',
     duration: '0:45'
   },
   {
-    image: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80&auto=format&fit=crop',
-    title: 'Club Motion & Lasers',
-    subtitle: 'Shot on iPhone 16 Pro · Low Light 4K',
-    tag: 'Nightlife',
-    category: 'nightlife',
-    duration: '0:30'
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&q=80&auto=format&fit=crop',
-    title: 'Acoustic Jam Session',
-    subtitle: 'Shot on iPhone 16 Pro · Spatial Audio',
-    tag: 'Culture & Jam',
-    category: 'nightlife',
-    duration: '0:40'
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1545232979-8bf68ee9b1af?w=800&q=80&auto=format&fit=crop',
-    title: 'Rooftop Choreography',
-    subtitle: 'Shot on iPhone 16 Pro · 4K 60fps',
-    tag: 'Dance Performance',
-    category: 'festivals',
-    duration: '0:25'
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80&auto=format&fit=crop',
-    title: 'Carnival Confetti Sky',
-    subtitle: 'Shot on iPhone 16 Pro · 120fps Slo-Mo',
-    tag: 'Festival Energy',
-    category: 'festivals',
-    duration: '0:32'
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&q=80&auto=format&fit=crop',
-    title: 'Midnight Sparklers',
-    subtitle: 'Shot on iPhone 16 Pro · Cinematic Mode',
-    tag: 'Milestone Toast',
+    image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&q=80&auto=format&fit=crop',
+    title: 'Champagne & Toasts',
+    subtitle: 'Shot on iPhone 16 Pro · Cinematic 4K',
+    tag: 'Reception Toast',
     category: 'weddings',
-    duration: '0:20'
+    duration: '0:22'
   },
   {
-    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80&auto=format&fit=crop',
-    title: 'Coastal Golden Hour',
-    subtitle: 'Shot on iPhone 16 Pro · 4K HDR Graded',
-    tag: 'Travel Story',
-    category: 'travel',
-    duration: '0:38'
+    image: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&q=80&auto=format&fit=crop',
+    title: 'Mehendi Beats & Henna',
+    subtitle: 'Shot on iPhone 16 Pro · Macro 4K',
+    tag: 'Mehendi Night',
+    category: 'weddings',
+    duration: '0:31'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=800&q=80&auto=format&fit=crop',
+    title: 'Sangeet Night Energy',
+    subtitle: 'Shot on iPhone 16 Pro · Action Mode',
+    tag: 'Sangeet Dance',
+    category: 'weddings',
+    duration: '0:36'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80&auto=format&fit=crop',
+    title: 'Festival Flare & Cheers',
+    subtitle: 'Shot on iPhone 16 Pro · Action Mode 60fps',
+    tag: 'Live Festival',
+    category: 'festivals',
+    duration: '0:34'
   },
   {
     image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&q=80&auto=format&fit=crop',
     title: 'Keynote & Stage Momentum',
     subtitle: 'Shot on iPhone 16 Pro · Telephoto 4K',
-    tag: 'Corporate Summit',
+    tag: 'Global Summit',
     category: 'festivals',
     duration: '0:26'
   },
   {
-    image: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800&q=80&auto=format&fit=crop',
-    title: 'Night Market Glow',
-    subtitle: 'Shot on iPhone 16 Pro · Night Mode Video',
-    tag: 'Street & Beats',
+    image: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=800&q=80&auto=format&fit=crop',
+    title: 'Sunburn Arena Beats',
+    subtitle: 'Shot on iPhone 16 Pro · 4K 24fps Log',
+    tag: 'Arena Concert',
+    category: 'festivals',
+    duration: '0:38'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?w=800&q=80&auto=format&fit=crop',
+    title: 'Gulal & Colors of Spring',
+    subtitle: 'Shot on iPhone 16 Pro · 120fps Slo-Mo',
+    tag: 'Holi Festival',
+    category: 'festivals',
+    duration: '0:30'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=800&q=80&auto=format&fit=crop',
+    title: 'Campus Fest Headline',
+    subtitle: 'Shot on iPhone 16 Pro · Ultra-Wide 4K',
+    tag: 'Cultural Fest',
+    category: 'festivals',
+    duration: '0:27'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1571266028243-3716f02d2d2e?w=800&q=80&auto=format&fit=crop',
+    title: 'Drop The Beat',
+    subtitle: 'Shot on iPhone 16 Pro · Low Light 4K',
+    tag: 'DJ Showcase',
+    category: 'nightlife',
+    duration: '0:33'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=800&q=80&auto=format&fit=crop',
+    title: 'Midnight Velvet Lounge',
+    subtitle: 'Shot on iPhone 16 Pro · Cinematic Mode',
+    tag: 'Cocktail Club',
     category: 'nightlife',
     duration: '0:29'
   },
   {
-    image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80&auto=format&fit=crop',
-    title: 'Unfiltered Laughter',
-    subtitle: 'Shot on iPhone 16 Pro · 4K 24fps',
-    tag: 'Friends Forever',
-    category: 'weddings',
-    duration: '0:24'
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80&auto=format&fit=crop',
-    title: 'Festival Flare & Cheers',
-    subtitle: 'Shot on iPhone 16 Pro · Action Mode',
-    tag: 'Live Event',
-    category: 'festivals',
-    duration: '0:34'
+    image: 'https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=800&q=80&auto=format&fit=crop',
+    title: 'Rhythm & Brass Sessions',
+    subtitle: 'Shot on iPhone 16 Pro · Spatial Audio',
+    tag: 'Live Club',
+    category: 'nightlife',
+    duration: '0:35'
   },
   {
     image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80&auto=format&fit=crop',
-    title: 'Mountain Sunrise Reel',
+    title: 'Himalayan Ridge Sunrise',
     subtitle: 'Shot on iPhone 16 Pro · ProRes Log Graded',
     tag: 'Scenic Adventure',
     category: 'travel',
     duration: '0:42'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=800&q=80&auto=format&fit=crop',
+    title: 'Dunes of Thar Golden Glow',
+    subtitle: 'Shot on iPhone 16 Pro · 4K 60fps',
+    tag: 'Desert Expedition',
+    category: 'travel',
+    duration: '0:40'
   }
 ];
 

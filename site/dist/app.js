@@ -15,7 +15,7 @@ $('#creator-form .form-grid').append(uploadFields);
 const photoInput = $('#creator-form input[name="photos"]');const videoInput = $('#creator-form input[name="videos"]');
 photoInput.addEventListener('change',()=>photoInput.setCustomValidity(photoInput.files.length === 5?'':'Please choose exactly five photos.'));
 videoInput.addEventListener('change',()=>videoInput.setCustomValidity(videoInput.files.length <= 2?'':'Please choose no more than two videos.'));
-const imagePath = name => `assets/${name}.webp`;
+const imagePath = name => (name && (name.startsWith('http://') || name.startsWith('https://'))) ? name : `assets/${name}.webp`;
 const menu = $('.menu-toggle');
 menu.addEventListener('click', () => {
   const open = menu.getAttribute('aria-expanded') !== 'true';
@@ -58,11 +58,11 @@ renderScroll();
 const observer = new IntersectionObserver(entries => entries.forEach(entry => {if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}}),{threshold:.08});
 $$('.work .section-top,.work h2,.work-strip,.price-card,.booking-copy,.creator-banner h2').forEach(element => {element.classList.add('reveal');observer.observe(element);});
 const galleryData = [
-  {image:'culture',title:'A room full of energy'},
-  {image:'corporate',title:'Celebrating the people behind it'},
-  {image:'wedding',title:'The feeling you keep'},
-  {image:'culture',title:'One more song. One more memory.'},
-  {image:'wedding',title:'All your favourite people'}
+  {image:'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=900&q=80&auto=format&fit=crop',title:'Sunlit vows & dinner laughter'},
+  {image:'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=900&q=80&auto=format&fit=crop',title:'Celebrating the people behind it'},
+  {image:'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=900&q=80&auto=format&fit=crop',title:'The feeling you keep'},
+  {image:'https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=900&q=80&auto=format&fit=crop',title:'One more song. One more memory.'},
+  {image:'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=900&q=80&auto=format&fit=crop',title:'All your favourite people'}
 ];
 let galleryIndex = 2;
 const cardsRoot = $('.replay-cards');

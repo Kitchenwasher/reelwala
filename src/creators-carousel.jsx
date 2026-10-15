@@ -4,19 +4,19 @@ import FlexCarousel from './components/FlexCarousel.jsx';
 
 const CREATOR_ITEMS = [
   {
-    src: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=1200&q=80&auto=format&fit=crop',
+    src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&q=80&auto=format&fit=crop',
     alt: 'Creator Aarav Sharma',
     title: 'Aarav Sharma',
     subtitle: 'Lead Reel Director · Mumbai'
   },
   {
-    src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&q=80&auto=format&fit=crop',
+    src: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=1200&q=80&auto=format&fit=crop',
     alt: 'Creator Kabir Sen',
     title: 'Kabir Sen',
     subtitle: 'Cinematic Videographer · Delhi NCR'
   },
   {
-    src: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=1200&q=80&auto=format&fit=crop',
+    src: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=1200&q=80&auto=format&fit=crop',
     alt: 'Creator Ananya Iyer',
     title: 'Ananya Iyer',
     subtitle: 'Visual Storyteller · Pune'
@@ -34,7 +34,7 @@ const CREATOR_ITEMS = [
     subtitle: 'Colorist & Wedding Reeler · Kolkata'
   },
   {
-    src: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=1200&q=80&auto=format&fit=crop',
+    src: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=1200&q=80&auto=format&fit=crop',
     alt: 'Creator Vikram Malhotra',
     title: 'Vikram Malhotra',
     subtitle: 'Festival & Concert Reeler · Goa'
@@ -46,7 +46,7 @@ const CREATOR_ITEMS = [
     subtitle: 'Culture & Lifestyle Reeler · Hyderabad'
   },
   {
-    src: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=1200&q=80&auto=format&fit=crop',
+    src: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=1200&q=80&auto=format&fit=crop',
     alt: 'Creator Tanya Sengupta',
     title: 'Tanya Sengupta',
     subtitle: 'Fashion & Brand Reeler · Jaipur'
