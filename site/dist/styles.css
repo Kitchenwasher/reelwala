@@ -188,13 +188,10 @@
 }
 
 .work-filter-chip.active {
-  background: linear-gradient(145deg, #ff6b3a 0%, #eb4412 100%);
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.4);
-  box-shadow: 
-    0 10px 24px -4px rgba(243, 84, 34, 0.5),
-    inset 2px 2px 4px rgba(255, 255, 255, 0.55),
-    inset -2px -2px 4px rgba(140, 28, 4, 0.35);
+  background: #ffffff;
+  color: #171513;
+  border-color: #ffffff;
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.2);
 }
 
 /* The Drift Wall Container - Full Bleed Cinematic Canvas */
@@ -537,22 +534,23 @@
   justify-content: center;
   gap: 12px;
   width: 100%;
-  padding: 13px 20px;
+  padding: 14px 22px;
   border-radius: 9999px;
-  background: var(--clay-orange-grad);
+  background: #f35422;
   color: #ffffff;
   font-family: var(--sans);
   font-size: 13px;
   font-weight: 600;
   text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  box-shadow: var(--clay-orange-shadow);
+  border: none;
+  box-shadow: 0 4px 16px rgba(243, 84, 34, 0.32);
   transition: all 0.25s ease;
 }
 
 .reel-cinema-cta:hover {
+  background: #e24311;
   transform: translateY(-2px);
-  box-shadow: var(--clay-orange-hover-shadow);
+  box-shadow: 0 8px 24px rgba(243, 84, 34, 0.45);
 }
 
 @media (max-width: 700px) {
@@ -578,37 +576,22 @@
   }
 }
 
-/* === CLAYMORPHISM DESIGN SYSTEM === */
-/* Inspired by Hype4 Academy: fluffy 3D depth, dual inner shadows & rounded curves */
+/* === MINIMALIST EDITORIAL DESIGN SYSTEM === */
+/* Clean lines, luxury typography, rich obsidian pills, subtle terracotta accents, zero clay bevels */
 
 :root {
-  --clay-orange: #f35422;
-  --clay-orange-grad: linear-gradient(145deg, #ff6b3a 0%, #eb4412 100%);
-  --clay-orange-shadow: 
-    0 12px 28px -4px rgba(243, 84, 34, 0.42),
-    0 5px 12px -2px rgba(243, 84, 34, 0.22),
-    inset 2px 2px 4px rgba(255, 255, 255, 0.55),
-    inset -3px -3px 6px rgba(140, 28, 4, 0.35);
-  --clay-orange-hover-shadow:
-    0 18px 36px -4px rgba(243, 84, 34, 0.5),
-    0 8px 18px -2px rgba(243, 84, 34, 0.3),
-    inset 3px 3px 6px rgba(255, 255, 255, 0.65),
-    inset -4px -4px 8px rgba(140, 28, 4, 0.4);
-
-  --clay-card-bg: #faf6ef;
-  --clay-card-shadow:
-    0 18px 40px -8px rgba(70, 50, 30, 0.12),
-    0 6px 16px -3px rgba(70, 50, 30, 0.07),
-    inset 2px 2px 6px rgba(255, 255, 255, 0.95),
-    inset -3px -3px 8px rgba(160, 140, 120, 0.14);
-
-  --clay-inset-bg: #f2ebe0;
-  --clay-inset-shadow:
-    inset 2px 2px 5px rgba(120, 100, 80, 0.14),
-    inset -2px -2px 5px rgba(255, 255, 255, 0.85);
+  --minimal-ink: #171513;
+  --minimal-ink-hover: #26221d;
+  --minimal-orange: #f35422;
+  --minimal-orange-hover: #db4414;
+  --minimal-card-bg: #ffffff;
+  --minimal-border: rgba(23, 21, 19, 0.09);
+  --minimal-border-focus: #171513;
+  --minimal-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  --minimal-shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.08);
 }
 
-/* 1. All Buttons - Highly Rounded Clay Pills */
+/* 1. Minimalist Pill Buttons */
 .button,
 a.button,
 button.button,
@@ -616,139 +599,169 @@ form > .button {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  gap: 28px !important;
-  padding: 16px 32px !important;
-  background: var(--clay-orange-grad) !important;
-  color: #fff !important;
-  border: 1px solid rgba(255, 255, 255, 0.35) !important;
-  border-radius: 9999px !important; /* Fully round pill! */
-  font-size: 14px !important;
+  gap: 22px !important;
+  padding: 15px 30px !important;
+  background: #171513 !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 9999px !important; /* Elegant pill */
+  font-family: var(--sans) !important;
+  font-size: 13px !important;
   font-weight: 600 !important;
-  line-height: 1.2 !important;
-  box-shadow: var(--clay-orange-shadow) !important;
-  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease, background 0.25s ease !important;
+  letter-spacing: 0.4px !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
   cursor: pointer !important;
   text-decoration: none !important;
+}
+
+.button span,
+a.button span,
+button.button span,
+form > .button span {
+  color: #f35422 !important;
+  display: inline-block !important;
+  transition: transform 0.2s ease !important;
 }
 
 .button:hover,
 a.button:hover,
 button.button:hover,
 form > .button:hover {
-  background: linear-gradient(145deg, #ff7a4c 0%, #ee4e1b 100%) !important;
-  transform: translateY(-3px) scale(1.02) !important;
-  box-shadow: var(--clay-orange-hover-shadow) !important;
+  background: #27231f !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14) !important;
+  border-color: rgba(243, 84, 34, 0.4) !important;
+}
+
+.button:hover span,
+a.button:hover span,
+button.button:hover span,
+form > .button:hover span {
+  transform: translate(2px, -2px) !important;
 }
 
 .button:active,
 a.button:active,
 button.button:active,
 form > .button:active {
-  transform: translateY(1px) scale(0.99) !important;
-  box-shadow: 
-    0 6px 14px -2px rgba(243, 84, 34, 0.4),
-    inset 2px 2px 4px rgba(140, 28, 4, 0.35),
-    inset -2px -2px 4px rgba(255, 255, 255, 0.4) !important;
+  transform: translateY(0px) scale(0.99) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
 }
 
 .button.small {
-  padding: 11px 22px !important;
+  padding: 10px 20px !important;
   gap: 14px !important;
   font-size: 11px !important;
   border-radius: 9999px !important;
 }
 
 .button.outline {
-  background: #faf5ed !important;
-  color: var(--ink) !important;
-  border: 1px solid rgba(255, 255, 255, 0.85) !important;
-  border-radius: 9999px !important;
-  box-shadow: 
-    0 10px 24px -4px rgba(60, 45, 25, 0.1),
-    inset 2px 2px 5px rgba(255, 255, 255, 0.95),
-    inset -2px -2px 5px rgba(160, 140, 120, 0.15) !important;
+  background: transparent !important;
+  color: #171513 !important;
+  border: 1px solid rgba(23, 21, 19, 0.2) !important;
+  box-shadow: none !important;
 }
 
 .button.outline:hover {
-  background: var(--clay-orange-grad) !important;
-  color: #fff !important;
-  border-color: rgba(255, 255, 255, 0.4) !important;
-  box-shadow: var(--clay-orange-hover-shadow) !important;
-  transform: translateY(-2px) scale(1.02) !important;
+  background: #171513 !important;
+  color: #ffffff !important;
+  border-color: #171513 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+.button.outline:hover span {
+  color: #f35422 !important;
 }
 
 .button.light {
   background: #ffffff !important;
-  color: var(--ink) !important;
-  border: 1px solid rgba(255, 255, 255, 0.95) !important;
+  color: #171513 !important;
+  border: 1px solid rgba(0, 0, 0, 0.09) !important;
   border-radius: 9999px !important;
-  box-shadow: 
-    0 12px 28px -4px rgba(0, 0, 0, 0.18),
-    inset 2px 2px 6px rgba(255, 255, 255, 1),
-    inset -3px -3px 6px rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
 }
 
 .button.light:hover {
-  transform: translateY(-2px) scale(1.02) !important;
-  box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.25) !important;
+  background: #fcfbf9 !important;
+  border-color: #171513 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08) !important;
 }
 
-/* 2. Price Cards - Rounded 3D Clay Boxes */
+/* 2. Minimalist Price Cards */
 .price-card {
-  border: 1px solid rgba(255, 255, 255, 0.7) !important;
-  border-radius: 32px !important; /* Round not square! */
-  background: var(--clay-card-bg) !important;
-  padding: 38px 32px !important;
+  border: 1px solid rgba(23, 21, 19, 0.09) !important;
+  border-radius: 24px !important;
+  background: #ffffff !important;
+  padding: 38px 30px !important;
   display: flex !important;
   flex-direction: column !important;
-  box-shadow: var(--clay-card-shadow) !important;
-  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03) !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease !important;
 }
 
 .price-card:hover {
-  transform: translateY(-6px) !important;
-  box-shadow: 
-    0 26px 52px -10px rgba(70, 50, 30, 0.16),
-    0 10px 22px -4px rgba(70, 50, 30, 0.1),
-    inset 2px 2px 6px rgba(255, 255, 255, 1),
-    inset -3px -3px 8px rgba(160, 140, 120, 0.16) !important;
+  transform: translateY(-4px) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.06) !important;
+  border-color: rgba(23, 21, 19, 0.2) !important;
 }
 
 .price-card.featured {
-  background: linear-gradient(160deg, #fffaf3 0%, #f7eee0 100%) !important;
-  border: 2px solid rgba(243, 84, 34, 0.45) !important;
-  box-shadow: 
-    0 22px 50px -8px rgba(243, 84, 34, 0.22),
-    0 8px 20px -3px rgba(243, 84, 34, 0.12),
-    inset 2px 2px 6px rgba(255, 255, 255, 0.95),
-    inset -4px -4px 10px rgba(230, 100, 50, 0.12) !important;
+  background: #ffffff !important;
+  border: 2px solid #171513 !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.07) !important;
 }
 
-/* 3. The Creator Banner - Round Clay Orange Container */
+.price-card.featured .eyebrow {
+  color: #f35422 !important;
+  font-weight: 600 !important;
+}
+
+/* 3. Minimalist Creator Banner */
 .creator-banner {
-  margin: 40px 4.3% !important;
-  padding: 55px 6% !important;
-  background: var(--clay-orange-grad) !important;
-  color: #fff !important;
-  border-radius: 36px !important; /* Round not square! */
-  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  margin: 50px 4.3% !important;
+  padding: 56px 6% !important;
+  background: #171513 !important;
+  color: #ffffff !important;
+  border-radius: 28px !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
   gap: 45px !important;
-  box-shadow: 
-    0 24px 60px -10px rgba(243, 84, 34, 0.45),
-    inset 3px 3px 8px rgba(255, 255, 255, 0.5),
-    inset -5px -5px 12px rgba(140, 28, 4, 0.35) !important;
+  box-shadow: 0 16px 45px -10px rgba(0, 0, 0, 0.15) !important;
 }
 
-/* 4. Booking Form & Inputs - Rounded Claymorphic Box */
+.creator-banner .eyebrow {
+  color: #f35422 !important;
+  font-size: 9px !important;
+  letter-spacing: 2px !important;
+  font-weight: 600 !important;
+}
+
+.creator-banner h2 {
+  color: #ffffff !important;
+}
+
+.creator-banner h2 em {
+  color: #f35422 !important;
+  font-style: italic !important;
+}
+
+.creator-banner p:not(.eyebrow) {
+  color: #a7a095 !important;
+}
+
+/* 4. Minimalist Booking Form & Clean Inputs */
 #booking-form {
-  border-radius: 36px !important; /* Round not square! */
-  background: var(--clay-card-bg) !important;
-  border: 1px solid rgba(255, 255, 255, 0.8) !important;
+  border-radius: 28px !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(23, 21, 19, 0.08) !important;
   padding: 44px !important;
-  box-shadow: var(--clay-card-shadow) !important;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.04) !important;
 }
 
 .form-grid input,
@@ -756,122 +769,86 @@ form > .button:active {
 .form-grid textarea {
   width: 100% !important;
   min-width: 0 !important;
-  border: 1px solid rgba(217, 211, 199, 0.8) !important;
-  border-radius: 18px !important; /* Round not square! */
-  background: var(--clay-inset-bg) !important;
-  padding: 12px 18px !important;
+  border: 1px solid #dfd8cc !important;
+  border-radius: 12px !important;
+  background: #faf8f4 !important;
+  padding: 12px 16px !important;
   color: var(--ink) !important;
   font-size: 13px !important;
-  box-shadow: var(--clay-inset-shadow) !important;
-  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s !important;
+  box-shadow: none !important;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease !important;
   outline: none !important;
 }
 
 .form-grid input:focus,
 .form-grid select:focus,
 .form-grid textarea:focus {
-  border-color: var(--orange) !important;
-  background: #fff !important;
-  box-shadow: 
-    0 0 0 3px rgba(243, 84, 34, 0.22),
-    inset 1px 1px 3px rgba(0, 0, 0, 0.05) !important;
+  border-color: #171513 !important;
+  background: #ffffff !important;
+  box-shadow: 0 0 0 2px rgba(23, 21, 19, 0.1) !important;
 }
 
-/* 5. Service Rows, Previews & Replay */
-.service-row {
-  border-radius: 20px !important;
-  padding: 18px 20px !important;
-  transition: all 0.25s ease !important;
-}
-
-.service-row.active {
-  background: #eee6d8 !important;
-  border-radius: 24px !important; /* Round! */
-  box-shadow: 
-    0 10px 24px -4px rgba(60, 45, 25, 0.08),
-    inset 2px 2px 5px rgba(255, 255, 255, 0.9),
-    inset -2px -2px 5px rgba(150, 130, 110, 0.12) !important;
-}
-
-.service-preview {
-  border-radius: 32px !important; /* Round! */
-  overflow: hidden !important;
-  box-shadow: 
-    0 24px 60px -10px rgba(60, 45, 25, 0.16),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.5) !important;
-}
-
-.service-preview img {
-  border-radius: 30px !important;
-}
-
+/* 5. Minimalist Controls, Circular Buttons & Containers */
 .circle-button {
   border-radius: 50% !important;
-  background: #faf6ef !important;
-  border: 1px solid rgba(255, 255, 255, 0.8) !important;
-  box-shadow: 
-    0 10px 20px -4px rgba(60, 45, 25, 0.12),
-    inset 2px 2px 4px rgba(255, 255, 255, 0.9),
-    inset -2px -2px 4px rgba(160, 140, 120, 0.15) !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(23, 21, 19, 0.14) !important;
+  color: #171513 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
   transition: all 0.2s ease !important;
 }
 
 .circle-button:hover {
   transform: scale(1.08) !important;
-  background: var(--clay-orange-grad) !important;
-  color: #fff !important;
-  box-shadow: var(--clay-orange-hover-shadow) !important;
+  background: #171513 !important;
+  color: #ffffff !important;
+  border-color: #171513 !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12) !important;
 }
 
-/* 6. Carousel and Showcase Containers */
 .creators-carousel-container {
-  border-radius: 32px !important; /* Round! */
-  box-shadow: 
-    0 24px 60px -10px rgba(60, 45, 20, 0.1),
-    inset 2px 2px 8px rgba(255, 255, 255, 0.9),
-    inset -3px -3px 8px rgba(160, 140, 120, 0.12) !important;
+  border-radius: 28px !important;
+  border: 1px solid rgba(23, 21, 19, 0.08) !important;
+  background: #faf6ef !important;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.04) !important;
 }
 
-/* 7. Dialogs */
+/* 6. Minimalist Dialogs */
 dialog {
-  border-radius: 36px !important; /* Round! */
-  background: var(--clay-card-bg) !important;
-  border: 1px solid rgba(255, 255, 255, 0.85) !important;
-  box-shadow: 
-    0 36px 90px -10px rgba(30, 20, 10, 0.35),
-    inset 3px 3px 8px rgba(255, 255, 255, 0.95),
-    inset -4px -4px 10px rgba(150, 130, 110, 0.16) !important;
+  border-radius: 28px !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(23, 21, 19, 0.1) !important;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.15) !important;
 }
 
-/* 8. Floating Stickers in Hero */
+/* 7. Hero Floating Stickers */
 .ig-badge {
-  border-radius: 9999px !important; /* Round pill! */
-  box-shadow: 
-    0 12px 28px -4px rgba(60, 40, 20, 0.14),
-    inset 2px 2px 4px rgba(255, 255, 255, 0.95),
-    inset -2px -2px 4px rgba(170, 150, 130, 0.12) !important;
+  border-radius: 9999px !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06) !important;
 }
 
 .ig-badge-heart {
-  background: linear-gradient(145deg, #ff4d66 0%, #e8203c 100%) !important;
-  box-shadow: 
-    0 12px 26px -4px rgba(232, 32, 60, 0.42),
-    inset 2px 2px 4px rgba(255, 255, 255, 0.6),
-    inset -2px -2px 4px rgba(140, 10, 25, 0.35) !important;
+  background: #e8203c !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 6px 18px rgba(232, 32, 60, 0.28) !important;
 }
 
 @media (max-width: 700px) {
   .creator-banner {
     margin: 30px 4.3% !important;
-    border-radius: 28px !important;
-    padding: 35px 22px !important;
+    border-radius: 24px !important;
+    padding: 38px 22px !important;
   }
   .price-card {
-    border-radius: 26px !important;
-    padding: 26px 20px !important;
+    border-radius: 20px !important;
+    padding: 28px 20px !important;
   }
   #booking-form {
-    border-radius: 28px !important;
+    border-radius: 22px !important;
     padding: 26px 18px !important;
   }
 }
