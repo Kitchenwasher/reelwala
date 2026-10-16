@@ -168,6 +168,7 @@ export default function PixelCard({
   };
 
   const handlePointerEnter = (e) => {
+    if (e.pointerType === 'touch' || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     isHoveredRef.current = true;
     const rect = containerRef.current?.getBoundingClientRect();
     if (rect) {
@@ -181,8 +182,11 @@ export default function PixelCard({
   };
 
   const handlePointerMove = (e) => {
+    if (e.pointerType === 'touch' || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const rect = containerRef.current?.getBoundingClientRect();
     if (rect) {
+      containerRef.current.style.setProperty('--package-x', `${e.clientX - rect.left}px`);
+      containerRef.current.style.setProperty('--package-y', `${e.clientY - rect.top}px`);
       cursorRef.current = {
         x: e.clientX - rect.left,
         y: e.clientY - rect.top

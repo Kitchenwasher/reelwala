@@ -13,9 +13,9 @@ function PricingPixelCards() {
     <>
       {/* 1. Standard Card */}
       <PixelCard
-        gap={11}
-        speed={45}
-        colors="#fdfbf7,#f5eee3,#fed7aa,#f97316"
+        gap={22}
+        speed={18}
+        colors="#f5eee4,#e9d7c2,#edc4a6"
         className="price-card-pixel-standard"
       >
         <h3>Standard</h3>
@@ -37,9 +37,9 @@ function PricingPixelCards() {
 
       {/* 2. Extended Card (Featured) */}
       <PixelCard
-        gap={10}
-        speed={55}
-        colors="#ffedd5,#fed7aa,#fb923c,#f35422,#ea580c"
+        gap={22}
+        speed={18}
+        colors="#f5eee4,#e9d7c2,#edc4a6"
         className="featured price-card-pixel-extended"
       >
         <h3>Extended</h3>
@@ -61,9 +61,9 @@ function PricingPixelCards() {
 
       {/* 3. Your Way / Custom Card */}
       <PixelCard
-        gap={11}
-        speed={45}
-        colors="#fdfbf7,#f5eee3,#fed7aa,#f97316"
+        gap={22}
+        speed={18}
+        colors="#f5eee4,#e9d7c2,#edc4a6"
         className="price-card-pixel-custom"
       >
         <h3>Your way</h3>

@@ -2300,21 +2300,21 @@ footer > a:not(.wordmark) {
 }
 
 .price-card.pixel-card:hover {
-  transform: translateY(-5px) !important;
-  box-shadow: 0 20px 48px rgba(45, 30, 18, 0.12) !important;
-  border-color: #beb29e !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 16px 38px rgba(45, 30, 18, 0.07) !important;
+  border-color: #d2a889 !important;
 }
 
 /* Featured (Extended) Card */
 .price-card.pixel-card.featured {
-  border: 2px solid #171815 !important;
+  border: 1px solid #b78665 !important;
   background: #ffffff !important;
-  box-shadow: 0 16px 44px rgba(243, 84, 34, 0.14) !important;
+  box-shadow: 0 12px 36px rgba(243, 84, 34, 0.07) !important;
 }
 
 .price-card.pixel-card.featured:hover {
-  border-color: var(--orange) !important;
-  box-shadow: 0 24px 60px rgba(243, 84, 34, 0.24) !important;
+  border-color: #c77e54 !important;
+  box-shadow: 0 16px 40px rgba(243, 84, 34, 0.10) !important;
 }
 
 /* Pixel Card Canvas */
@@ -2326,7 +2326,47 @@ footer > a:not(.wordmark) {
   pointer-events: none !important;
   z-index: 1 !important;
   border-radius: inherit !important;
-  opacity: 0.85;
+  opacity: 0.10;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 40%, #000 100%);
+  mask-image: linear-gradient(to bottom, transparent 40%, #000 100%);
+}
+
+.price-card.pixel-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  background: radial-gradient(340px circle at var(--package-x, 50%) var(--package-y, 15%), #f4c29c35, transparent 72%);
+  transition: opacity .4s ease;
+}
+
+.price-card.pixel-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 32px;
+  right: 32px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #e6a172, transparent);
+  opacity: 0;
+  transform: scaleX(.65);
+  transition: opacity .4s ease, transform .4s ease;
+  pointer-events: none;
+}
+
+.price-card.pixel-card:hover::before,
+.price-card.pixel-card:focus-within::before { opacity: 1; }
+.price-card.pixel-card:hover::after,
+.price-card.pixel-card:focus-within::after { opacity: .65; transform: scaleX(1); }
+.price-card.pixel-card:focus-within { border-color: #d2a889 !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .price-card.pixel-card:hover { transform: none !important; }
+  .pixel-card-canvas { display: none; }
+  .price-card.pixel-card::before, .price-card.pixel-card::after { transition: none; }
 }
 
 /* Pixel Card Content */
