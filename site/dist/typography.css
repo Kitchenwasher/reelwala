@@ -1,0 +1,53 @@
+/* Shared type rules for the homepage, directory and both application flows. */
+:root {
+  --serif:'DM Serif Display',Georgia,serif;
+  --sans:'DM Sans',Arial,sans-serif;
+}
+body {font-family:var(--sans);font-size:17px;line-height:1.6}
+button,input,textarea,select {font-family:var(--sans)!important}
+h1,h2,h3,legend,.creators-dock-name,.flex-carousel__title {font-family:var(--serif)!important;font-weight:400}
+.button,.creator-button,.our-work-card-action,.work-filter-chip,
+.creator-form-steps button,.edit-page-steps button {font-family:var(--sans)!important}
+
+.header nav,.header nav .text-button {font-size:17px!important}
+.directory-header nav,.creator-header nav,.edit-page-header>a:last-child {font-size:15px}
+.eyebrow,.creator-eyebrow {font-size:13px!important}
+.button,.price-card .button,.creator-button,.creator-directory-info .button {font-size:16px!important}
+.hero-copy>.button {font-size:16px!important}
+.editing-hook-copy .button {font-size:18px!important}
+.hero-description {font-size:clamp(20px,1.9vw,26px)!important}
+.hero-device-note {font-size:13px}
+.editing-hook-description {font-size:clamp(17px,1.55vw,24px)}
+.our-work-details ul {font-size:15px;line-height:1.65}
+.our-work-card-action {font-size:13px}
+.work-filter-chip {font-size:14px}
+.price-card h3 {font-size:48px!important}
+.price-card p,.price-card li {font-size:16px!important;line-height:1.65!important}
+.creators-dock-name {font-size:18px!important}
+.creators-dock-sub,.creator-directory-info p {font-size:14px!important;line-height:1.6}
+.creators-dock-tag,.creator-directory-info .creator-directory-city {font-size:12px!important}
+.drift-wall__title {font-size:15px}
+.drift-wall__subtitle {font-size:13px}
+.tiny-note,.form-note,.booking-small,.creator-mode-note,.creator-field-note,
+.creator-upload-note,.creator-review-note,#creator-result,#request-result,
+#request-clip-status,.request-summary,.edit-step-help {font-size:14px!important;line-height:1.7!important}
+
+input,textarea,select {font-size:16px!important;line-height:1.5}
+.field-label,.group-label,.creator-form-grid label,
+#booking-form label,.creator-upload-group label {font-size:14px!important}
+.creator-form-steps button,.edit-page-steps button {font-size:15px}
+.creator-form-actions .creator-form-back,.edit-page-back {font-size:14px}
+.creator-hero-description {font-size:19px;line-height:1.7}
+.creator-journey-grid p,.creator-requirement-list p,.creator-apply-heading>p:last-child {font-size:16px;line-height:1.7}
+.edit-page-upload>span:last-child,.edit-style-options label>span:last-child {font-size:14px}
+.creator-photo-previews figcaption,.request-clip-previews figcaption {font-size:12px;line-height:1.5}
+
+@media(max-width:700px) {
+  body {font-size:16px}
+  .header .mobile-nav a,.header .mobile-nav .text-button {font-size:17px!important}
+  .price-card h3 {font-size:40px!important}
+  .creators-dock-actions .button {font-size:14px!important;white-space:normal;text-align:center;justify-content:center}
+  .directory-header nav {font-size:13px}
+  .creator-header nav {font-size:14px}
+  .editing-hook-copy .button {font-size:16px!important}
+}
