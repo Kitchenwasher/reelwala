@@ -76,5 +76,17 @@
 
 ## Verification record
 
-Implementation had not started when this plan was created. Append results after the update.
+Completed 16 October 2026 after plan checkpoint `7635d8a`.
+
+- Updated the three service-card summaries and included all 24 catalogue entries in the existing About-page template.
+- Standard: 4 complimentary colour-graded photos and reel delivery within 24 hours. Extended: up to 4 hours, 7 photos and reel delivery within 24 hours.
+- Replaced invented base prices and Premium inclusions with enquiry copy. The confirmed ₹1,000 extra-hour amount keeps the existing count-up animation. Three Standard slots and four Premium slots remain; Premium option names are explicitly provisional.
+- Updated booking labels, selected-plan summaries and export notes without changing intake enums or form navigation.
+- Included booking, reeler assignment and 24-hour secure-link delivery in existing copy. Creator journey now reads Register → Attend workshop → Receive shoots → Get paid after shoots.
+- Creator locality, five own photos and two optional edited videos match the notes. iPhone 16+ and truthful local-draft messaging remain.
+- No testimonials invented. No source CSS, image, font, background, animation or layout-template changes. Unrelated generated source-map noise was discarded.
+- Passed `npm run build`, `npm test` (booking navigation, custom validation, price animation/data and intake checks) and `git diff --check`.
+- A separate read-only content audit verified all 24 services, both workflows, removed dummy fees, unchanged backend occasion values, required photos/optional videos, and unchanged stylesheet and image references.
+- No browser automation used. Text wrapping has not been visually reviewed in a browser.
+- Existing version `26e10cd` was pushed first. The plan and this information update are local commits awaiting a subsequent push request.
 

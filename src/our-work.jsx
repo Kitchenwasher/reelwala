@@ -23,20 +23,20 @@ function OurWork(){
   return <div className="our-work-bento">
     <WorkSpotlightCard className="our-work-celebrations" href="#event-reels" onClick={()=>selectCategory('weddings')}>
       <img src="assets/service-wedding-daylight.jpg" alt="A newlywed Indian couple sharing a quiet moment outdoors" loading="lazy" width="1600" height="1066" />
-      <div className="our-work-card-copy"><h3>Weddings &amp;<br/>celebrations</h3>
-        <ServiceDetails items={['Birthdays & anniversaries','Engagements & weddings','Haldi, mehendi & sangeet','Receptions','Private celebrations']}/>
+      <div className="our-work-card-copy"><h3>Private<br/>events</h3>
+        <ServiceDetails items={['Weddings & pre-wedding shoots','Mehendi, sangeet & haldi','Birthdays, baby & family events','New cars, pets & home tours','Graduations & housewarming']}/>
         <span className="our-work-card-action">View reels</span></div>
     </WorkSpotlightCard>
     <WorkSpotlightCard className="our-work-festivals" href="#event-reels" onClick={()=>selectCategory('festivals')}>
       <img src="assets/service-festival-real.jpg" alt="A crowd watching a live concert in Bengaluru" loading="lazy" width="1200" height="900" />
-      <div className="our-work-card-copy"><h3>Festivals &amp;<br/>college events</h3>
-        <ServiceDetails items={['Holi & Diwali celebrations','Navratri & cultural events','College fests & freshers','Farewells & annual days','Concerts & stage shows']}/>
+      <div className="our-work-card-copy"><h3>Social &amp;<br/>cultural events</h3>
+        <ServiceDetails items={['Fests, carnivals & community','Diwali, Holi, Eid & more','Concerts, music & stand-up','Fashion & food festivals']}/>
         <span className="our-work-card-action">View reels</span></div>
     </WorkSpotlightCard>
     <WorkSpotlightCard className="our-work-corporate" href="#event-reels" onClick={()=>selectCategory('corporate')}>
       <img src="assets/service-corporate-real.jpg" alt="An audience listening to a speaker at a conference" loading="lazy" width="1400" height="935" />
       <div className="our-work-card-copy"><h3>Corporate events</h3>
-        <ServiceDetails items={['Product launches','Conferences & talks','Team celebrations','Awards nights']}/>
+        <ServiceDetails items={['Team & office celebrations','Meetups & launches','Sports & tournaments']}/>
         <span className="our-work-card-action">View reels</span></div>
     </WorkSpotlightCard>
     <WorkSpotlightCard className="our-work-editing" href="edit-reel.html">

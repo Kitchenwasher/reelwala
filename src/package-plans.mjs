@@ -1,15 +1,106 @@
-// Preview content approved for dummy pricing. Replace before offering fixed rates.
+// Written service requirements; unprovided base/Premium rates stay on enquiry.
 export const PACKAGE_PLANS = [
-  {id:'essential',family:'standard',name:'Essential',price:1999,bookingPackage:'Standard',description:'A little coverage for a small occasion.',features:['Up to 1 hour of coverage','1 edited reel + 2 colour-graded photos','One creator for your event']},
-  {id:'standard',family:'standard',name:'Standard',price:3499,bookingPackage:'Standard',featured:true,description:'The moments, the people, the atmosphere.',features:['Short event coverage with one creator','1 edited reel + 4 colour-graded photos','Edited reel delivery within 24 hours']},
-  {id:'extended',family:'standard',name:'Extended',price:5999,bookingPackage:'Extended',description:'More time to capture the whole occasion.',features:['Up to 4 hours of coverage','2 edited reels + 7 colour-graded photos','Edited reel delivery within 24 hours']},
-  {id:'single-event',family:'select',name:'Single event',price:9999,bookingPackage:'Custom / Premium',description:'One celebration, from arrival to the last dance.',features:['One event covered','3 edited reels + 10 colour-graded photos','A dedicated creator for your celebration']},
-  {id:'two-events',family:'select',name:'Two events',price:18999,bookingPackage:'Custom / Premium',description:'Two chapters of the same celebration.',features:['Two events covered','6 edited reels + 20 colour-graded photos','Coverage planned around your schedule']},
-  {id:'three-events',family:'select',name:'Three events',price:27999,bookingPackage:'Custom / Premium',featured:true,description:'For celebrations with more than one big moment.',features:['Three events covered','9 edited reels + 30 colour-graded photos','A coordinated creator schedule']},
-  {id:'full-celebration',family:'select',name:'Full celebration',price:39999,bookingPackage:'Custom / Premium',description:'A complete story across your celebrations.',features:['Up to four events covered','12 edited reels + 40 colour-graded photos','A coverage plan built around your events']}
+  {
+    "id": "essential",
+    "family": "standard",
+    "name": "Standard",
+    "price": null,
+    "bookingPackage": "Standard",
+    "description": "Quick, focused content for a high-quality reel without the wait.",
+    "features": [
+      "4 complimentary colour-graded photos",
+      "Reel delivery within 24 hours",
+      "A professional reeler assigned to your event"
+    ]
+  },
+  {
+    "id": "extended",
+    "family": "standard",
+    "name": "Extended",
+    "price": null,
+    "bookingPackage": "Extended",
+    "featured": true,
+    "description": "For longer shoots, events and creating multiple high-quality reels in one session.",
+    "features": [
+      "Up to 4 hours of shoot time",
+      "7 complimentary colour-graded photos",
+      "Reel delivery within 24 hours"
+    ]
+  },
+  {
+    "id": "extra-hour",
+    "family": "standard",
+    "name": "Extra hour",
+    "price": 1000,
+    "addon": true,
+    "bookingPackage": "Custom / Premium",
+    "description": "Extend your shoot with an additional hour of coverage.",
+    "features": [
+      "₹1,000 per extra shoot hour",
+      "Added to your agreed shoot coverage",
+      "Confirm extra time with the team"
+    ]
+  },
+  {
+    "id": "premium-1",
+    "family": "select",
+    "name": "Premium option 1",
+    "price": null,
+    "pending": true,
+    "bookingPackage": "Custom / Premium",
+    "description": "Premium package details are available on enquiry.",
+    "features": [
+      "Coverage: to be confirmed",
+      "Deliverables: to be confirmed",
+      "Price: on enquiry"
+    ]
+  },
+  {
+    "id": "premium-2",
+    "family": "select",
+    "name": "Premium option 2",
+    "price": null,
+    "pending": true,
+    "bookingPackage": "Custom / Premium",
+    "description": "Premium package details are available on enquiry.",
+    "features": [
+      "Coverage: to be confirmed",
+      "Deliverables: to be confirmed",
+      "Price: on enquiry"
+    ]
+  },
+  {
+    "id": "premium-3",
+    "family": "select",
+    "name": "Premium option 3",
+    "price": null,
+    "pending": true,
+    "bookingPackage": "Custom / Premium",
+    "description": "Premium package details are available on enquiry.",
+    "features": [
+      "Coverage: to be confirmed",
+      "Deliverables: to be confirmed",
+      "Price: on enquiry"
+    ]
+  },
+  {
+    "id": "premium-4",
+    "family": "select",
+    "name": "Premium option 4",
+    "price": null,
+    "pending": true,
+    "bookingPackage": "Custom / Premium",
+    "description": "Premium package details are available on enquiry.",
+    "features": [
+      "Coverage: to be confirmed",
+      "Deliverables: to be confirmed",
+      "Price: on enquiry"
+    ]
+  }
 ];
-export const formatRupees=value=>`₹${Math.round(value).toLocaleString('en-IN')}`;
+export const formatRupees=value=>typeof value==='number'&&Number.isFinite(value)?`₹${Math.round(value).toLocaleString('en-IN')}`:'On enquiry';
 export function priceAtTime(target,elapsed,duration=1250){
+  if(typeof target!=='number'||!Number.isFinite(target))return null;
   const progress=Math.max(0,Math.min(1,elapsed/duration));
   return Math.round(target*(1-(1-progress)**3));
 }

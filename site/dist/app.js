@@ -429,8 +429,8 @@ const ReelWalaBooking = {
     if (!itemsEl) return;
 
     const occasionLabels = {
-      'Wedding / private celebration': 'Wedding & Celebration',
-      'Social / cultural event': 'Festival & Concert',
+      'Wedding / private celebration': 'Private event',
+      'Social / cultural event': 'Social / cultural event',
       'Corporate event': 'Corporate Event',
       'Something else': 'Other event'
     };
@@ -446,7 +446,7 @@ const ReelWalaBooking = {
 
     const chips = [
       { icon: icons.ring, text: occasionLabels[this.state.occasion] || this.state.occasion },
-      { icon: icons.pkg, text: this.state.plan ? `${this.state.plan.family === 'standard' ? 'Standard' : 'Select'} · ${this.state.plan.name} (sample)` : `${this.state.package} package` },
+      { icon: icons.pkg, text: this.state.plan ? `${this.state.plan.family === 'standard' ? 'Standard' : 'Premium'} · ${this.state.plan.name}` : `${this.state.package} package` },
       { icon: icons.cam, text: this.state.creator ? this.state.creator.name : 'Assigned by the team' }
     ];
 
@@ -558,7 +558,7 @@ async function sendEnquiry(form, kind) {
       const notesField = $('#input-notes');
       if (notesField) {
         let prefix = '';
-        if (ReelWalaBooking.state.plan) prefix += `[Sample plan: ${$('#field-plan').value}] `;
+        if (ReelWalaBooking.state.plan) prefix += `[Plan: ${$('#field-plan').value}] `;
         if (ReelWalaBooking.state.creator) {
           prefix += `[Director: ${ReelWalaBooking.state.creator.name} (${ReelWalaBooking.state.creator.role} · ${ReelWalaBooking.state.creator.city})] `;
         }

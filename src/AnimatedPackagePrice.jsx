@@ -3,8 +3,9 @@ import {formatRupees,priceAtTime} from './package-plans.mjs';
 
 export default function AnimatedPackagePrice({amount}){
   const ref=useRef(null);
-  const [value,setValue]=useState(()=>matchMedia('(prefers-reduced-motion: reduce)').matches?amount:0);
+  const [value,setValue]=useState(()=>amount===null?null:matchMedia('(prefers-reduced-motion: reduce)').matches?amount:0);
   useEffect(()=>{
+    if(amount===null)return;
     const preference=matchMedia('(prefers-reduced-motion: reduce)');
     let frame=0,started=false,observer;
     const finish=()=>{cancelAnimationFrame(frame);setValue(amount);};
@@ -30,5 +31,5 @@ export default function AnimatedPackagePrice({amount}){
     }else start();
     return ()=>{cancelAnimationFrame(frame);observer?.disconnect();preference.removeEventListener('change',onPreference);};
   },[amount]);
-  return <div className="package-price" ref={ref}><span className="package-price-accessible">Sample price {formatRupees(amount)}</span><span aria-hidden="true">{formatRupees(value)}</span></div>;
+  return <div className="package-price" ref={ref}><span className="package-price-accessible">{amount===null?'Price on enquiry':`Price ${formatRupees(amount)}`}</span><span aria-hidden="true">{amount===null?'Enquire':formatRupees(value)}</span></div>;
 }

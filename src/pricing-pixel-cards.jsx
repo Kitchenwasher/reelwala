@@ -10,10 +10,10 @@ function PricingPackages(){
   function select(plan){
     const booking=window.ReelWalaBooking;
     if(!booking)return;
-    booking.setPackage(plan.bookingPackage);
-    booking.state.plan={name:plan.name,family:plan.family,price:plan.price};
+    booking.setPackage(plan.addon?booking.state.package:plan.bookingPackage);
+    booking.state.plan={name:plan.name,family:plan.family,price:plan.price,pending:!!plan.pending,addon:!!plan.addon};
     const field=document.getElementById('field-plan');
-    if(field)field.value=`${plan.family==='standard'?'Standard':'Select'} · ${plan.name} (sample price ₹${plan.price.toLocaleString('en-IN')})`;
+    if(field)field.value=`${plan.family==='standard'?'Standard':'Premium'} · ${plan.name}${plan.price===null?' (price on enquiry)':` (${plan.price.toLocaleString('en-IN')} rupees${plan.addon?' per extra hour':''})`}${plan.pending?' · details to be confirmed':''}`;
     booking.renderBlueprint();
   }
   return <div className="packages-showcase" data-family={family}>
@@ -24,15 +24,15 @@ function PricingPackages(){
             event.preventDefault();const next=event.key==='Home'?'standard':event.key==='End'?'select':name==='standard'?'select':'standard';
             setFamily(next);document.getElementById(`package-tab-${next}`)?.focus();
           }
-        }}><span>{name==='standard'?'Standard packages':'Select packages'}</span><small>{name==='standard'?'03':'04'}</small></button>)}
+        }}><span>{name==='standard'?'Standard packages':'Premium packages'}</span><small>{name==='standard'?'03':'04'}</small></button>)}
     </div>
-    <p className="package-demo-note">Sample plans & prices · final coverage, rates and taxes to be confirmed.</p>
+    <p className="package-demo-note">Base prices and Premium coverage are confirmed on enquiry. Extra shoot time is ₹1,000 per hour.</p>
     <div className="price-grid package-collection" id="package-collection" role="tabpanel" aria-labelledby={`package-tab-${family}`}>
       {plans.map((plan,index)=><PricingMotionCard key={plan.id} order={index} className={plan.featured?'featured':''}>
-        <div className="package-intro"><div className="package-card-top"><span>{family==='standard'?'EVENT SHOOT':'CELEBRATION COVERAGE'}</span><span>{String(index+1).padStart(2,'0')}</span></div>
+        <div className="package-intro"><div className="package-card-top"><span>{plan.addon?'PER EXTRA SHOOT HOUR':family==='standard'?'STANDARD COVERAGE':'PREMIUM · DETAILS ON ENQUIRY'}</span><span>{String(index+1).padStart(2,'0')}</span></div>
           <h3>{plan.name}</h3><AnimatedPackagePrice amount={plan.price}/><p>{plan.description}</p>
         </div>
-        <a className={`button ${plan.featured?'':'outline'}`} href="#book" data-package={plan.bookingPackage} onClick={()=>select(plan)}>Check availability</a>
+        <a className={`button ${plan.featured?'':'outline'}`} href="#book" data-package={plan.bookingPackage} onClick={()=>select(plan)}>{plan.addon?'Add an hour':'Check availability'}</a>
         <div className="package-inclusions"><p>What’s included</p><ul>{plan.features.map(feature=><li key={feature}>{feature}</li>)}</ul></div>
       </PricingMotionCard>)}
     </div>

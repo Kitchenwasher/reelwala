@@ -1,4 +1,5 @@
 import {readFile,writeFile} from 'node:fs/promises';
+import {SERVICE_CATALOGUE,CUSTOMER_WORKFLOW} from '../src/site-content.mjs';
 
 const root=new URL('./dist/',import.meta.url);
 const footer=`<footer class="reel-footer" aria-label="The Reel Wala">
@@ -16,10 +17,12 @@ const footer=`<footer class="reel-footer" aria-label="The Reel Wala">
 
 const pages=[
   {slug:'about',title:'Behind the reels.',label:'About us',intro:'We capture the moments you’re busy living.',sections:[
-    ['What we do','The Reel Wala offers event shoots and reel editing for weddings, birthdays, festivals, college events and corporate gatherings. Our creators capture the occasion; our editors shape it into a reel.'],
-    ['How we work','Share your date, location and occasion. The team confirms availability, coverage and pricing before a booking is final. Event shoots use an iPhone 16 or newer. Delivery and the final scope are confirmed with your booking.'],
+    ['What we do','Your events, captured in reels. The Reel Wala covers private, corporate, social and cultural occasions, with event shoots on iPhone 16 or newer.'],
+    ...SERVICE_CATALOGUE.map(({name,items})=>[name,items.join('; ')+'.']),
+    ...CUSTOMER_WORKFLOW,
+    ['Packages','Standard includes 4 complimentary colour-graded photos and reel delivery within 24 hours. Extended includes up to 4 hours of shoot time, 7 complimentary colour-graded photos and reel delivery within 24 hours. Extra shoot time is ₹1,000 per hour. Base prices, Premium details and taxes are confirmed with the team before booking.'],
     ['Already have the clips?','Send three or four videos through our reel-editing flow and choose an editing style. An editor handles the cut, colour and music according to the agreed brief.'],
-    ['Create with us','Shoot events, develop your portfolio and work with our team. Visit the creator page for device requirements and the application process.']
+    ['Create with us','Register, attend the workshop, receive shoots and get paid after shoots. Apply with an iPhone 16 or newer, your locality and five of your best photos. Up to two edited videos are optional. Assignments and payment terms are agreed with the team.']
   ]},
   {slug:'privacy',title:'Your moments. Your privacy.',label:'Privacy policy',intro:'What the website handles, and what happens when you share information.',sections:[
     ['Information you choose to share','Booking enquiries ask for contact details, event information and your brief. Creator applications ask for contact details, location, device, portfolio links and selected media. Editing requests ask for contact details, clips and editing preferences. Avoid including sensitive personal information that is not needed for the request.'],
