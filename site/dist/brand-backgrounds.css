@@ -1,0 +1,9 @@
+/* Decorative orange shards stay in the background paint layer, below content. */
+.has-brand-shards {
+  background-image: url('assets/brand-shards.svg'), var(--brand-original-image, none) !important;
+  background-size: var(--brand-shard-size, 1100px auto), var(--brand-original-size, auto) !important;
+  background-position: var(--brand-shard-position, center top), var(--brand-original-position, center) !important;
+  background-repeat: repeat-y, var(--brand-original-repeat, repeat) !important;
+}
+@media(max-width:700px){.has-brand-shards{background-size:850px auto,var(--brand-original-size,auto)!important}}
+@media print{.has-brand-shards{background-image:none!important}}

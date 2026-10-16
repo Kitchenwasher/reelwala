@@ -9,7 +9,7 @@ The Google endpoint is still empty. Applications download a draft with file name
 
 ## Separate deployment
 
-`npm run build:creator` produces a creator-only site in `dist/creator-portal/` with `index.html`, its CSS/JS, config and three local images. The normal main-site build also produces this directory.
+`npm run build:creator` produces a creator-only site in `dist/creator-portal/` with `index.html`, its CSS/JS, config, local images and the shared shard decoration. The normal main-site build also produces this directory.
 
 For a separate Vercel project from this repository, use build command `npm run build:creator` and output directory `dist/creator-portal`. `vercel.creator.json` records those settings. Attach the chosen creator subdomain to that project once its domain is known; no domain or DNS has been changed here.
 
