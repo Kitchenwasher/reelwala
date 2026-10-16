@@ -54,3 +54,31 @@
   .pricing-motion-card[data-arrival] {opacity:1}
   .pricing-motion-card .button::after {display:none}
 }
+
+/* Price-led package collections, in the existing cream and terracotta palette. */
+.package-family-tabs{display:flex;width:max-content;max-width:100%;gap:5px;padding:5px;border:1px solid var(--line);border-radius:40px;background:#ffffff80;margin-bottom:18px}
+.package-family-tabs button{display:flex;align-items:center;gap:14px;padding:13px 23px;border:0;border-radius:30px;background:none;color:var(--muted);font:500 15px/1.5 var(--sans);transition:background .3s,color .3s,box-shadow .3s}
+.package-family-tabs button[aria-selected=true]{background:var(--ink);color:#fff;box-shadow:0 4px 12px #17181512}
+.package-family-tabs small{font-size:11px;opacity:.65;font-variant-numeric:tabular-nums}
+.package-demo-note{font-size:13px;line-height:1.7;color:var(--muted);margin:0 0 27px}
+.packages-showcase[data-family=select] .price-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.packages-showcase .price-card.pricing-motion-card{padding:13px!important;background:#eee6d8!important;border-radius:28px!important;border-color:#d9cdbb!important}
+.packages-showcase .price-card.pricing-motion-card.featured{background:#eddcc8!important;border-color:#c88a61!important}
+.packages-showcase .pixel-card-content{gap:14px}
+.package-intro{padding:25px 23px 22px;border-radius:18px;background:#fffdf9;display:flex;flex-direction:column;min-height:245px}
+.package-card-top{display:flex;align-items:center;justify-content:space-between;gap:14px;font:500 10px/1.5 var(--sans);letter-spacing:1.5px;color:#8f7460;margin-bottom:14px}
+.packages-showcase .price-card .package-intro h3{font-size:34px!important;margin:0 0 15px!important;line-height:1.12!important;letter-spacing:-.8px!important}
+.package-price{font:500 clamp(42px,4vw,62px)/1.1 var(--sans);font-variant-numeric:tabular-nums;letter-spacing:-2.5px;color:#b65d33;white-space:nowrap;min-height:69px;margin-bottom:17px}
+.package-price-accessible{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.packages-showcase .price-card .package-intro p{font-size:15px!important;line-height:1.7!important;color:var(--muted)!important;margin:0!important;max-width:400px}
+.packages-showcase .price-card .button{margin:0!important;font-size:16px!important;padding:17px 20px!important;border-radius:40px!important;min-height:55px;background:#fffdf980!important;border:1px solid #cbbda9!important}
+.packages-showcase .price-card.featured .button{background:var(--orange)!important;border-color:var(--orange)!important;color:#fff!important}
+.packages-showcase .price-card .button.outline:hover{background:#fffdf9!important;border-color:#b9805c!important}
+.package-inclusions{flex:1;border-radius:18px;background:#fffdf9;padding:22px 23px 12px}
+.packages-showcase .price-card .package-inclusions>p{font:500 13px/1.6 var(--sans)!important;letter-spacing:.2px;margin:0 0 9px!important;color:var(--muted)!important}
+.packages-showcase .price-card .package-inclusions ul{margin:0!important}
+.packages-showcase .price-card .package-inclusions li{font-size:15px!important;line-height:1.7!important;align-items:baseline!important;padding:14px 0!important}
+.packages-showcase .price-card .package-inclusions li:last-child{border-bottom:0!important}
+#book .booking-selected-plan{font-size:14px;line-height:1.7;color:#9a4f2a;padding:10px 13px;border-left:2px solid #ce7846;background:#f6eadb;border-radius:0 8px 8px 0;margin-top:8px}
+@media(max-width:1100px){.packages-showcase .price-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.package-price{font-size:54px}.package-intro{min-height:235px}}
+@media(max-width:700px){.packages-showcase .price-grid,.packages-showcase[data-family=select] .price-grid{grid-template-columns:1fr}.package-family-tabs{width:100%}.package-family-tabs button{flex:1;justify-content:center;gap:8px;padding:12px 13px;font-size:14px}.package-demo-note{font-size:12px}.package-intro{min-height:0;padding:24px}.package-price{font-size:57px;min-height:62px}.packages-showcase .price-card .package-intro h3{font-size:34px!important}.package-inclusions{padding:22px 24px 12px}}

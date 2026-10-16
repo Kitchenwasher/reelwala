@@ -45,7 +45,7 @@
     if(!state)return;
     const occasion=form.querySelector('.occasion-chip.active .chip-title')?.textContent||state.occasion;
     const date=state.isDateFlexible?'Flexible date':state.date?new Intl.DateTimeFormat('en-IN',{day:'numeric',month:'short',year:'numeric'}).format(new Date(state.date+'T12:00:00')):'Date to choose';
-    form.querySelector('#booking-review-line').textContent=[occasion,state.package,date,state.locality||'City to choose'].join(' · ');
+    form.querySelector('#booking-review-line').textContent=[occasion,state.plan?`${state.plan.family==='standard'?'Standard':'Select'} · ${state.plan.name} (sample)`:state.package,date,state.locality||'City to choose'].join(' · ');
   }
   next.addEventListener('click',()=>navigate(Math.min(2,current+1)));
   back.addEventListener('click',()=>navigate(Math.max(0,current-1)));

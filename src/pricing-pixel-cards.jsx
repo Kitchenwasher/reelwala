@@ -1,93 +1,42 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
+import React, {useState} from 'react';
+import {createRoot} from 'react-dom/client';
 import PricingMotionCard from './PricingMotionCard.jsx';
+import AnimatedPackagePrice from './AnimatedPackagePrice.jsx';
+import {PACKAGE_PLANS} from './package-plans.mjs';
 
-function PricingPixelCards() {
-  const handleSelectPackage = (pkgName) => {
-    if (typeof window !== 'undefined' && window.ReelWalaBooking?.setPackage) {
-      window.ReelWalaBooking.setPackage(pkgName);
-    }
-  };
-
-  return (
-    <>
-      {/* 1. Standard Card */}
-      <PricingMotionCard order={0}
-        className="price-card-pixel-standard"
-      >
-        <h3>Standard</h3>
-        <p>Short event coverage with one creator.</p>
-        <ul>
-          <li>4 complimentary color-graded photos</li>
-          <li>Edited reel delivery within 24 hours</li>
-          <li>A dedicated reel creator</li>
-        </ul>
-        <a
-          className="button outline"
-          href="#book"
-          data-package="Standard"
-          onClick={() => handleSelectPackage('Standard')}
-        >
-          Enquire about Standard
-        </a>
-      </PricingMotionCard>
-
-      {/* 2. Extended Card (Featured) */}
-      <PricingMotionCard order={1}
-        className="featured price-card-pixel-extended"
-      >
-        <h3>Extended</h3>
-        <p>Up to four hours of event coverage.</p>
-        <ul>
-          <li>Up to 4 hours of shoot time</li>
-          <li>7 complimentary color-graded photos</li>
-          <li>Edited reel delivery within 24 hours</li>
-        </ul>
-        <a
-          className="button"
-          href="#book"
-          data-package="Extended"
-          onClick={() => handleSelectPackage('Extended')}
-        >
-          Enquire about Extended
-        </a>
-      </PricingMotionCard>
-
-      {/* 3. Your Way / Custom Card */}
-      <PricingMotionCard order={2}
-        className="price-card-pixel-custom"
-      >
-        <h3>Your way</h3>
-        <p>Ask us about longer or multi-day shoots.</p>
-        <ul>
-          <li>Discuss Premium coverage</li>
-          <li>Extra shoot hour: ₹1,000</li>
-          <li>Final scope and quote before booking</li>
-        </ul>
-        <a
-          className="button outline"
-          href="#book"
-          data-package="Custom / Premium"
-          onClick={() => handleSelectPackage('Custom / Premium')}
-        >
-          Let’s talk details
-        </a>
-      </PricingMotionCard>
-    </>
-  );
-}
-
-function mount() {
-  const container = document.getElementById('pricing-pixel-cards-root');
-  if (container && !container._reactRoot) {
-    const root = createRoot(container);
-    container._reactRoot = root;
-    root.render(<PricingPixelCards />);
+function PricingPackages(){
+  const [family,setFamily]=useState('standard');
+  const plans=PACKAGE_PLANS.filter(plan=>plan.family===family);
+  function select(plan){
+    const booking=window.ReelWalaBooking;
+    if(!booking)return;
+    booking.setPackage(plan.bookingPackage);
+    booking.state.plan={name:plan.name,family:plan.family,price:plan.price};
+    const field=document.getElementById('field-plan');
+    if(field)field.value=`${plan.family==='standard'?'Standard':'Select'} · ${plan.name} (sample price ₹${plan.price.toLocaleString('en-IN')})`;
+    booking.renderBlueprint();
   }
+  return <div className="packages-showcase" data-family={family}>
+    <div className="package-family-tabs" role="tablist" aria-label="Package collection">
+      {['standard','select'].map(name=><button type="button" key={name} id={`package-tab-${name}`} role="tab" aria-selected={family===name} aria-controls="package-collection" tabIndex={family===name?0:-1}
+        onClick={()=>setFamily(name)} onKeyDown={event=>{
+          if(['ArrowLeft','ArrowRight','Home','End'].includes(event.key)){
+            event.preventDefault();const next=event.key==='Home'?'standard':event.key==='End'?'select':name==='standard'?'select':'standard';
+            setFamily(next);document.getElementById(`package-tab-${next}`)?.focus();
+          }
+        }}><span>{name==='standard'?'Standard packages':'Select packages'}</span><small>{name==='standard'?'03':'04'}</small></button>)}
+    </div>
+    <p className="package-demo-note">Sample plans & prices · final coverage, rates and taxes to be confirmed.</p>
+    <div className="price-grid package-collection" id="package-collection" role="tabpanel" aria-labelledby={`package-tab-${family}`}>
+      {plans.map((plan,index)=><PricingMotionCard key={plan.id} order={index} className={plan.featured?'featured':''}>
+        <div className="package-intro"><div className="package-card-top"><span>{family==='standard'?'EVENT SHOOT':'CELEBRATION COVERAGE'}</span><span>{String(index+1).padStart(2,'0')}</span></div>
+          <h3>{plan.name}</h3><AnimatedPackagePrice amount={plan.price}/><p>{plan.description}</p>
+        </div>
+        <a className={`button ${plan.featured?'':'outline'}`} href="#book" data-package={plan.bookingPackage} onClick={()=>select(plan)}>Check availability</a>
+        <div className="package-inclusions"><p>What’s included</p><ul>{plan.features.map(feature=><li key={feature}>{feature}</li>)}</ul></div>
+      </PricingMotionCard>)}
+    </div>
+  </div>;
 }
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', mount);
-} else {
-  mount();
-}
+const container=document.getElementById('pricing-pixel-cards-root');
+if(container&&!container._reactRoot){container._reactRoot=createRoot(container);container._reactRoot.render(<PricingPackages/>);}

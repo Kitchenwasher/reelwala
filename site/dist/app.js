@@ -134,6 +134,7 @@ const ReelWalaBooking = {
     occasion: 'Wedding / private celebration',
     package: 'Standard',
     creator: null,
+    plan: null,
     inspiration: null,
     isDateFlexible: false,
     date: '',
@@ -235,13 +236,21 @@ const ReelWalaBooking = {
         pill.classList.add('active');
         const pkg = pill.dataset.pkg;
         if (hiddenPackage) hiddenPackage.value = pkg;
+        this.clearPlan();
         this.state.package = pkg;
         this.renderBlueprint();
       });
     });
   },
 
+  clearPlan() {
+    this.state.plan = null;
+    const field = $('#field-plan');
+    if (field) field.value = '';
+  },
+
   setPackage(pkgValue) {
+    this.clearPlan();
     this.state.package = pkgValue;
     const hiddenPackage = $('#field-package');
     if (hiddenPackage) hiddenPackage.value = pkgValue;
@@ -437,7 +446,7 @@ const ReelWalaBooking = {
 
     const chips = [
       { icon: icons.ring, text: occasionLabels[this.state.occasion] || this.state.occasion },
-      { icon: icons.pkg, text: `${this.state.package} package` },
+      { icon: icons.pkg, text: this.state.plan ? `${this.state.plan.family === 'standard' ? 'Standard' : 'Select'} · ${this.state.plan.name} (sample)` : `${this.state.package} package` },
       { icon: icons.cam, text: this.state.creator ? this.state.creator.name : 'Assigned by the team' }
     ];
 
@@ -467,6 +476,11 @@ const ReelWalaBooking = {
       chip.append(icon, text);
       return chip;
     }));
+    const planNote = $('#booking-selected-plan');
+    if (planNote) {
+      planNote.hidden = !this.state.plan;
+      planNote.textContent = this.state.plan ? $('#field-plan').value : '';
+    }
     document.dispatchEvent(new CustomEvent('reel-wala:booking-change'));
 
     if (statusEl) {
@@ -544,6 +558,7 @@ async function sendEnquiry(form, kind) {
       const notesField = $('#input-notes');
       if (notesField) {
         let prefix = '';
+        if (ReelWalaBooking.state.plan) prefix += `[Sample plan: ${$('#field-plan').value}] `;
         if (ReelWalaBooking.state.creator) {
           prefix += `[Director: ${ReelWalaBooking.state.creator.name} (${ReelWalaBooking.state.creator.role} · ${ReelWalaBooking.state.creator.city})] `;
         }

@@ -1,6 +1,7 @@
 import { cp, mkdir } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 
+await import('./build-package-preview.mjs');
 await import('./build-info-pages.mjs');
 
 const bundle = spawnSync(process.execPath, ['scripts/bundle-carousel.mjs'], { stdio: 'inherit' });
