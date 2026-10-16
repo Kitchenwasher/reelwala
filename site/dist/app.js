@@ -354,13 +354,21 @@ const ReelWalaBooking = {
     const hiddenInspiration = $('#field-inspiration');
 
     if (reelObj && banner) {
-      if (thumb) thumb.src = reelObj.image || '';
+      banner.hidden = false;
+      if (thumb) {
+        const frame = thumb.closest('.inspiration-thumb');
+        frame.hidden = !reelObj.image;
+        if (reelObj.image) thumb.src = reelObj.image;
+        else thumb.removeAttribute('src');
+        thumb.onerror = () => { frame.hidden = true; };
+      }
       if (title) title.textContent = reelObj.title || 'Inspiration Reel';
       if (subtitle) subtitle.textContent = reelObj.subtitle || (reelObj.tag ? `Tag: ${reelObj.tag}` : '');
       if (hiddenInspiration) hiddenInspiration.value = `${reelObj.title} (${reelObj.subtitle || ''})`;
       banner.style.display = 'flex';
       if (reelObj.occasion) this.setOccasion(reelObj.occasion);
     } else if (banner) {
+      banner.hidden = true;
       banner.style.display = 'none';
       if (hiddenInspiration) hiddenInspiration.value = '';
     }
@@ -456,12 +464,19 @@ const ReelWalaBooking = {
       chips.push({ icon: icons.pin, text: `City: ${this.state.locality}` });
     }
 
-    itemsEl.innerHTML = chips.map(c => `
-      <div class="blueprint-chip">
-        <span class="bp-icon">${c.icon}</span>
-        <span class="bp-text">${c.text}</span>
-      </div>
-    `).join('');
+    itemsEl.replaceChildren(...chips.map(c => {
+      const chip = document.createElement('div');
+      chip.className = 'blueprint-chip';
+      const icon = document.createElement('span');
+      icon.className = 'bp-icon';
+      icon.innerHTML = c.icon;
+      const text = document.createElement('span');
+      text.className = 'bp-text';
+      text.textContent = c.text;
+      chip.append(icon, text);
+      return chip;
+    }));
+    document.dispatchEvent(new CustomEvent('reel-wala:booking-change'));
 
     if (statusEl) {
       statusEl.textContent = `${chips.length} selections`;
