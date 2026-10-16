@@ -187,9 +187,12 @@ const DriftWall = ({
     });
   }, [columnItems, speed, direction, variance]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     offsetsRef.current = columnMeta.map((meta, c) => meta.copyHeight * ((c * 0.37) % 1));
     velocitiesRef.current = columnItems.map(() => 0);
+    trackRefs.current.forEach((track,c)=>{
+      if(track)track.style.transform = `translate3d(0, ${-offsetsRef.current[c]}px, 0)`;
+    });
   }, [columnMeta, columnItems]);
 
   const applyPlaneTransform = useCallback(
@@ -203,6 +206,11 @@ const DriftWall = ({
     },
     [tilt, turn, roll, depth]
   );
+
+  // Position the wall before its first paint, even without pointer movement.
+  useLayoutEffect(() => {
+    applyPlaneTransform(pointerDampedRef.current.x, pointerDampedRef.current.y);
+  }, [applyPlaneTransform]);
 
   useEffect(() => {
     let isVisible = true;

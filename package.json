@@ -8,7 +8,7 @@
     "build:creator": "node site/build-creator.mjs",
     "bundle": "node scripts/bundle-carousel.mjs",
     "start": "python -m http.server 4173 --directory site/dist --bind 127.0.0.1",
-    "test": "node --check site/dist/app.js && node --check site/dist/edit-reel.js && node --check site/dist/creator-portal.js && node --check site/dist/booking-flow.js && node site/check-booking-flow.mjs && node --check site/dist/form-validation.js && node site/check-form-validation.mjs && node --test src/edit-hook-layout.test.mjs src/package-plans.test.mjs && node site/integrations/check-intake.mjs"
+    "test": "node --check site/dist/app.js && node --check site/dist/edit-reel.js && node --check site/dist/creator-portal.js && node --check site/dist/booking-flow.js && node site/check-booking-flow.mjs && node --check site/dist/form-validation.js && node site/check-form-validation.mjs && node --test src/edit-hook-layout.test.mjs src/package-plans.test.mjs src/drift-wall-layout.test.mjs && node site/integrations/check-intake.mjs"
   },
   "repository": {
     "type": "git",
