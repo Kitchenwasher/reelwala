@@ -22,19 +22,19 @@ function ReelEditGraphic(){
 function OurWork(){
   return <div className="our-work-bento">
     <WorkSpotlightCard className="our-work-celebrations" href="#event-reels" onClick={()=>selectCategory('weddings')}>
-      <img src="assets/wedding.webp" alt="An Indian couple celebrating their wedding" loading="lazy" width="1536" height="1024" />
+      <img src="assets/service-wedding-real.jpg" alt="An Indian couple celebrating their wedding" loading="lazy" width="1400" height="933" />
       <div className="our-work-card-copy"><h3>Weddings &amp;<br/>celebrations</h3>
         <ServiceDetails items={['Birthdays & anniversaries','Engagements & weddings','Haldi, mehendi & sangeet','Receptions','Private celebrations']}/>
         <span className="our-work-card-action">View reels</span></div>
     </WorkSpotlightCard>
     <WorkSpotlightCard className="our-work-festivals" href="#event-reels" onClick={()=>selectCategory('festivals')}>
-      <img src="assets/culture.webp" alt="Friends celebrating at a live festival" loading="lazy" width="1536" height="1024" />
+      <img src="assets/service-festival-real.jpg" alt="A crowd watching a live concert in Bengaluru" loading="lazy" width="1200" height="900" />
       <div className="our-work-card-copy"><h3>Festivals &amp;<br/>college events</h3>
         <ServiceDetails items={['Holi & Diwali celebrations','Navratri & cultural events','College fests & freshers','Farewells & annual days','Concerts & stage shows']}/>
         <span className="our-work-card-action">View reels</span></div>
     </WorkSpotlightCard>
     <WorkSpotlightCard className="our-work-corporate" href="#event-reels" onClick={()=>selectCategory('corporate')}>
-      <img src="assets/corporate.webp" alt="A speaker and team at a corporate event" loading="lazy" width="1536" height="1024" />
+      <img src="assets/service-corporate-real.jpg" alt="An audience listening to a speaker at a conference" loading="lazy" width="1400" height="935" />
       <div className="our-work-card-copy"><h3>Corporate events</h3>
         <ServiceDetails items={['Product launches','Conferences & talks','Team celebrations','Awards nights']}/>
         <span className="our-work-card-action">View reels</span></div>
