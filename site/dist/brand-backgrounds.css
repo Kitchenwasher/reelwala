@@ -19,3 +19,12 @@
 }
 @media(max-width:700px){.brand-continuous-main{background-size:850px auto}}
 @media print{.brand-continuous-main{background-image:none}}
+
+/* The creator invitation keeps its dark surface with visible warm moving shards. */
+.brand-continuous-main > .creator-banner {
+  background-image:url('assets/brand-shards-dark.svg?v=1')!important;
+  background-size:cover!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+}
+@media print{.brand-continuous-main>.creator-banner{background-image:none!important}}
