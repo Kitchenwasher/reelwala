@@ -56,7 +56,7 @@ const EDITED_REELS = [
     title: 'Keynote & Stage Momentum',
     subtitle: 'Event photo preview',
     tag: 'Global Summit',
-    category: 'festivals',
+    category: 'corporate',
     duration: '0:26'
   },
   {
@@ -126,11 +126,12 @@ const EDITED_REELS = [
 ];
 
 const CATEGORIES = [
-  { id: 'all', label: 'All Reels', count: 15 },
-  { id: 'weddings', label: 'Weddings & Celebrations', count: 5 },
-  { id: 'festivals', label: 'Festivals & Stages', count: 5 },
-  { id: 'nightlife', label: 'Nightlife & Beats', count: 3 },
-  { id: 'travel', label: 'Travel & Scenic', count: 2 }
+  { id: 'all', label: 'All Reels' },
+  { id: 'weddings', label: 'Weddings & Celebrations' },
+  { id: 'festivals', label: 'Festivals & Stages' },
+  { id: 'corporate', label: 'Corporate Events' },
+  { id: 'nightlife', label: 'Nightlife & Beats' },
+  { id: 'travel', label: 'Travel & Scenic' }
 ];
 
 function useResponsiveColumns() {
@@ -154,6 +155,14 @@ function WorkDriftWallShowcase() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [activeReel, setActiveReel] = useState(null);
   const columns = useResponsiveColumns();
+
+  useEffect(() => {
+    const selectCategory = event => {
+      if (CATEGORIES.some(category => category.id === event.detail)) setActiveCategory(event.detail);
+    };
+    window.addEventListener('reel-wala:category', selectCategory);
+    return () => window.removeEventListener('reel-wala:category', selectCategory);
+  }, []);
 
   const filteredReels = useMemo(() => {
     if (activeCategory === 'all') return EDITED_REELS;
@@ -192,9 +201,10 @@ function WorkDriftWallShowcase() {
             className={`work-filter-chip ${activeCategory === cat.id ? 'active' : ''}`}
             onClick={() => setActiveCategory(cat.id)}
             type="button"
+            aria-pressed={activeCategory === cat.id}
           >
             <span>{cat.label}</span>
-            <small style={{ opacity: 0.7, marginLeft: '6px' }}>({cat.count})</small>
+            <small style={{ opacity: 0.7, marginLeft: '6px' }}>({cat.id === 'all' ? EDITED_REELS.length : EDITED_REELS.filter(reel => reel.category === cat.id).length})</small>
           </button>
         ))}
       </div>
@@ -274,6 +284,7 @@ function WorkDriftWallShowcase() {
                     let occasionVal = 'Wedding / private celebration';
                     if (activeReel.category === 'weddings') occasionVal = 'Wedding / private celebration';
                     else if (activeReel.category === 'festivals') occasionVal = 'Social / cultural event';
+                    else if (activeReel.category === 'corporate') occasionVal = 'Corporate event';
                     else if (activeReel.category === 'nightlife') occasionVal = 'Social / cultural event';
                     else occasionVal = 'Something else';
 

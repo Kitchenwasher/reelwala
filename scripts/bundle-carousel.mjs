@@ -114,6 +114,18 @@ async function build() {
     });
     console.log('Editing hook bundled successfully.');
 
+    await esbuild.build({
+      entryPoints: ['src/our-work.jsx'],
+      bundle: true,
+      outfile: 'site/dist/our-work.bundle.js',
+      format: 'esm',
+      minify: true,
+      sourcemap: true,
+      jsx: 'automatic',
+      define: { 'process.env.NODE_ENV': '"production"' }
+    });
+    console.log('Our work bento bundled successfully.');
+
     // 6. Bundle Pricing PixelCards
     await esbuild.build({
       entryPoints: ['src/pricing-pixel-cards.jsx'],
