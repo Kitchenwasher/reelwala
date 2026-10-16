@@ -1,6 +1,6 @@
 /* Decorative orange shards stay in the background paint layer, below content. */
 .has-brand-shards {
-  background-image: url('assets/brand-shards.svg'), var(--brand-original-image, none) !important;
+  background-image: url('assets/brand-shards.svg?v=2'), var(--brand-original-image, none) !important;
   background-size: var(--brand-shard-size, 1100px auto), var(--brand-original-size, auto) !important;
   background-position: var(--brand-shard-position, center top), var(--brand-original-position, center) !important;
   background-repeat: repeat-y, var(--brand-original-repeat, repeat) !important;
@@ -10,7 +10,7 @@
 
 /* One background spans the homepage so the motif never restarts at a section seam. */
 .brand-continuous-main {
-  background: url('assets/brand-shards.svg') center top / 1200px auto repeat-y var(--paper);
+  background: url('assets/brand-shards.svg?v=2') center top / 1200px auto repeat-y var(--paper);
 }
 .brand-continuous-main > section:not(.hero):not(.creator-banner) {
   background: transparent !important;
