@@ -22,7 +22,7 @@ function ReelEditGraphic(){
 function OurWork(){
   return <div className="our-work-bento">
     <WorkSpotlightCard className="our-work-celebrations" href="#event-reels" onClick={()=>selectCategory('weddings')}>
-      <img src="assets/service-wedding-real.jpg" alt="An Indian couple celebrating their wedding" loading="lazy" width="1400" height="933" />
+      <img src="assets/service-wedding-daylight.jpg" alt="A newlywed Indian couple sharing a quiet moment outdoors" loading="lazy" width="1600" height="1066" />
       <div className="our-work-card-copy"><h3>Weddings &amp;<br/>celebrations</h3>
         <ServiceDetails items={['Birthdays & anniversaries','Engagements & weddings','Haldi, mehendi & sangeet','Receptions','Private celebrations']}/>
         <span className="our-work-card-action">View reels</span></div>
