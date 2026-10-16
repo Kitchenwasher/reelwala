@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f5f1e9"><meta name="description" content="Apply to create event reels with The Reel Wala. Explore the creator programme, requirements and portfolio application.">
+  <title>Become a creator — The Reel Wala</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&family=Oswald:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="creator-portal.css?v=1">
+  <script src="config.js" defer></script><script src="creator-portal.js?v=1" defer></script>
+</head>
+<body id="top">
+  <a class="creator-skip" href="#main">Skip to content</a>
+  <header class="creator-header">
+    <a class="creator-brand" href="#top" aria-label="The Reel Wala creators home">THE REEL WALA<span>CREATORS</span></a>
+    <nav aria-label="Creator navigation"><a href="#journey">How it works</a><a href="#requirements">Requirements</a><a class="creator-button creator-button-small" href="#apply">Apply now</a></nav>
+  </header>
+  <main id="main">
+    <section class="creator-hero" aria-labelledby="creator-title">
+      <div class="creator-hero-copy"><p class="creator-eyebrow"><i></i> The creator programme</p>
+        <h1 id="creator-title">Shoot with<br><em>The Reel Wala.</em></h1>
+        <p class="creator-hero-description">Create event reels with our team.<br>Show us your eye for a good shot.</p>
+        <a class="creator-button" href="#apply">Become a creator</a>
+        <a class="creator-text-link" href="#requirements">See what you’ll need</a>
+      </div>
+      <div class="creator-hero-scene" aria-hidden="true">
+        <div class="creator-scene-orbit"></div>
+        <figure class="creator-scene-photo creator-photo-left"><img src="assets/wedding.webp" alt="" width="1536" height="1024"><figcaption>WEDDINGS</figcaption></figure>
+        <figure class="creator-scene-photo creator-photo-right"><img src="assets/culture.webp" alt="" width="1536" height="1024"><figcaption>LIVE EVENTS</figcaption></figure>
+        <div class="creator-scene-device"><img class="creator-gimbal" src="assets/gimbal.png" alt="" width="1024" height="1536"><div class="creator-device-screen"><img src="assets/culture.webp" alt=""><span></span></div></div>
+      </div>
+    </section>
+    <section class="creator-event-strip" aria-label="Events you could shoot"><span>Weddings</span><i>·</i><span>Birthdays</span><i>·</i><span>Festivals</span><i>·</i><span>College events</span><i>·</i><span>Corporate events</span></section>
+    <section class="creator-section creator-journey" id="journey" aria-labelledby="journey-heading">
+      <div class="creator-section-heading"><p class="creator-eyebrow">How it works</p><h2 id="journey-heading">From application<br><em>to your first shoot.</em></h2></div>
+      <div class="creator-journey-grid">
+        <article><span>01</span><h3>Apply</h3><p>Share your details, device and five of your best photos. Add edited videos if you have them.</p></article>
+        <article><span>02</span><h3>Portfolio review</h3><p>The team reviews your work and gets in touch about the next step.</p></article>
+        <article><span>03</span><h3>Onboarding</h3><p>If shortlisted, complete the workshop and onboarding with the team.</p></article>
+        <article><span>04</span><h3>Event shoots</h3><p>Confirm your availability, assignment details and payment terms before taking a shoot.</p></article>
+      </div>
+    </section>
+    <section class="creator-section creator-requirements" id="requirements" aria-labelledby="requirements-heading">
+      <div class="creator-section-heading"><p class="creator-eyebrow">Before you apply</p><h2 id="requirements-heading">Bring your phone.<br><em>And your perspective.</em></h2></div>
+      <div class="creator-requirement-list">
+        <article><span>01</span><div><h3>iPhone 15 or newer</h3><p>Choose your exact model in the application.</p></div></article>
+        <article><span>02</span><div><h3>A portfolio to share</h3><p>Five photos are required. You can also add up to two edited videos and a portfolio link.</p></div></article>
+        <article><span>03</span><div><h3>Availability for events</h3><p>Tell us your location so the team can discuss suitable shoots with you.</p></div></article>
+      </div>
+    </section>
+    <section class="creator-section creator-apply" id="apply" aria-labelledby="apply-heading">
+      <div class="creator-apply-heading"><p class="creator-eyebrow">Your application</p><h2 id="apply-heading">Join the crew.</h2><p>Start with your details. Your portfolio comes next.</p></div>
+      <div class="creator-application">
+        <nav class="creator-form-steps" aria-label="Application steps">
+          <button type="button" data-creator-go="0" aria-current="step"><span>01</span> Details</button><button type="button" data-creator-go="1" disabled><span>02</span> Portfolio</button><button type="button" data-creator-go="2" disabled><span>03</span> Review</button>
+        </nav>
+        <form id="creator-application-form">
+          <fieldset data-creator-step="0"><legend>Your details</legend>
+            <div class="creator-form-grid">
+              <label>Full name<input name="name" autocomplete="name" maxlength="100" required></label>
+              <label>Email<input name="email" type="email" autocomplete="email" maxlength="254" required></label>
+              <label>Phone<input name="phone" type="tel" autocomplete="tel" minlength="7" maxlength="20" required></label>
+              <label>City / locality<input name="locality" autocomplete="address-level2" maxlength="150" placeholder="e.g. Viman Nagar, Pune" required></label>
+              <label class="creator-form-full">Your iPhone model<select name="device" required><option value="">Select your iPhone model</option></select></label>
+            </div>
+            <div class="creator-form-actions"><button class="creator-button" type="button" id="creator-details-next">Continue</button></div>
+          </fieldset>
+          <fieldset data-creator-step="1" hidden><legend>Your portfolio</legend>
+            <div class="creator-upload-group"><label for="creator-photos"><strong>Choose your best 5 photos</strong><span>JPG, PNG, WebP or HEIC · up to 4 MB each</span></label><input id="creator-photos" name="photos" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" multiple required><p id="creator-photo-status" class="creator-field-note" role="status">No photos selected</p><div class="creator-photo-previews" id="creator-photo-previews"></div></div>
+            <div class="creator-upload-group"><label for="creator-videos"><strong>Edited videos <span class="creator-optional">(optional)</span></strong><span>Up to 2 MP4, MOV or WebM videos · 10 MB each</span></label><input id="creator-videos" name="videos" type="file" accept="video/mp4,video/quicktime,video/webm" multiple><p id="creator-video-status" class="creator-field-note" role="status">No videos selected</p></div>
+            <p class="creator-field-note">Keep photos and videos under 25 MB combined.</p>
+            <label class="creator-portfolio-link">Portfolio link <span class="creator-optional">(optional)</span><input name="portfolio" type="url" placeholder="https://…" maxlength="1000"></label>
+            <div class="creator-form-actions"><button class="creator-form-back" type="button" data-creator-back="0">Back</button><button class="creator-button" type="button" id="creator-portfolio-next">Review application</button></div>
+          </fieldset>
+          <fieldset data-creator-step="2" hidden><legend>Review your application</legend><dl class="creator-review" id="creator-review"></dl>
+            <p class="creator-field-note">Check your contact details and selected files before continuing.</p>
+            <div class="creator-form-actions"><button class="creator-form-back" type="button" data-creator-back="1">Back</button><button class="creator-button" type="submit" id="creator-submit">Download application draft</button></div>
+            <p class="creator-mode-note" id="creator-mode-note">Preview mode: downloads your application with file names. Files stay on your device; nothing is sent.</p>
+          </fieldset>
+          <input class="creator-honeypot" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <p class="creator-result" id="creator-result" role="status" aria-live="polite"></p>
+        </form>
+        <noscript>Enable JavaScript to complete the application steps.</noscript>
+      </div>
+    </section>
+    <section class="creator-section creator-faq" aria-labelledby="creator-faq-heading"><h2 id="creator-faq-heading">Before you hit apply.</h2>
+      <details><summary>Do I need professional experience?</summary><p>Share your best work. The team will review your portfolio and discuss the next steps with you.</p></details>
+      <details><summary>What happens after I apply?</summary><p>The team reviews applications and contacts shortlisted creators about the workshop and onboarding.</p></details>
+      <details><summary>How are shoots and payments arranged?</summary><p>Availability, event requirements and payment terms are confirmed with the team before each assignment.</p></details>
+    </section>
+  </main>
+  <footer class="creator-footer"><a class="creator-brand" href="#top">THE REEL WALA<span>CREATORS</span></a><span>© <span id="creator-year"></span> The Reel Wala</span></footer>
+</body>
+</html>

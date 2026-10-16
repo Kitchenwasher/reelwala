@@ -6,18 +6,13 @@ const syncHeader = () => header?.classList.toggle('is-scrolled', window.scrollY 
 window.addEventListener('scroll', syncHeader, { passive: true });
 window.addEventListener('pageshow', syncHeader);
 syncHeader();
-const deviceInput = $('#creator-form input[name="device"]');
-const deviceSelect = document.createElement('select');
-deviceSelect.name = 'device';deviceSelect.required = true;
-const modelNames = ['iPhone 15','iPhone 15 Plus','iPhone 15 Pro','iPhone 15 Pro Max','iPhone 16','iPhone 16 Plus','iPhone 16 Pro','iPhone 16 Pro Max','iPhone 16e','iPhone 17','iPhone 17 Pro','iPhone 17 Pro Max','iPhone Air','iPhone 17e','iPhone 18 Pro','iPhone 18 Pro Max'];
-deviceSelect.append(new Option('Select your iPhone model',''), ...modelNames.map(name=>new Option(name,name)));
-deviceInput.replaceWith(deviceSelect);
-const uploadFields = document.createElement('div');uploadFields.className='portfolio-uploads full';
-uploadFields.innerHTML=`<label>Choose your best 5 photos<input type="file" name="photos" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" multiple required><small>Choose five photos. Preview selection only; files stay on your device.</small></label><label>Choose up to 2 edited videos <span class="optional">(optional)</span><input type="file" name="videos" accept="video/mp4,video/quicktime,video/webm" multiple><small>Optional: select one or two examples of your edits.</small></label>`;
-$('#creator-form .form-grid').append(uploadFields);
-const photoInput = $('#creator-form input[name="photos"]');const videoInput = $('#creator-form input[name="videos"]');
-photoInput.addEventListener('change',()=>photoInput.setCustomValidity(photoInput.files.length === 5?'':'Please choose exactly five photos.'));
-videoInput.addEventListener('change',()=>videoInput.setCustomValidity(videoInput.files.length <= 2?'':'Please choose no more than two videos.'));
+const creatorPortalUrl = window.REEL_WALA_CONFIG?.creatorPortalUrl;
+if (creatorPortalUrl) {
+  try {
+    const destination = new URL(creatorPortalUrl, window.location.href);
+    if (['https:', 'http:'].includes(destination.protocol)) $$('[data-creator-portal]').forEach(link => { link.href = destination.href; });
+  } catch { /* Keep the local creator page when the configured URL is invalid. */ }
+}
 const imagePath = name => (name && (name.startsWith('http://') || name.startsWith('https://'))) ? name : `assets/${name}.webp`;
 const menu = $('.menu-toggle');
 if (menu) {
@@ -604,13 +599,10 @@ async function sendEnquiry(form, kind) {
 
 if (endpoint) {
   $('#booking-form button[type="submit"]').innerHTML = 'Send my enquiry <span>↗</span>';
-  $('#creator-form button[type="submit"]').innerHTML = 'Send my application <span>↗</span>';
   $('#booking-form .form-note').textContent = 'Your details are sent securely to the Reel Wala team. A booking is final only after confirmation.';
-  $('#creator-form .form-note').textContent = 'Your application and selected portfolio files are sent to the Reel Wala team for review.';
-  $$('.portfolio-uploads small').forEach((small, i) => small.textContent = i === 0 ? 'Five photos, up to 4 MB each.' : 'Optional: up to two videos, 10 MB each. All files combined: 25 MB maximum.');
 }
 
-[$('#booking-form'), $('#creator-form'), $('#edit-form')].forEach(form => {
+[$('#booking-form')].forEach(form => {
   if (!form) return;
   const trap = document.createElement('input');
   trap.name = 'website';
@@ -624,6 +616,4 @@ if (endpoint) {
 
 const bForm = $('#booking-form');
 if (bForm) bForm.addEventListener('submit', event => { event.preventDefault(); sendEnquiry(event.currentTarget, 'booking'); });
-const cForm = $('#creator-form');
-if (cForm) cForm.addEventListener('submit', event => { event.preventDefault(); sendEnquiry(event.currentTarget, 'creator'); });
 $('#year').textContent=new Date().getFullYear();

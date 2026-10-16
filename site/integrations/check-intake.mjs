@@ -37,3 +37,17 @@ assert.equal(rows[0][5].split('\n').length,3);assert.equal(rows[0][6],"'=brief")
 assert.equal(invoke({...edit,uploads:[...edit.uploads,{...clip,name:'fourth.mp4'}]}).success,true);
 assert.equal(rows[1][5].split('\n').length,4);
 console.log('Editing intake checks passed: clip counts, types, empty files, brief limits, saved links and formula escaping.');
+
+// The standalone creator page keeps the existing portfolio intake contract.
+rows=[];
+const photo={kind:'photo',name:'photo.jpg',mime:'image/jpeg',data:Buffer.from('sample photo').toString('base64')};
+const creator={...valid,kind:'creator',data:{name:'Creator Applicant',email:'creator@example.com',phone:'+91 90000 00000',locality:'Pune',device:'iPhone 16',portfolio:'https://example.com/portfolio'},uploads:[...Array(5).fill(photo),clip]};
+assert.equal(invoke({...creator,uploads:Array(4).fill(photo)}).success,false);
+assert.equal(invoke({...creator,uploads:[...Array(5).fill(photo),clip,clip,clip]}).success,false);
+assert.equal(invoke({...creator,data:{...creator.data,device:'Unsupported'}}).success,false);
+assert.equal(invoke({...creator,data:{...creator.data,portfolio:'not-a-link'}}).success,false);
+assert.equal(invoke({...creator,uploads:[...Array(4).fill(photo),{...photo,mime:'image/svg+xml'}]}).success,false);
+assert.equal(invoke(creator).success,true);assert.equal(rows.length,1);
+assert.equal(rows[0][5],'Pune');assert.equal(rows[0][6],'iPhone 16');
+assert.equal(rows[0][8].split('\n').length,5);assert.equal(rows[0][9].split('\n').length,1);
+console.log('Creator intake checks passed: required portfolio counts, device, URL, file types and private upload links.');
