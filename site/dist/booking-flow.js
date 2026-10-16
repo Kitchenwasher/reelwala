@@ -34,7 +34,7 @@
     if(target>current){
       for(let index=current;index<target;index++){
         const invalid=firstInvalid(panels[index]);
-        if(invalid){show(index,false);invalid.reportValidity();return;}
+        if(invalid){show(index,false);window.ReelWalaValidation.report(invalid);return;}
       }
     }
     show(target);
@@ -55,7 +55,7 @@
     if(current<2){event.preventDefault();event.stopImmediatePropagation();navigate(current+1);return;}
     for(let index=0;index<panels.length;index++){
       const invalid=firstInvalid(panels[index]);
-      if(invalid){event.preventDefault();event.stopImmediatePropagation();show(index,false);invalid.reportValidity();return;}
+      if(invalid){event.preventDefault();event.stopImmediatePropagation();show(index,false);window.ReelWalaValidation.report(invalid);return;}
     }
   },true);
   form.querySelector('#booking-step-count').setAttribute('aria-live','polite');

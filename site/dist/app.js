@@ -180,6 +180,7 @@ const ReelWalaBooking = {
           if (dateInput) {
             dateInput.required = false;
             dateInput.disabled = true;
+            window.ReelWalaValidation?.clear(dateInput);
             dateInput.style.opacity = '0.5';
           }
           const future = new Date(today.getTime() + 30 * 86400000);
@@ -491,7 +492,7 @@ const requestedCreator = CREATORS_LIST.find(creator => creator.id === requestedC
 if (requestedCreator) ReelWalaBooking.setCreator(requestedCreator);
 
 function downloadEnquiry(form, kind) {
-  if (!form.reportValidity()) return;
+  if (!window.ReelWalaValidation.report(form)) return;
   const data = {};
   for (const [key, value] of new FormData(form)) {
     if (value instanceof File) {
@@ -536,7 +537,7 @@ function downloadEnquiry(form, kind) {
 
 async function sendEnquiry(form, kind) {
   if (!endpoint) return downloadEnquiry(form, kind === 'booking' ? 'Shoot enquiry' : kind === 'edit' ? 'Reel edit request' : 'Creator application');
-  if (!form.reportValidity()) return;
+  if (!window.ReelWalaValidation.report(form)) return;
   const button = $('button[type="submit"]', form);
   if (button.disabled) return;
   const status = $('.form-status', form);

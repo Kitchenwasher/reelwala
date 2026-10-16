@@ -1,0 +1,5 @@
+.field-error-message {display:flex;align-items:flex-start;gap:9px;box-sizing:border-box;max-width:100%;margin:9px 0 0;padding:10px 12px;border-left:2px solid #c8572d;border-radius:0 8px 8px 0;background:#f8e8dc;color:#8c3c21;font:400 13px/1.6 var(--sans)!important;letter-spacing:0!important;text-transform:none!important;animation:field-error-in .2s ease both}
+.field-error-icon {display:grid;place-items:center;flex:0 0 16px;height:16px;margin-top:2px;border:1px solid #c36b48;border-radius:50%;font-size:11px;font-weight:600;line-height:1}
+#book #booking-form [aria-invalid=true],#creator-application-form [aria-invalid=true],#reel-request-form [aria-invalid=true] {border-color:#c76a43!important;background-color:#fff9f3!important;outline-color:#df986b!important}
+@keyframes field-error-in {from{opacity:0;translate:0 -3px}to{opacity:1;translate:0 0}}
+@media(prefers-reduced-motion:reduce){.field-error-message{animation:none}}

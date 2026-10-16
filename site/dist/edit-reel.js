@@ -38,12 +38,12 @@ clips.addEventListener('change',()=>{
     caption.textContent=file.name;figure.append(video,caption);previews.append(figure);
   });
 });
-document.getElementById('clips-next').addEventListener('click',()=>{if(validateClips())goStep(1);else clips.reportValidity();});
+document.getElementById('clips-next').addEventListener('click',()=>{if(validateClips())goStep(1);else window.ReelWalaValidation.report(clips);});
 document.getElementById('style-next').addEventListener('click',()=>goStep(2));
 document.querySelectorAll('[data-back]').forEach(button=>button.addEventListener('click',()=>goStep(Number(button.dataset.back))));
 document.querySelectorAll('[data-go-step]').forEach(button=>button.addEventListener('click',()=>{
   const step=Number(button.dataset.goStep);
-  if(step>0&&!validateClips()){goStep(0);clips.reportValidity();return;}goStep(step);
+  if(step>0&&!validateClips()){goStep(0);window.ReelWalaValidation.report(clips);return;}goStep(step);
 }));
 form.addEventListener('input',()=>{delete form.dataset.submissionId;});
 window.addEventListener('pagehide',clearPreviews);
@@ -61,8 +61,8 @@ function readFile(file){return new Promise((resolve,reject)=>{
 
 form.addEventListener('submit',async event=>{
   event.preventDefault();
-  if(!validateClips()){goStep(0);clips.reportValidity();return;}
-  if(!form.reportValidity())return;
+  if(!validateClips()){goStep(0);window.ReelWalaValidation.report(clips);return;}
+  if(!window.ReelWalaValidation.report(form))return;
   const data=Object.fromEntries([...new FormData(form)].filter(([,value])=>typeof value==='string'));
   if(!/^[+0-9()\s-]{7,20}$/.test(data.phone)){result.textContent='Enter a valid phone number.';form.elements.phone.focus();return;}
   const files=[...clips.files];

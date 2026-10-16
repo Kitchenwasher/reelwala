@@ -52,8 +52,8 @@ function goStep(index){
 }
 
 function advance(index){
-  if(index>0&&!validateDetails()){goStep(0);application.querySelector('[data-creator-step="0"] :invalid')?.reportValidity();return;}
-  if(index>1&&!validatePortfolio()){goStep(1);application.querySelector('[data-creator-step="1"] :invalid')?.reportValidity();return;}
+  if(index>0&&!validateDetails()){goStep(0);window.ReelWalaValidation.report(application.querySelector('[data-creator-step="0"] :invalid'));return;}
+  if(index>1&&!validatePortfolio()){goStep(1);window.ReelWalaValidation.report(application.querySelector('[data-creator-step="1"] :invalid'));return;}
   goStep(index);
 }
 document.getElementById('creator-details-next').addEventListener('click',()=>advance(1));

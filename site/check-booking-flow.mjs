@@ -22,7 +22,7 @@ const form=new Element();
 form.querySelector=selector=>nodes[selector]||null;
 form.querySelectorAll=selector=>selector==='[data-booking-panel]'?panels:[];
 const document={querySelector:()=>form,querySelectorAll:()=>tabs,addEventListener:()=>{}};
-vm.runInNewContext(readFileSync(new URL('./dist/booking-flow.js',import.meta.url),'utf8'),{document,window:{ReelWalaBooking:{state:{occasion:'Wedding / private celebration',package:'Extended',date:'',locality:''}}},Intl,Date});
+vm.runInNewContext(readFileSync(new URL('./dist/booking-flow.js',import.meta.url),'utf8'),{document,window:{ReelWalaValidation:{report:field=>field.reportValidity()},ReelWalaBooking:{state:{occasion:'Wedding / private celebration',package:'Extended',date:'',locality:''}}},Intl,Date});
 const next=()=>nodes['#booking-next'].fire('click');
 assert.deepEqual(panels.map(panel=>panel.hidden),[false,true,true]);
 next();assert.equal(form.dataset.step,'0');assert.equal(date.reported,1);
