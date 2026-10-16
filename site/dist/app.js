@@ -1,6 +1,11 @@
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 const endpoint = window.REEL_WALA_CONFIG?.sheetsEndpoint || '';
+const header = $('.header');
+const syncHeader = () => header?.classList.toggle('is-scrolled', window.scrollY > 24);
+window.addEventListener('scroll', syncHeader, { passive: true });
+window.addEventListener('pageshow', syncHeader);
+syncHeader();
 const deviceInput = $('#creator-form input[name="device"]');
 const deviceSelect = document.createElement('select');
 deviceSelect.name = 'device';deviceSelect.required = true;
