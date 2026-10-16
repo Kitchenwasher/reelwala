@@ -11,7 +11,7 @@ function ServiceDetails({items}){
 
 function ReelEditGraphic(){
   return <div className="our-work-edit-graphic" aria-hidden="true">
-    <div className="our-work-edit-frame">{[0,1,2].map(index=><span key={index}><svg viewBox={`${index%2*3} ${Math.floor(index/2)*4} 3 4`} preserveAspectRatio="xMidYMid slice"><image href="assets/editing-birthday-story.png" width="6" height="8" preserveAspectRatio="none"/></svg></span>)}</div>
+    <div className="our-work-edit-frame">{[0,1,2].map(index=><span key={index}><svg viewBox={`${index%2*3} ${Math.floor(index/2)*4} 3 4`} preserveAspectRatio="xMidYMid slice"><image href="assets/editing-editorial-story.png" width="6" height="8" preserveAspectRatio="none"/></svg></span>)}</div>
     <div className="our-work-edit-timeline">
       {[.3,.6,.8,.4,1,.6,.9,.5,.8,.4,.7,.9,.5,.7,.3,.6,.9,.5,.4,.7].map((height,index)=><i key={index} style={{height:`${height*100}%`}}/>)}
       <b/>

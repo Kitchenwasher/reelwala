@@ -3,9 +3,9 @@ import { createRoot } from 'react-dom/client';
 import { hookLayout, clipFlight } from './edit-hook-layout.mjs';
 import './editing-hook.css';
 
-function Photo({ index }) {
+function Artwork({ index }) {
   return <svg viewBox={`${index%2*3} ${Math.floor(index/2)*4} 3 4`} preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <image href="assets/editing-birthday-story.png" width="6" height="8" preserveAspectRatio="none" />
+    <image href="assets/editing-editorial-story.png" width="6" height="8" preserveAspectRatio="none" />
   </svg>;
 }
 
@@ -76,12 +76,12 @@ function EditingHook() {
           <circle ref={dot} r="4" cx="0" cy="0" />
         </svg>
         {layout.sources.map((source,i)=><React.Fragment key={i}>
-          <div className={`editing-hook-source source-${i}`} style={boxStyle(source)} aria-hidden="true"><span className="editing-hook-number">0{i+1}</span><Photo index={i}/></div>
-          <div className="editing-hook-flyer" ref={element=>{flyers.current[i]=element;}} style={{width:source.width,height:source.height}} aria-hidden="true"><Photo index={i}/></div>
+          <div className={`editing-hook-source source-${i}`} style={boxStyle(source)} aria-hidden="true"><span className="editing-hook-number">0{i+1}</span><Artwork index={i}/></div>
+          <div className="editing-hook-flyer" ref={element=>{flyers.current[i]=element;}} style={{width:source.width,height:source.height}} aria-hidden="true"><Artwork index={i}/></div>
         </React.Fragment>)}
         <div className="editing-hook-output" style={boxStyle(layout.reel)} aria-hidden="true">
           <span className="editing-hook-output-label">Your reel</span>
-          <Photo index={screen.previous}/><div className="editing-hook-screen" key={screen.current}><Photo index={screen.current}/></div>
+          <Artwork index={screen.previous}/><div className="editing-hook-screen" key={screen.current}><Artwork index={screen.current}/></div>
           <span className="editing-hook-progress"><i key={screen.current}/></span>
         </div>
       </>}
