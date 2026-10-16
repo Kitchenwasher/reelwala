@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import PixelCard from './PixelCard.jsx';
+import PricingMotionCard from './PricingMotionCard.jsx';
 
 function PricingPixelCards() {
   const handleSelectPackage = (pkgName) => {
@@ -12,10 +12,7 @@ function PricingPixelCards() {
   return (
     <>
       {/* 1. Standard Card */}
-      <PixelCard
-        gap={22}
-        speed={18}
-        colors="#f5eee4,#e9d7c2,#edc4a6"
+      <PricingMotionCard order={0}
         className="price-card-pixel-standard"
       >
         <h3>Standard</h3>
@@ -33,13 +30,10 @@ function PricingPixelCards() {
         >
           Enquire about Standard
         </a>
-      </PixelCard>
+      </PricingMotionCard>
 
       {/* 2. Extended Card (Featured) */}
-      <PixelCard
-        gap={22}
-        speed={18}
-        colors="#f5eee4,#e9d7c2,#edc4a6"
+      <PricingMotionCard order={1}
         className="featured price-card-pixel-extended"
       >
         <h3>Extended</h3>
@@ -57,13 +51,10 @@ function PricingPixelCards() {
         >
           Enquire about Extended
         </a>
-      </PixelCard>
+      </PricingMotionCard>
 
       {/* 3. Your Way / Custom Card */}
-      <PixelCard
-        gap={22}
-        speed={18}
-        colors="#f5eee4,#e9d7c2,#edc4a6"
+      <PricingMotionCard order={2}
         className="price-card-pixel-custom"
       >
         <h3>Your way</h3>
@@ -81,7 +72,7 @@ function PricingPixelCards() {
         >
           Let’s talk details
         </a>
-      </PixelCard>
+      </PricingMotionCard>
     </>
   );
 }

@@ -1,0 +1,56 @@
+/* Motion stays on the cards; the continuous cream page is untouched. */
+.price-card.pricing-motion-card {
+  isolation:isolate;
+  transform-origin:center;
+  transition:transform .45s cubic-bezier(.2,.75,.25,1),box-shadow .45s,border-color .35s!important;
+}
+.price-card.pricing-motion-card::before {
+  background:radial-gradient(360px circle at var(--package-x,50%) var(--package-y,20%),#eea77622,transparent 75%);
+}
+.price-card.pricing-motion-card::after {
+  inset:0;left:0;right:0;top:0;height:auto;border-radius:inherit;padding:1px;
+  background:conic-gradient(from var(--package-angle,0deg),transparent 0deg,#e88f59 55deg,transparent 115deg,transparent 230deg,#e8b68d 285deg,transparent 340deg);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  mask-composite:exclude;
+  transform:none;
+  transition:opacity .35s;
+}
+.price-card.pricing-motion-card:focus-within::after {opacity:1;transform:none}
+.pricing-motion-card h3 {transition:transform .45s cubic-bezier(.2,.75,.25,1)}
+.pricing-motion-card li {position:relative;transition:transform .4s,color .4s}
+.pricing-motion-card li:nth-child(2) {transition-delay:45ms}
+.pricing-motion-card li:nth-child(3) {transition-delay:90ms}
+.pricing-motion-card li::after {
+  content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,#e4a67a,transparent);transform:scaleX(0);transform-origin:left;
+  transition:transform .6s cubic-bezier(.2,.75,.25,1);transition-delay:inherit;
+}
+.pricing-motion-card:focus-within li::after {transform:scaleX(1)}
+.pricing-motion-card .button {position:relative;overflow:hidden}
+.pricing-motion-card .button::after {
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(110deg,transparent 25%,#ffffff3d 48%,transparent 70%);
+  transform:translateX(-130%);
+}
+.pricing-motion-card .button:is(:hover,:focus-visible)::after {animation:package-button-light .75s ease both}
+.pricing-motion-card[data-arrival=entered] {animation:package-arrive .75s cubic-bezier(.2,.75,.25,1) both;animation-delay:calc(var(--package-order)*100ms)}
+.pricing-motion-card[data-arrival=waiting] {opacity:0;translate:0 22px}
+@media(hover:hover) and (prefers-reduced-motion:no-preference) {
+  .price-card.pricing-motion-card:hover {
+    transform:perspective(1400px) translateY(-6px) rotateX(var(--package-rx,0deg)) rotateY(var(--package-ry,0deg))!important;
+    box-shadow:0 22px 42px #39261312!important;
+  }
+  .price-card.pricing-motion-card:hover::after {opacity:1;transform:none}
+  .pricing-motion-card:hover h3 {transform:translateY(-3px)}
+  .pricing-motion-card:hover li {transform:translateX(3px)}
+  .pricing-motion-card:hover li::after {transform:scaleX(1)}
+}
+@keyframes package-arrive {from{opacity:0;translate:0 22px}to{opacity:1;translate:0 0}}
+@keyframes package-button-light {to{transform:translateX(130%)}}
+@media(prefers-reduced-motion:reduce) {
+  .price-card.pricing-motion-card,.pricing-motion-card * {animation:none!important;transition:none!important;transform:none!important;translate:none!important}
+  .pricing-motion-card[data-arrival] {opacity:1}
+  .pricing-motion-card .button::after {display:none}
+}
