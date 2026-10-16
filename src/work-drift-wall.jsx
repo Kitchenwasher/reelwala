@@ -151,10 +151,17 @@ function useResponsiveColumns() {
   return cols;
 }
 
-function WorkDriftWallShowcase() {
+function WorkDriftWallShowcase({ gallery = false }) {
   const [activeCategory, setActiveCategory] = useState('all');
   const [activeReel, setActiveReel] = useState(null);
   const columns = useResponsiveColumns();
+
+  useEffect(() => {
+    if (gallery) return;
+    const requested = new URLSearchParams(window.location.search).get('reel');
+    const reel = EDITED_REELS.find(item => item.title === requested);
+    if (reel) window.ReelWalaBooking?.setInspiration({ ...reel, occasion: occasionForReel(reel) });
+  }, [gallery]);
 
   useEffect(() => {
     const selectCategory = event => {
@@ -209,7 +216,16 @@ function WorkDriftWallShowcase() {
         ))}
       </div>
 
-      {/* Full-Bleed Edge-to-Edge Drift Wall */}
+      {gallery ? <>
+        <p className="gallery-result-count" role="status">{filteredReels.length} {filteredReels.length === 1 ? 'reel' : 'reels'}</p>
+        <div className="reels-gallery-grid">
+          {filteredReels.map(item => <button type="button" className="reels-gallery-card" key={item.title} onClick={() => handleTileClick(item)} aria-label={`View ${item.title}`}>
+            <img src={item.image} alt="" loading="lazy" width="600" height="800" />
+            <span className="reels-gallery-tag">{item.tag}</span>
+            <span className="reels-gallery-caption"><strong>{item.title}</strong><span>{item.subtitle}</span></span>
+          </button>)}
+        </div>
+      </> :
       <div className="work-drift-wall-container">
         <DriftWall
           items={filteredReels}
@@ -234,7 +250,7 @@ function WorkDriftWallShowcase() {
           radius={18}
           onTileClick={handleTileClick}
         />
-      </div>
+      </div>}
 
       {/* Event preview */}
       {activeReel && (
@@ -278,15 +294,10 @@ function WorkDriftWallShowcase() {
                 <h3>{activeReel.title}</h3>
                 <p className="reel-cinema-tech">{activeReel.subtitle}</p>
                 <a
-                  href="#book"
+                  href={gallery ? `./?reel=${encodeURIComponent(activeReel.title)}#book` : '#book'}
                   className="reel-cinema-cta"
                   onClick={() => {
-                    let occasionVal = 'Wedding / private celebration';
-                    if (activeReel.category === 'weddings') occasionVal = 'Wedding / private celebration';
-                    else if (activeReel.category === 'festivals') occasionVal = 'Social / cultural event';
-                    else if (activeReel.category === 'corporate') occasionVal = 'Corporate event';
-                    else if (activeReel.category === 'nightlife') occasionVal = 'Social / cultural event';
-                    else occasionVal = 'Something else';
+                    const occasionVal = occasionForReel(activeReel);
 
                     window.ReelWalaBooking?.setInspiration({
                       title: activeReel.title,
@@ -310,12 +321,19 @@ function WorkDriftWallShowcase() {
   );
 }
 
+function occasionForReel(reel) {
+  if (reel.category === 'weddings') return 'Wedding / private celebration';
+  if (reel.category === 'corporate') return 'Corporate event';
+  if (['festivals', 'nightlife'].includes(reel.category)) return 'Social / cultural event';
+  return 'Something else';
+}
+
 function mount() {
-  const rootElement = document.getElementById('work-drift-wall-root');
+  const rootElement = document.getElementById('work-drift-wall-root') || document.getElementById('reels-gallery-root');
   if (rootElement && !rootElement._reactRoot) {
     const root = createRoot(rootElement);
     rootElement._reactRoot = root;
-    root.render(<WorkDriftWallShowcase />);
+    root.render(<WorkDriftWallShowcase gallery={rootElement.id === 'reels-gallery-root'} />);
   }
 }
 

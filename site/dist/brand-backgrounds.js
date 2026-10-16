@@ -2,7 +2,7 @@
 // Preserve each section's existing gradients and background colour.
 const continuousMain=document.querySelector('main.brand-continuous-main');
 continuousMain?.classList.add('brand-continuous-main');
-const shardSections=[...document.querySelectorAll('main > section:not(.hero), body > footer, .directory-main, .edit-page-main')]
+const shardSections=[...document.querySelectorAll('main > section:not(.hero), body > footer, .directory-main, .edit-page-main, .gallery-page')]
   .filter(section=>!continuousMain?.contains(section));
 const shardLayers=shardSections.filter(section=>!section.classList.contains('has-brand-shards')).map(section=>{
   const style=getComputedStyle(section);

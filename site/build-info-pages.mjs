@@ -5,7 +5,7 @@ const footer=`<footer class="reel-footer" aria-label="The Reel Wala">
   <div class="reel-footer-lead"><div><p class="reel-footer-kicker"><span></span> KEEP THE MOMENT</p><h2>Got a moment?</h2></div><a class="reel-footer-book" href="./#book">Let’s make it a reel<span aria-hidden="true" class="reel-footer-play"></span></a></div>
   <div class="reel-footer-grid">
     <div class="reel-footer-intro"><p>Event reels.<br>Made to be replayed.</p><span>Shot on iPhone 16 or newer.</span><div class="reel-footer-contact"><span>Email coming soon</span><span>hello@thereelwala.example</span></div></div>
-    <nav aria-label="Explore"><h3>Explore</h3><a href="./#work">Our services</a><a href="./#event-reels">Event reels</a><a href="creators.html">Our creators</a><a href="edit-reel.html">Reel editing</a></nav>
+    <nav aria-label="Explore"><h3>Explore</h3><a href="./#work">Our services</a><a href="gallery.html">Reel gallery</a><a href="creators.html">Our creators</a><a href="edit-reel.html">Reel editing</a></nav>
     <nav aria-label="The Reel Wala company"><h3>The Reel Wala</h3><a href="about.html">About us</a><a href="become-creator.html" data-creator-portal>Become a creator</a><a href="./#pricing">Packages</a><a href="./#book">Get in touch</a></nav>
     <nav aria-label="Policies"><h3>The details</h3><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms of service</a><a href="booking-policy.html">Booking & cancellations</a><a href="about.html#photo-credits">Photo credits</a></nav>
   </div>
@@ -52,7 +52,7 @@ for(const page of pages){
   await writeFile(new URL(page.slug+'.html',root),`<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f5f1e9"><title>${page.label} — The Reel Wala</title><link href="${fonts}" rel="stylesheet"><link rel="stylesheet" href="styles.css?v=22"><link rel="stylesheet" href="typography.css?v=2"><link rel="stylesheet" href="footer.css?v=2"><script src="footer.js?v=1" defer></script></head><body><a class="skip-link" href="#main">Skip to content</a><header class="info-header"><a class="wordmark" href="./">THE REEL WALA</a><a href="./#book">Book a shoot</a></header><main class="info-page" id="main"><div class="info-page-heading"><p class="eyebrow">${page.label}</p><h1>${page.title}</h1><p>${page.intro}</p>${page.slug==='about'?'':'<span class="info-updated">Updated 16 October 2026</span>'}</div><div class="info-page-body">${page.sections.map(([heading,copy])=>`<section><h2>${heading}</h2><p>${copy}</p></section>`).join('')}${credits}${page.slug==='privacy'?'<section><h2>Provider policies</h2><p><a href="https://policies.google.com/privacy">Google privacy policy</a> · <a href="https://fonts.google.com/faq">Google Fonts FAQ</a> · <a href="https://unsplash.com/privacy">Unsplash privacy policy</a></p></section>':''}<a class="button" href="./#book">Discuss your event</a></div></main>${footer}</body></html>`);
 }
 
-for(const name of ['index.html','creators.html','edit-reel.html']){
+for(const name of ['index.html','creators.html','edit-reel.html','gallery.html']){
   const file=new URL(name,root);
   let html=await readFile(file,'utf8');
   html=html.includes('<footer')?html.replace(/<footer\b[\s\S]*?<\/footer>/,footer):html.replace('</body>',footer+'\n</body>');
