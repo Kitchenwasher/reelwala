@@ -1,4 +1,4 @@
-.editing-hook{padding:65px 4.3%;background:var(--paper);overflow:hidden;border-top:1px solid var(--line)}
+.editing-hook{padding:65px 4.3%;background:var(--paper);overflow:hidden}
 .editing-hook-content{display:grid;grid-template-columns:1fr 1.15fr;gap:20px;align-items:center;max-width:1800px;margin:auto}
 .editing-hook-copy{position:relative;z-index:5}
 .editing-hook-copy .eyebrow{margin-bottom:30px}

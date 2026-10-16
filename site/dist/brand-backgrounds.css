@@ -7,3 +7,15 @@
 }
 @media(max-width:700px){.has-brand-shards{background-size:850px auto,var(--brand-original-size,auto)!important}}
 @media print{.has-brand-shards{background-image:none!important}}
+
+/* One background spans the homepage so the motif never restarts at a section seam. */
+.brand-continuous-main {
+  background: url('assets/brand-shards.svg') center top / 1200px auto repeat-y var(--paper);
+}
+.brand-continuous-main > section:not(.hero) {
+  background: transparent !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+}
+@media(max-width:700px){.brand-continuous-main{background-size:850px auto}}
+@media print{.brand-continuous-main{background-image:none}}
