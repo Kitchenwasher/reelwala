@@ -1,6 +1,8 @@
 import { cp, mkdir } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 
+await import('./build-info-pages.mjs');
+
 const bundle = spawnSync(process.execPath, ['scripts/bundle-carousel.mjs'], { stdio: 'inherit' });
 if (bundle.status !== 0) {
   process.exit(bundle.status || 1);
