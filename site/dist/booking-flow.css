@@ -28,6 +28,8 @@
 #book .form-header>p {font-size:15px;line-height:1.65;color:var(--muted);max-width:440px}
 #book fieldset {border:0;padding:0;margin:0;min-width:0;animation:booking-step-enter .35s ease both}
 #book fieldset>.form-group {margin-bottom:27px}
+#book fieldset[data-booking-panel="0"]>.form-group:last-child {margin-bottom:0}
+#book form[data-step="0"] .booking-flow-actions {margin-top:18px}
 #book .group-label {font:500 13px/1.5 var(--sans)!important;letter-spacing:1px!important;color:var(--muted)!important;margin:0 0 5px}
 #book .occasion-chip,#book .package-pill {background:#f9f6f0!important;border:1px solid #ddd6ca!important;border-radius:13px!important;padding:17px!important;box-shadow:none!important;min-width:0;transition:background .25s,border-color .25s,transform .25s!important}
 #book .occasion-chip {align-items:flex-start!important;gap:12px!important;min-height:78px}
