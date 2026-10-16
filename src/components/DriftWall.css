@@ -15,12 +15,12 @@
   --dw-overlay: #120f18;
   --dw-edge: 35%;
   -webkit-mask-image:
-    radial-gradient(ellipse 85% 85% at 50% 50%, #000 var(--dw-edge), transparent 100%),
-    linear-gradient(to top, #000 var(--dw-edge), transparent 100%);
+    linear-gradient(to right, transparent, #000 calc((100% - var(--dw-edge)) / 4), #000 calc(100% - (100% - var(--dw-edge)) / 4), transparent),
+    linear-gradient(to bottom, transparent, #000 calc((100% - var(--dw-edge)) / 2), #000 calc(100% - (100% - var(--dw-edge)) / 2), transparent);
   -webkit-mask-composite: source-in;
   mask-image:
-    radial-gradient(ellipse 85% 85% at 50% 50%, #000 var(--dw-edge), transparent 100%),
-    linear-gradient(to top, #000 var(--dw-edge), transparent 100%);
+    linear-gradient(to right, transparent, #000 calc((100% - var(--dw-edge)) / 4), #000 calc(100% - (100% - var(--dw-edge)) / 4), transparent),
+    linear-gradient(to bottom, transparent, #000 calc((100% - var(--dw-edge)) / 2), #000 calc(100% - (100% - var(--dw-edge)) / 2), transparent);
   mask-composite: intersect;
 }
 
@@ -96,7 +96,7 @@
   position: absolute;
   inset: 0;
   background: var(--dw-overlay);
-  opacity: 0.32;
+  opacity: 0.12;
   pointer-events: none;
   transition: opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1);
 }

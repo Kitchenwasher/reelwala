@@ -228,8 +228,8 @@ function WorkDriftWallShowcase() {
           parallax={0.55}
           pauseOnHover={false}
           lift={56}
-          fade={0.6}
-          dim={0.82}
+          fade={0.12}
+          dim={1}
           overlayColor="#07060a"
           radius={18}
           onTileClick={handleTileClick}
