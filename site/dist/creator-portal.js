@@ -3,7 +3,7 @@ const photos=document.getElementById('creator-photos'),videos=document.getElemen
 const photoStatus=document.getElementById('creator-photo-status'),videoStatus=document.getElementById('creator-video-status');
 const previews=document.getElementById('creator-photo-previews'),result=document.getElementById('creator-result');
 const endpoint=window.REEL_WALA_CONFIG?.sheetsEndpoint||'';
-const modelNames=['iPhone 15','iPhone 15 Plus','iPhone 15 Pro','iPhone 15 Pro Max','iPhone 16','iPhone 16 Plus','iPhone 16 Pro','iPhone 16 Pro Max','iPhone 16e','iPhone 17','iPhone 17 Pro','iPhone 17 Pro Max','iPhone Air','iPhone 17e','iPhone 18 Pro','iPhone 18 Pro Max'];
+const modelNames=['iPhone 16','iPhone 16 Plus','iPhone 16 Pro','iPhone 16 Pro Max','iPhone 16e','iPhone 17','iPhone 17 Pro','iPhone 17 Pro Max','iPhone Air','iPhone 17e','iPhone 18 Pro','iPhone 18 Pro Max'];
 application.elements.device.append(...modelNames.map(name=>new Option(name,name)));
 const allowedPhotos=['image/jpeg','image/png','image/webp','image/heic','image/heif'];
 const allowedVideos=['video/mp4','video/quicktime','video/webm'];

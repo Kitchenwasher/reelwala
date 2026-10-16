@@ -1,7 +1,7 @@
 // Google Apps Script intake. Deploy as the owner, with web app access for Anyone.
 // The spreadsheet and uploaded portfolio files remain private to the owner.
 const SPREADSHEET_ID = '1FJgAmUw1CxSokhUSJxPsbE_gmXqvm7t1eesWt4a1qr4';
-const MODELS = ['iPhone 15','iPhone 15 Plus','iPhone 15 Pro','iPhone 15 Pro Max','iPhone 16','iPhone 16 Plus','iPhone 16 Pro','iPhone 16 Pro Max','iPhone 16e','iPhone 17','iPhone 17 Pro','iPhone 17 Pro Max','iPhone Air','iPhone 17e','iPhone 18 Pro','iPhone 18 Pro Max'];
+const MODELS = ['iPhone 16','iPhone 16 Plus','iPhone 16 Pro','iPhone 16 Pro Max','iPhone 16e','iPhone 17','iPhone 17 Pro','iPhone 17 Pro Max','iPhone Air','iPhone 17e','iPhone 18 Pro','iPhone 18 Pro Max'];
 function doGet() {return output_({success:true,service:'Reel Wala intake',version:1});}
 function doPost(event) {
   let lock, folder, saved=false;

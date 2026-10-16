@@ -47,6 +47,7 @@ assert.equal(invoke({...creator,uploads:[...Array(5).fill(photo),clip,clip,clip]
 assert.equal(invoke({...creator,data:{...creator.data,device:'Unsupported'}}).success,false);
 assert.equal(invoke({...creator,data:{...creator.data,portfolio:'not-a-link'}}).success,false);
 assert.equal(invoke({...creator,uploads:[...Array(4).fill(photo),{...photo,mime:'image/svg+xml'}]}).success,false);
+for(const device of ['iPhone 15','iPhone 15 Plus','iPhone 15 Pro','iPhone 15 Pro Max']) assert.equal(invoke({...creator,data:{...creator.data,device}}).success,false);
 assert.equal(invoke(creator).success,true);assert.equal(rows.length,1);
 assert.equal(rows[0][5],'Pune');assert.equal(rows[0][6],'iPhone 16');
 assert.equal(rows[0][8].split('\n').length,5);assert.equal(rows[0][9].split('\n').length,1);
