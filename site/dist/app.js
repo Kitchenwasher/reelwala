@@ -264,41 +264,31 @@ const ReelWalaBooking = {
         ? CREATORS_LIST
         : CREATORS_LIST.filter(c => c.category === filter);
 
+      const specialties = {weddings:'Weddings',festivals:'Festivals & concerts',nightlife:'Nightlife & fashion',travel:'Culture & travel'};
+      $$('.picker-filter-chip').forEach(button => {
+        const active = button.dataset.filter === filter;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+      if (teamMatchCard) {
+        const selected = !this.state.creator;
+        teamMatchCard.classList.toggle('selected', selected);
+        teamMatchCard.setAttribute('aria-pressed', String(selected));
+        $('.picker-team-action', teamMatchCard).textContent = selected ? 'Selected' : 'Choose';
+      }
       grid.innerHTML = filtered.map(c => {
-        const isSelected = this.state.creator && this.state.creator.id === c.id;
-        return `
-          <div class="picker-creator-card ${isSelected ? 'selected' : ''}" data-id="${c.id}">
-            <div class="p-card-top">
-              <div class="p-card-avatar"><img src="${c.avatar}" alt="${c.name}" loading="lazy"></div>
-              <div class="p-card-meta">
-                <strong>${c.name}</strong>
-                <span>${c.role} · ${c.city}</span>
-              </div>
-            </div>
-            <p class="p-card-desc">Signature: ${c.style}</p>
-            <button type="button" class="picker-select-btn ${isSelected ? 'active-state' : ''}" data-select-id="${c.id}">
-              ${isSelected ? 'Selected ✓' : 'Select Director'}
-            </button>
-          </div>
-        `;
+        const selected = this.state.creator?.id === c.id;
+        return `<button type="button" class="picker-creator-card ${selected?'selected':''}" data-select-id="${c.id}" aria-pressed="${selected}">
+          <span class="p-card-avatar"><img src="${c.avatar}" alt="" loading="lazy"></span>
+          <span class="p-card-meta"><strong>${c.name}</strong><span>${c.city} · ${specialties[c.category]}</span></span>
+          <span class="picker-card-action">${selected?'Selected':'Choose'}</span>
+        </button>`;
       }).join('');
-
-      $$('.picker-select-btn', grid).forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const creator = CREATORS_LIST.find(c => c.id === btn.dataset.selectId);
-          if (creator) this.setCreator(creator);
-          if (pickerDialog) pickerDialog.close();
-        });
-      });
-
-      $$('.picker-creator-card', grid).forEach(card => {
-        card.addEventListener('click', () => {
-          const creator = CREATORS_LIST.find(c => c.id === card.dataset.id);
-          if (creator) this.setCreator(creator);
-          if (pickerDialog) pickerDialog.close();
-        });
-      });
+      $$('[data-select-id]', grid).forEach(button => button.addEventListener('click', () => {
+        const creator = CREATORS_LIST.find(item => item.id === button.dataset.selectId);
+        if (creator) this.setCreator(creator);
+        pickerDialog?.close();
+      }));
     };
 
     renderGrid('all');
@@ -332,7 +322,7 @@ const ReelWalaBooking = {
 
     if (creatorObj) {
       if (nameEl) nameEl.textContent = creatorObj.name;
-      if (descEl) descEl.textContent = `${creatorObj.role} · ${creatorObj.city} (${creatorObj.style})`;
+      if (descEl) descEl.textContent = `${creatorObj.role} · ${creatorObj.city}`;
       if (badgeEl) badgeEl.textContent = 'Director Chosen';
       if (avatarWrap) avatarWrap.innerHTML = `<img src="${creatorObj.avatar}" alt="${creatorObj.name}">`;
       if (hiddenCreator) hiddenCreator.value = `${creatorObj.name} (${creatorObj.role} · ${creatorObj.city})`;

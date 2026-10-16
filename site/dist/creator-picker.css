@@ -1,0 +1,27 @@
+#creator-picker-dialog {width:min(940px,calc(100% - 32px))!important;max-width:none!important;max-height:calc(100svh - 48px)!important;overflow:auto!important;padding:36px!important;background:#f8f5ef!important;border-radius:24px!important}
+#creator-picker-dialog .picker-header {padding-right:30px;margin-bottom:24px}
+#creator-picker-dialog .picker-header .eyebrow {display:none}
+#creator-picker-dialog .picker-header h2 {font:clamp(32px,3vw,44px)/1.12 var(--serif)!important;letter-spacing:-1px!important;margin:0 0 12px}
+#creator-picker-dialog .picker-subtitle {font-size:17px!important;line-height:1.6!important;color:var(--muted)!important}
+#creator-picker-dialog .dialog-close {width:36px;height:36px;right:18px;top:18px;font-size:25px;border-radius:50%;background:#ede7dd}
+#creator-picker-dialog .picker-filter-bar {display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+#creator-picker-dialog .picker-filter-chip {font-size:14px!important;padding:10px 16px!important;line-height:1.5!important}
+#creator-picker-dialog .picker-team-card {width:100%;display:flex!important;flex-direction:row!important;align-items:center!important;gap:16px!important;text-align:left;padding:20px!important;background:#fffdf8!important;border:1px solid var(--line)!important;border-radius:16px!important;box-shadow:none!important;margin-bottom:22px}
+#creator-picker-dialog .picker-team-card.selected {border-color:#cb8255!important;background:#f5e7d8!important}
+#creator-picker-dialog .picker-team-sparkle {font-size:27px;color:#c65b30;flex:0 0 34px;text-align:center}
+#creator-picker-dialog .picker-team-copy {flex:1;min-width:0}
+#creator-picker-dialog .picker-team-copy strong {display:block;font:500 18px/1.4 var(--sans)!important;color:var(--ink)}
+#creator-picker-dialog .picker-team-copy>span {display:block;font-size:14px;line-height:1.6;color:var(--muted);margin-top:4px}
+#creator-picker-dialog .picker-team-action,#creator-picker-dialog .picker-card-action {padding:8px 13px;border:1px solid #d9d0c1;border-radius:25px;color:var(--ink);font-size:14px;line-height:1.4;flex-shrink:0}
+#creator-picker-dialog .selected .picker-team-action,#creator-picker-dialog .selected .picker-card-action {color:#fff;background:var(--orange);border-color:var(--orange)}
+#creator-picker-dialog .picker-creators-grid {grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;max-height:none!important;overflow:visible!important;padding:0!important}
+#creator-picker-dialog .picker-creator-card {display:flex!important;flex-direction:row!important;align-items:center!important;gap:14px!important;text-align:left;padding:19px 16px!important;min-width:0;border:1px solid #dfd6c9!important;border-radius:14px!important;background:#fffdfa!important;box-shadow:none!important}
+#creator-picker-dialog .picker-creator-card.selected {border:1px solid #cb8255!important;background:#f9eddf!important}
+#creator-picker-dialog .p-card-avatar {width:54px!important;height:54px!important;display:block}
+#creator-picker-dialog .p-card-meta {flex:1;min-width:0}
+#creator-picker-dialog .p-card-meta strong {font:500 18px/1.4 var(--sans)!important}
+#creator-picker-dialog .p-card-meta>span {font:400 14px/1.6 var(--sans)!important;margin-top:5px!important;color:var(--muted)!important}
+#creator-picker-dialog .picker-creator-card:is(:hover,:focus-visible),#creator-picker-dialog .picker-team-card:is(:hover,:focus-visible) {border-color:#b66c42!important;transform:none!important;background:#f4eadd!important}
+@media(max-width:850px){#creator-picker-dialog .picker-creators-grid{grid-template-columns:1fr!important}}
+@media(max-width:600px){#creator-picker-dialog{padding:28px 20px!important;max-height:calc(100svh - 24px)!important;width:calc(100% - 24px)!important;border-radius:20px!important}#creator-picker-dialog .picker-subtitle{font-size:16px!important}#creator-picker-dialog .picker-filter-chip{font-size:13px!important;padding:8px 12px!important}#creator-picker-dialog .picker-team-card{padding:16px!important;gap:10px!important}#creator-picker-dialog .picker-team-sparkle{display:none}#creator-picker-dialog .p-card-avatar{width:46px!important;height:46px!important}#creator-picker-dialog .picker-creator-card{padding:16px 13px!important;gap:11px!important}#creator-picker-dialog .p-card-meta strong{font-size:17px!important}#creator-picker-dialog .picker-card-action,#creator-picker-dialog .picker-team-action{padding:7px 10px;font-size:13px}}
+@media(prefers-reduced-motion:reduce){#creator-picker-dialog *{transition:none!important;animation:none!important}}
