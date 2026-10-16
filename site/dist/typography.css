@@ -51,3 +51,10 @@ input,textarea,select {font-size:16px!important;line-height:1.5}
   .creator-header nav {font-size:14px}
   .editing-hook-copy .button {font-size:16px!important}
 }
+
+.creator-banner h2 {font-size:clamp(40px,4vw,64px)!important;line-height:1.12}
+.creator-banner p:not(.eyebrow) {font-size:17px!important;line-height:1.75}
+.creator-banner .button {font-size:18px!important}
+footer>span,footer>a:not(.wordmark) {font-size:15px!important;line-height:1.6}
+.footer-note {font-size:14px!important}
+@media(max-width:700px){.creator-banner h2{font-size:42px!important}.creator-banner p:not(.eyebrow){font-size:16px!important}.creator-banner .button{font-size:16px!important}footer>span,footer>a:not(.wordmark){font-size:14px!important}}
