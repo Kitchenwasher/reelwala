@@ -24,9 +24,8 @@ function PricingPackages(){
             event.preventDefault();const next=event.key==='Home'?'standard':event.key==='End'?'select':name==='standard'?'select':'standard';
             setFamily(next);document.getElementById(`package-tab-${next}`)?.focus();
           }
-        }}><span>{name==='standard'?'Standard packages':'Premium packages'}</span><small>{name==='standard'?'03':'04'}</small></button>)}
+        }}><span>{name==='standard'?'Standard packages':'Premium packages'}</span></button>)}
     </div>
-    <p className="package-demo-note">Base prices and Premium coverage are confirmed on enquiry. Extra shoot time is ₹1,000 per hour.</p>
     <div className="price-grid package-collection" id="package-collection" role="tabpanel" aria-labelledby={`package-tab-${family}`}>
       {plans.map((plan,index)=><PricingMotionCard key={plan.id} order={index} className={plan.featured?'featured':''}>
         <div className="package-intro"><div className="package-card-top"><span>{plan.addon?'PER EXTRA SHOOT HOUR':family==='standard'?'STANDARD COVERAGE':'PREMIUM · DETAILS ON ENQUIRY'}</span><span>{String(index+1).padStart(2,'0')}</span></div>
