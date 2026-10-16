@@ -120,7 +120,7 @@ function CreatorsDirectory() {
           <h2>{creator.title}</h2>
           <p>{role}</p>
           <a className="button outline" href={`./?creator=${encodeURIComponent(id)}#book`}>
-            Book with {creator.title.split(' ')[0]} <span aria-hidden="true">↗</span>
+            Book with {creator.title.split(' ')[0]}
           </a>
         </div>
       </article>;

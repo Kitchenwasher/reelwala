@@ -299,7 +299,7 @@ function WorkDriftWallShowcase() {
                     setActiveReel(null);
                   }}
                 >
-                  Book a reel like this <span>↗</span>
+                  Book a reel like this
                 </a>
               </div>
             </div>

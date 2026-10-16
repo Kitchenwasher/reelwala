@@ -598,7 +598,7 @@ async function sendEnquiry(form, kind) {
 }
 
 if (endpoint) {
-  $('#booking-form button[type="submit"]').innerHTML = 'Send my enquiry <span>↗</span>';
+  $('#booking-form button[type="submit"]').innerHTML = 'Send my enquiry';
   $('#booking-form .form-note').textContent = 'Your details are sent securely to the Reel Wala team. A booking is final only after confirmation.';
 }
 

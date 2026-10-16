@@ -31,7 +31,7 @@ function PricingPixelCards() {
           data-package="Standard"
           onClick={() => handleSelectPackage('Standard')}
         >
-          Enquire about Standard <span>↗</span>
+          Enquire about Standard
         </a>
       </PixelCard>
 
@@ -55,7 +55,7 @@ function PricingPixelCards() {
           data-package="Extended"
           onClick={() => handleSelectPackage('Extended')}
         >
-          Enquire about Extended <span>↗</span>
+          Enquire about Extended
         </a>
       </PixelCard>
 
@@ -79,7 +79,7 @@ function PricingPixelCards() {
           data-package="Custom / Premium"
           onClick={() => handleSelectPackage('Custom / Premium')}
         >
-          Let’s talk details <span>↗</span>
+          Let’s talk details
         </a>
       </PixelCard>
     </>
