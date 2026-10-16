@@ -27,6 +27,6 @@ Model options were checked against https://support.apple.com/en-in/108044 on Oct
 
 ## Reel editing
 
-The Replay section has been replaced with an edit-request form. It accepts 3–4 MP4, MOV or WebM clips, up to 10 MB each and 25 MB combined. The `edit` intake kind saves contact details, private Drive video links, editing brief and status in Edits. Uploads are stored privately in the owner’s Drive; they are not made public. No automatic editing, pricing or delivery promise is implied.
+The homepage editing hook links to edit-reel.html, a separate Clips → Style → Details flow. It accepts 3–4 MP4, MOV or WebM clips, up to 10 MB each and 25 MB combined. The `edit` intake kind saves contact details, private Drive video links, editing brief and status in Edits. Uploads are stored privately in the owner’s Drive; they are not made public. No automatic editing, pricing or delivery promise is implied.
 
 The endpoint is still empty. Until the owner deploys this updated Code.gs and configures config.js, the form only downloads a draft containing clip names; it does not send files. Verify one labelled edit request, its Edits row and its Drive files after deployment.

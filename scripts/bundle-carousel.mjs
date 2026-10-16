@@ -102,6 +102,18 @@ async function build() {
     });
     console.log('Hero AeroShards bundled successfully into site/dist/hero-aero-shards.bundle.js');
 
+    await esbuild.build({
+      entryPoints: ['src/editing-hook.jsx'],
+      bundle: true,
+      outfile: 'site/dist/editing-hook.bundle.js',
+      format: 'esm',
+      minify: true,
+      sourcemap: true,
+      jsx: 'automatic',
+      define: { 'process.env.NODE_ENV': '"production"' }
+    });
+    console.log('Editing hook bundled successfully.');
+
     // 6. Bundle Pricing PixelCards
     await esbuild.build({
       entryPoints: ['src/pricing-pixel-cards.jsx'],

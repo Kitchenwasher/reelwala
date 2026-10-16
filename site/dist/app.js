@@ -621,42 +621,4 @@ const bForm = $('#booking-form');
 if (bForm) bForm.addEventListener('submit', event => { event.preventDefault(); sendEnquiry(event.currentTarget, 'booking'); });
 const cForm = $('#creator-form');
 if (cForm) cForm.addEventListener('submit', event => { event.preventDefault(); sendEnquiry(event.currentTarget, 'creator'); });
-const editForm = $('#edit-form');
-if (editForm) {
-  const clips = $('#edit-clips');
-  const previews = $('#edit-clip-previews');
-  const note = $('#edit-files-note');
-  let previewUrls = [];
-  const clearPreviews = () => { previewUrls.forEach(url => URL.revokeObjectURL(url));previewUrls = [];previews.replaceChildren(); };
-  const validateClips = () => {
-    const files = [...clips.files];
-    let error = '';
-    if (files.length < 3 || files.length > 4) error = 'Choose three or four videos.';
-    else if (files.some(file => !['video/mp4', 'video/quicktime', 'video/webm'].includes(file.type))) error = 'Choose MP4, MOV or WebM videos.';
-    else if (files.some(file => !file.size || file.size > 10000000)) error = 'Each video must be under 10 MB and cannot be empty.';
-    else if (files.reduce((total, file) => total + file.size, 0) > 25000000) error = 'Keep the videos under 25 MB combined.';
-    clips.setCustomValidity(error);
-    note.textContent = error || files.length + ' clips selected';
-    return !error;
-  };
-  clips.addEventListener('change', () => {
-    delete editForm.dataset.submissionId;clearPreviews();
-    if (!validateClips()) return;
-    [...clips.files].forEach(file => {
-      const figure = document.createElement('figure');
-      const video = document.createElement('video');
-      const caption = document.createElement('figcaption');
-      video.src = URL.createObjectURL(file);previewUrls.push(video.src);
-      video.controls = true;video.preload = 'metadata';video.playsInline = true;
-      caption.textContent = file.name;figure.append(video,caption);previews.append(figure);
-    });
-  });
-  editForm.addEventListener('submit', event => { event.preventDefault();if (validateClips()) sendEnquiry(editForm,'edit');else clips.reportValidity(); });
-  editForm.addEventListener('reset', () => { clearPreviews();clips.setCustomValidity('');note.textContent = 'No clips selected'; });
-  window.addEventListener('pagehide',clearPreviews);
-  if (endpoint) {
-    $('button[type="submit"]',editForm).innerHTML = 'Send clips for editing <span>↗</span>';
-    $('.form-note',editForm).textContent = 'Your videos are sent privately to the Reel Wala team. We’ll confirm the price and delivery date before editing starts.';
-  }
-}
 $('#year').textContent=new Date().getFullYear();

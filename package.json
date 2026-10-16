@@ -7,7 +7,7 @@
     "build": "node site/build.mjs",
     "bundle": "node scripts/bundle-carousel.mjs",
     "start": "python -m http.server 4173 --directory site/dist --bind 127.0.0.1",
-    "test": "node --check site/dist/app.js && node site/integrations/check-intake.mjs"
+    "test": "node --check site/dist/app.js && node --check site/dist/edit-reel.js && node --test src/edit-hook-layout.test.mjs && node site/integrations/check-intake.mjs"
   },
   "repository": {
     "type": "git",
