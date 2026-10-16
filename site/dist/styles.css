@@ -51,17 +51,12 @@
 .work {
   position: relative !important;
   width: 100% !important;
-  background: #09080e !important;
-  background:
-    linear-gradient(to bottom, #f5f1e9 0%, #e4dbcf 14%, #b7a99d 34%, #75635b 54%, #382a29 76%, rgba(9, 8, 14, 0) 100%) top / 100% var(--work-blend-height, 96px) no-repeat,
-    radial-gradient(ellipse 80% 45% at 50% 0%, rgba(243, 84, 34, 0.18) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 85% 60%, rgba(130, 60, 200, 0.08) 0%, transparent 60%),
-    #09080e !important;
-  color: #f7f4ee !important;
-  padding: 132px 0 75px 0 !important;
+  background: var(--paper) !important;
+  color: var(--ink) !important;
+  padding: 75px 0 !important;
   overflow: hidden !important;
   border-top: 0 !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-bottom: 1px solid var(--line) !important;
 }
 
 .work-header {
@@ -129,7 +124,7 @@
 .work h2 {
   font: clamp(48px, 6.2vw, 88px)/1.04 var(--serif) !important;
   letter-spacing: -2.5px !important;
-  color: #ffffff !important;
+  color: var(--ink) !important;
   margin: 0 !important;
   max-width: 620px;
 }
@@ -167,9 +162,9 @@
 }
 
 .work-filter-chip {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #c5beaf;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid var(--line);
+  color: var(--muted);
   padding: 9px 18px;
   border-radius: 9999px;
   font-family: var(--sans);
@@ -182,17 +177,17 @@
 }
 
 .work-filter-chip:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.24);
+  background: #efe3d3;
+  color: var(--ink);
+  border-color: #c7b49d;
   transform: translateY(-1px);
 }
 
 .work-filter-chip.active {
-  background: #ffffff;
-  color: #171513;
-  border-color: #ffffff;
-  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.2);
+  background: var(--orange);
+  color: #ffffff;
+  border-color: var(--orange);
+  box-shadow: 0 4px 14px rgba(205, 84, 35, 0.12);
 }
 
 /* The Drift Wall Container - Full Bleed Cinematic Canvas */
@@ -217,7 +212,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, #09080e 0%, transparent 14%, transparent 86%, #09080e 100%);
+  background: linear-gradient(to bottom, var(--paper) 0%, transparent 14%, transparent 86%, var(--paper) 100%);
   pointer-events: none;
   z-index: 6;
 }
@@ -226,7 +221,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, #09080e 0%, transparent 8%, transparent 92%, #09080e 100%);
+  background: linear-gradient(to right, var(--paper) 0%, transparent 8%, transparent 92%, var(--paper) 100%);
   pointer-events: none;
   z-index: 6;
 }
@@ -556,8 +551,7 @@
 
 @media (max-width: 700px) {
   .work {
-    --work-blend-height: 80px;
-    padding: 116px 0 50px 0 !important;
+    padding: 55px 0 50px 0 !important;
   }
   .work-heading-row {
     gap: 16px;
