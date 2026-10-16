@@ -1,6 +1,6 @@
 // A single cached SVG motif re-used without extra canvases or stacking contexts.
 // Preserve each section's existing gradients and background colour.
-const continuousMain=document.querySelector('main#main:has(> .hero)');
+const continuousMain=document.querySelector('main.brand-continuous-main');
 continuousMain?.classList.add('brand-continuous-main');
 const shardSections=[...document.querySelectorAll('main > section:not(.hero), body > footer, .directory-main, .edit-page-main')]
   .filter(section=>!continuousMain?.contains(section));

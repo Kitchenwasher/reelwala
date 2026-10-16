@@ -12,7 +12,7 @@
 .brand-continuous-main {
   background: url('assets/brand-shards.svg') center top / 1200px auto repeat-y var(--paper);
 }
-.brand-continuous-main > section:not(.hero) {
+.brand-continuous-main > section:not(.hero):not(.creator-banner) {
   background: transparent !important;
   border-top: 0 !important;
   border-bottom: 0 !important;
