@@ -4,26 +4,35 @@ export const PACKAGE_PLANS = [
     "id": "essential",
     "family": "standard",
     "name": "Standard",
-    "price": null,
+    "subtitle": "Hourly Plan",
+    "price": 1999,
     "bookingPackage": "Standard",
-    "description": "Quick, focused content for a high-quality reel without the wait.",
+    "description": "Quick, focused content for when you need a high-quality reel without the wait.",
     "features": [
+      "Up to 1 hour shoot time",
+      "1 edited reel delivered (up to 60s)",
       "4 complimentary colour-graded photos",
-      "Reel delivery within 24 hours",
-      "A professional reeler assigned to your event"
+      "Trained and certified reel maker",
+      "Shot on latest iPhones",
+      "Reel delivery within 24 hours"
     ]
   },
   {
     "id": "extended",
     "family": "standard",
     "name": "Extended",
-    "price": null,
+    "subtitle": "Half Day Plan",
+    "price": 4999,
     "bookingPackage": "Extended",
     "featured": true,
-    "description": "For longer shoots, events and creating multiple high-quality reels in one session.",
+    "description": "Ideal for longer shoots, events, and creating multiple high-quality reels in one session.",
     "features": [
       "Up to 4 hours of shoot time",
+      "2 edited reels delivered (up to 60s each)",
       "7 complimentary colour-graded photos",
+      "Raw footage access",
+      "Trained and certified reel maker",
+      "Shot on latest iPhones",
       "Reel delivery within 24 hours"
     ]
   },
@@ -31,12 +40,14 @@ export const PACKAGE_PLANS = [
     "id": "extra-hour",
     "family": "standard",
     "name": "Extra hour",
+    "subtitle": "Add-on Coverage",
     "price": 1000,
     "addon": true,
     "bookingPackage": "Custom / Premium",
     "description": "Extend your shoot with an additional hour of coverage.",
     "features": [
       "₹1,000 per extra shoot hour",
+      "1 extra reel OR 1 hour extra shoot",
       "Added to your agreed shoot coverage",
       "Confirm extra time with the team"
     ]

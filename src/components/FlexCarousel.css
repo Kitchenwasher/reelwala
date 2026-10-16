@@ -48,7 +48,7 @@
   flex-direction: column;
   align-items: center;
   max-width: 100%;
-  font-size: 16px;
+  font-size: 18px;
   font-family: var(--serif, 'DM Serif Display', Georgia, serif);
   font-weight: 500;
   line-height: 1.35;
@@ -58,11 +58,11 @@
 
 .flex-carousel__subtitle {
   font-family: var(--sans, 'DM Sans', sans-serif);
-  font-size: 11px;
-  font-weight: 400;
+  font-size: 12px;
+  font-weight: 600;
   letter-spacing: 1.2px;
   text-transform: uppercase;
-  color: var(--orange, #f35422);
+  color: var(--orange-text, #c24115);
   margin-top: 2px;
 }
 
@@ -71,11 +71,11 @@
   align-items: center;
   gap: 4px;
   font-family: var(--sans, 'DM Sans', sans-serif);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 1px;
   line-height: 1;
   font-variant-numeric: tabular-nums;
-  color: var(--muted, #726f67);
+  color: var(--muted, #57534a);
   transition: opacity 400ms ease;
   margin-top: 4px;
 }

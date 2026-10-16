@@ -31,13 +31,13 @@ test('prices use Indian currency grouping',()=>{
 test('written notes control coverage and unknown prices stay on enquiry',()=>{
   const standard=PACKAGE_PLANS.find(plan=>plan.name==='Standard');
   const extended=PACKAGE_PLANS.find(plan=>plan.name==='Extended');
-  assert.equal(standard.price,null);
+  assert.equal(standard.price,1999);
   assert(standard.features.includes('4 complimentary colour-graded photos'));
-  assert.equal(extended.price,null);
+  assert.equal(extended.price,4999);
   assert(extended.features.includes('Up to 4 hours of shoot time'));
   assert(extended.features.includes('7 complimentary colour-graded photos'));
   for(const plan of [standard,extended])assert(plan.features.includes('Reel delivery within 24 hours'));
-  assert.deepEqual(PACKAGE_PLANS.filter(plan=>plan.price!==null).map(plan=>[plan.id,plan.price]),[['extra-hour',1000]]);
+  assert.deepEqual(PACKAGE_PLANS.filter(plan=>plan.price!==null).map(plan=>[plan.id,plan.price]),[['essential',1999],['extended',4999],['extra-hour',1000]]);
   for(const plan of PACKAGE_PLANS.filter(plan=>plan.family==='select')){
     assert.equal(plan.price,null);assert.equal(plan.pending,true);
     assert(plan.features.every(feature=>!/\d/.test(feature)));

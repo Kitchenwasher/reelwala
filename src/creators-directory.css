@@ -1,7 +1,7 @@
 .creators-dock-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .creators-dock-actions .button{white-space:nowrap}
 .creators-dock-actions .button.outline span{color:currentColor}
-@media(max-width:700px){.creators-dock-actions{width:100%;gap:10px}.creators-dock-actions .button{flex:1;justify-content:space-between;font-size:12px;gap:12px;padding:13px 16px}}
+@media(max-width:700px){.creators-dock-actions{width:100%;gap:10px}.creators-dock-actions .button{flex:1;justify-content:space-between;font-size:14px;gap:12px;padding:13px 16px}}
 .directory-header{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:30px 4.3%;border-bottom:1px solid var(--line)}
 .directory-header .wordmark{font-size:30px;letter-spacing:-1px}
 .directory-header nav{display:flex;gap:28px;align-items:center;font-size:14px}
@@ -12,8 +12,8 @@
 .creator-directory-card>img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}
 .creator-directory-info{padding:24px}
 .creator-directory-info h2{font:28px/1.2 var(--serif);letter-spacing:-.5px;margin:8px 0}
-.creator-directory-info p{font-size:13px;line-height:1.6;color:var(--muted)}
-.creator-directory-info .creator-directory-city{color:var(--orange);font-size:11px;text-transform:uppercase;letter-spacing:1.4px}
-.creator-directory-info .button{width:100%;margin-top:24px;padding:15px;gap:12px;font-size:12px}
+.creator-directory-info p{font-size:14px;line-height:1.6;color:var(--muted)}
+.creator-directory-info .creator-directory-city{color:var(--orange-text,#c24115);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1.2px}
+.creator-directory-info .button{width:100%;margin-top:24px;padding:15px;gap:12px;font-size:14px}
 @media(max-width:1100px){.creator-directory-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:600px){.directory-header{padding:24px 6%;align-items:flex-start}.directory-header .wordmark{font-size:23px}.directory-header nav{gap:15px;font-size:12px}.directory-main{padding:40px 6% 60px}.creator-directory-grid{grid-template-columns:1fr;gap:24px}.creator-directory-info{padding:22px}.directory-main h1{margin-bottom:28px}}
+@media(max-width:600px){.directory-header{padding:24px 6%;align-items:flex-start}.directory-header .wordmark{font-size:23px}.directory-header nav{gap:15px;font-size:13px}.directory-main{padding:40px 6% 60px}.creator-directory-grid{grid-template-columns:1fr;gap:24px}.creator-directory-info{padding:22px}.directory-main h1{margin-bottom:28px}}

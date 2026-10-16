@@ -4,64 +4,64 @@ import HeroReelScene from './HeroReelScene.jsx';
 
 const REEL_MOMENTS = [
   {
-    src: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=900&q=80&auto=format&fit=crop',
-    alt: 'Best Friends Laughing Outdoors',
-    title: 'Unfiltered Joy',
-    subtitle: 'Close Friends'
+    src: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=900&q=80&auto=format&fit=crop',
+    alt: 'Joyful Haldi Ceremony with Marigold Petals',
+    title: 'Haldi Celebration',
+    subtitle: 'Wedding Ceremony'
   },
   {
-    src: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=900&q=80&auto=format&fit=crop',
-    alt: 'Music Festival Stage & Neon Lights',
-    title: 'Neon Pulse',
-    subtitle: 'Music Festivals'
+    src: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=900&q=80&auto=format&fit=crop',
+    alt: 'Romantic Couple First Dance under Fairy Lights',
+    title: 'The First Dance',
+    subtitle: 'Reception Night'
   },
   {
-    src: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=900&q=80&auto=format&fit=crop',
-    alt: 'Nightclub & Electric Dance Floor',
-    title: 'Midnight Motion',
-    subtitle: 'Nightlife & Parties'
+    src: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=900&q=80&auto=format&fit=crop',
+    alt: 'Vibrant Sangeet Dance Performance',
+    title: 'Sangeet Energy',
+    subtitle: 'Dance & Music'
   },
   {
-    src: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=900&q=80&auto=format&fit=crop',
-    alt: 'Acoustic Jam Session & Friends',
-    title: 'Warm Sessions',
-    subtitle: 'Living Room Vibe'
+    src: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=900&q=80&auto=format&fit=crop',
+    alt: 'Bridal Henna & Mehendi Celebration',
+    title: 'Mehendi Beats',
+    subtitle: 'Wedding Festivities'
   },
   {
-    src: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=900&q=80&auto=format&fit=crop',
-    alt: 'Rooftop Birthday Party & Toast',
-    title: 'Golden Hour',
-    subtitle: 'Celebrations'
+    src: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=900&q=80&auto=format&fit=crop',
+    alt: 'Golden Hour Champagne Toast Celebration',
+    title: 'Golden Hour Toasts',
+    subtitle: 'Cocktail Reception'
   },
   {
-    src: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900&q=80&auto=format&fit=crop',
-    alt: 'Festival Confetti & Strobe Lights',
-    title: 'Electric Carnival',
-    subtitle: 'Culture & Crowd'
+    src: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=900&q=80&auto=format&fit=crop',
+    alt: 'Live Concert & Festival Sparklers Crowd',
+    title: 'Live Festival Energy',
+    subtitle: 'Concerts & Events'
   },
   {
-    src: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=900&q=80&auto=format&fit=crop',
-    alt: 'Celebration Sparklers & Toast',
-    title: 'Spark & Relive',
-    subtitle: 'Milestones'
+    src: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=900&q=80&auto=format&fit=crop',
+    alt: 'Keynote Speaker on Modern Conference Stage',
+    title: 'Keynote Momentum',
+    subtitle: 'Corporate Summit'
   },
   {
-    src: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=80&auto=format&fit=crop',
-    alt: 'Coastal Adventure & Sunset Glow',
-    title: 'Chasing Coast',
-    subtitle: 'Travel Reels'
+    src: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?w=900&q=80&auto=format&fit=crop',
+    alt: 'Joyful Holi Color Powder Festival Celebration',
+    title: 'Festival of Colors',
+    subtitle: 'Cultural Festivities'
   },
   {
-    src: 'https://images.unsplash.com/photo-1545232979-8bf68ee9b1af?w=900&q=80&auto=format&fit=crop',
-    alt: 'Rooftop Dance & Sunset Cocktail',
-    title: 'Sunset Moves',
-    subtitle: 'Dance & Beats'
+    src: 'https://images.unsplash.com/photo-1571266028243-3716f02d2d2e?w=900&q=80&auto=format&fit=crop',
+    alt: 'Nightclub & DJ Showcase Celebration',
+    title: 'Midnight Beats',
+    subtitle: 'Afterparty & Nightlife'
   },
   {
-    src: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=900&q=80&auto=format&fit=crop',
-    alt: 'Carnival Night Festivities',
-    title: 'Night Glow',
-    subtitle: 'Festival Energy'
+    src: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=900&q=80&auto=format&fit=crop',
+    alt: 'Arena Live Stage & Crowd Celebration',
+    title: 'Arena Lights',
+    subtitle: 'Live Shows'
   }
 ];
 

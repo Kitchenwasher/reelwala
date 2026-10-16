@@ -27,11 +27,30 @@ function EditingHook() {
     const query=matchMedia('(prefers-reduced-motion: reduce)');
     const preference=()=>{reduced.current=query.matches;stage.current.dataset.moving=String(moving.current&&!query.matches);};
     query.addEventListener('change',preference);preference();
-    const observer=new IntersectionObserver(([entry])=>{visible.current=entry.isIntersecting;stage.current.dataset.moving=String(entry.isIntersecting&&moving.current&&!reduced.current);});observer.observe(stage.current);
-    let frame,last=performance.now(),elapsed=0;
+    let frame=null,last=performance.now(),elapsed=0;
+    const wake=()=>{
+      if(!frame&&visible.current&&!document.hidden&&moving.current&&!reduced.current){
+        last=performance.now();
+        frame=requestAnimationFrame(animate);
+      }
+    };
+    const sleep=()=>{
+      if(frame){cancelAnimationFrame(frame);frame=null;}
+    };
+    const observer=new IntersectionObserver(([entry])=>{
+      visible.current=entry.isIntersecting;
+      stage.current.dataset.moving=String(entry.isIntersecting&&moving.current&&!reduced.current);
+      if(entry.isIntersecting)wake();
+      else sleep();
+    });
+    observer.observe(stage.current);
+    const onVisibility=()=>{if(document.hidden)sleep();else wake();};
+    document.addEventListener('visibilitychange',onVisibility);
     const animate=now=>{
+      frame=null;
+      if(!visible.current||document.hidden||!moving.current||reduced.current)return;
       const dt=Math.min(now-last,50);last=now;
-      if(visible.current&&!document.hidden&&moving.current&&!reduced.current&&geometry.current){
+      if(geometry.current){
         elapsed+=dt;
         const index=Math.floor(elapsed/2600)%3;
         const phase=(elapsed%2600)/2600;
@@ -53,8 +72,8 @@ function EditingHook() {
       }
       frame=requestAnimationFrame(animate);
     };
-    frame=requestAnimationFrame(animate);
-    return()=>{cancelAnimationFrame(frame);observer.disconnect();query.removeEventListener('change',preference);};
+    wake();
+    return()=>{sleep();observer.disconnect();query.removeEventListener('change',preference);document.removeEventListener('visibilitychange',onVisibility);};
   },[]);
   const toggle=()=>{moving.current=!moving.current;setPaused(!moving.current);stage.current.dataset.moving=String(moving.current&&!reduced.current);};
   const boxStyle=box=>({left:box.x,top:box.y,width:box.width,height:box.height});

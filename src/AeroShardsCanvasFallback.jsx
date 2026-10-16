@@ -557,13 +557,50 @@ export default function AeroShardsCanvasFallback({
         }
       }
 
-      animId = requestAnimationFrame(render);
+      if (isVisible && !document.hidden) {
+        animId = requestAnimationFrame(render);
+      } else {
+        animId = null;
+      }
     };
+
+    let isVisible = true;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible && !document.hidden) {
+          lastTime = performance.now();
+          if (!animId) animId = requestAnimationFrame(render);
+        } else {
+          if (animId) {
+            cancelAnimationFrame(animId);
+            animId = null;
+          }
+        }
+      },
+      { threshold: 0.01 }
+    );
+    io.observe(container);
+
+    const onVisibility = () => {
+      if (document.hidden) {
+        if (animId) {
+          cancelAnimationFrame(animId);
+          animId = null;
+        }
+      } else if (isVisible && !animId) {
+        lastTime = performance.now();
+        animId = requestAnimationFrame(render);
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibility);
 
     animId = requestAnimationFrame(render);
 
     return () => {
-      cancelAnimationFrame(animId);
+      if (animId) cancelAnimationFrame(animId);
+      io.disconnect();
+      document.removeEventListener('visibilitychange', onVisibility);
       if (resizeObserver) resizeObserver.disconnect();
       window.removeEventListener('resize', updateSize);
       if (mouseInteraction) {

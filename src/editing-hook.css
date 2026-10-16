@@ -28,5 +28,5 @@
 @keyframes hook-screen-in{from{opacity:0}to{opacity:1}}
 @keyframes hook-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @media(max-width:900px){.editing-hook{padding:55px 6%}.editing-hook-content{grid-template-columns:1fr;gap:35px}.editing-hook-copy h2{font-size:clamp(44px,7vw,68px)}.editing-hook-stage{width:100%;max-width:650px;margin:auto}.editing-hook-description{margin:20px 0 24px}.editing-hook-copy .eyebrow{margin-bottom:22px}}
-@media(max-width:480px){.editing-hook{padding:45px 6% 35px}.editing-hook-copy h2{font-size:43px;letter-spacing:-1.5px}.editing-hook-copy .button{font-size:15px;padding:17px 28px}.editing-hook-number{top:-22px;font-size:10px}.editing-hook-output-label{top:-28px;font-size:12px}.editing-hook-source,.editing-hook-flyer,.editing-hook-output{border-radius:10px}}
+@media(max-width:480px){.editing-hook{padding:45px 6% 35px}.editing-hook-copy h2{font-size:43px;letter-spacing:-1.5px}.editing-hook-copy .button{font-size:15px;padding:17px 28px}.editing-hook-number{top:-24px;font-size:12px}.editing-hook-output-label{top:-28px;font-size:12px}.editing-hook-source,.editing-hook-flyer,.editing-hook-output{border-radius:10px}}
 @media(prefers-reduced-motion:reduce){.editing-hook-stage *{animation:none!important}.editing-hook-flyer,.editing-hook-pause{display:none}.editing-hook-progress i{transform:scaleX(1)}}

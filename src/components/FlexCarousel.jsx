@@ -110,7 +110,7 @@ const BEND_PRESETS = {
 };
 
 const FIT_ASPECT = { portrait: 0.75, square: 1, landscape: 4 / 3 };
-const TAPS = 12;
+const TAPS = 6;
 const PIXEL_BUDGET = 4.5e6;
 const INTRO_DURATION = { rise: 2.1, bloom: 1.6, spin: 2.2, deal: 1.5, fade: 0.35 };
 
@@ -228,12 +228,7 @@ void main() {
   vec2 shifted = uv + drift / uResolution;
 
   vec2 texels = uResolution * uDpr;
-  vec2 gx = dFdx(shifted);
-  vec2 gy = dFdy(shifted);
-  gx *= min(1.0, 3.0 / max(length(gx * texels), 1e-4));
-  gy *= min(1.0, 3.0 / max(length(gy * texels), 1e-4));
-
-  vec4 color = textureGrad(tScene, shifted, gx, gy);
+  vec4 color = texture(tScene, shifted);
   vec2 spread = vec2(0.0, side * slope * uFlow * uStrength) / uResolution * uDispersion;
   float spreadPx = length(spread * texels);
   if (color.a > 0.002 && spreadPx > 0.25) {
@@ -242,7 +237,7 @@ void main() {
     vec3 sumWeight = vec3(0.0);
     for (int i = 0; i < ${TAPS}; i++) {
       float s = (float(i) + 0.5) / float(${TAPS});
-      vec4 c = textureGrad(tScene, shifted + spread * (s - 0.5), gx, gy);
+      vec4 c = texture(tScene, shifted + spread * (s - 0.5));
       vec3 w = max(1.0 - abs(vec3(s) - vec3(0.15, 0.5, 0.85)) * 2.6, 0.0) * c.a;
       sumColor += c.rgb * (w / max(c.a, 0.002));
       sumWeight += w;
@@ -399,7 +394,7 @@ const FlexCarousel = ({
       width: 2,
       height: 2,
       depth: false,
-      minFilter: gl.LINEAR_MIPMAP_LINEAR,
+      minFilter: gl.LINEAR,
       magFilter: gl.LINEAR
     });
 
@@ -959,8 +954,6 @@ const FlexCarousel = ({
           gl.clear(gl.COLOR_BUFFER_BIT);
         }
         renderer.bindFramebuffer();
-        target.texture.bind();
-        gl.generateMipmap(gl.TEXTURE_2D);
 
         lensUniforms.uResolution.value = [width, height];
         lensUniforms.uDpr.value = dpr;

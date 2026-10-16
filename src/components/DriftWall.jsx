@@ -144,7 +144,6 @@ const DriftWall = ({
   const lastTsRef = useRef(null);
 
   const [containerHeight, setContainerHeight] = useState(600);
-  const [activeId, setActiveId] = useState(null);
   const activeIdRef = useRef(null);
   const [reduced, setReduced] = useState(false);
 
@@ -206,7 +205,15 @@ const DriftWall = ({
   );
 
   useEffect(() => {
+    let isVisible = true;
+    let animId = null;
+
     const animate = ts => {
+      if (!isVisible || document.hidden) {
+        animId = null;
+        lastTsRef.current = null;
+        return;
+      }
       if (lastTsRef.current === null) lastTsRef.current = ts;
       const dt = Math.min(0.05, Math.max(0, ts - lastTsRef.current) / 1000);
       lastTsRef.current = ts;
@@ -215,9 +222,13 @@ const DriftWall = ({
       const targetX = pointerRef.current.x * maxTilt;
       const targetY = -pointerRef.current.y * maxTilt;
       const damp = 1 - Math.exp(-dt / 0.12);
-      pointerDampedRef.current.x += (targetX - pointerDampedRef.current.x) * damp;
-      pointerDampedRef.current.y += (targetY - pointerDampedRef.current.y) * damp;
-      applyPlaneTransform(pointerDampedRef.current.x, pointerDampedRef.current.y);
+      const prevX = pointerDampedRef.current.x;
+      const prevY = pointerDampedRef.current.y;
+      pointerDampedRef.current.x += (targetX - prevX) * damp;
+      pointerDampedRef.current.y += (targetY - prevY) * damp;
+      if (Math.abs(pointerDampedRef.current.x - prevX) > 0.001 || Math.abs(pointerDampedRef.current.y - prevY) > 0.001) {
+        applyPlaneTransform(pointerDampedRef.current.x, pointerDampedRef.current.y);
+      }
 
       if (!reduced) {
         for (let c = 0; c < trackRefs.current.length; c++) {
@@ -244,27 +255,67 @@ const DriftWall = ({
         }
       }
 
-      rafRef.current = requestAnimationFrame(animate);
+      animId = requestAnimationFrame(animate);
+      rafRef.current = animId;
     };
 
-    rafRef.current = requestAnimationFrame(animate);
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible && !document.hidden) {
+          lastTsRef.current = null;
+          if (!animId) {
+            animId = requestAnimationFrame(animate);
+            rafRef.current = animId;
+          }
+        } else {
+          if (animId) {
+            cancelAnimationFrame(animId);
+            animId = null;
+            rafRef.current = null;
+          }
+        }
+      },
+      { threshold: 0.01 }
+    );
+
+    if (containerRef.current) io.observe(containerRef.current);
+
+    const onVisibility = () => {
+      if (document.hidden) {
+        if (animId) {
+          cancelAnimationFrame(animId);
+          animId = null;
+          rafRef.current = null;
+        }
+      } else if (isVisible && !animId) {
+        lastTsRef.current = null;
+        animId = requestAnimationFrame(animate);
+        rafRef.current = animId;
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibility);
+
+    animId = requestAnimationFrame(animate);
+    rafRef.current = animId;
+
     return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      if (animId) cancelAnimationFrame(animId);
       rafRef.current = null;
       lastTsRef.current = null;
+      io.disconnect();
+      document.removeEventListener('visibilitychange', onVisibility);
     };
   }, [baseVelocities, columnMeta, pauseOnHover, parallax, reduced, applyPlaneTransform]);
 
   const activate = useCallback((id, index) => {
     activeIdRef.current = id;
     hoveredColRef.current = index;
-    setActiveId(id);
   }, []);
 
   const release = useCallback(() => {
     activeIdRef.current = null;
     hoveredColRef.current = -1;
-    setActiveId(null);
   }, []);
 
   const handlePointerMove = useCallback(
@@ -277,14 +328,12 @@ const DriftWall = ({
           y: (e.clientY - rect.top) / rect.height - 0.5
         };
       }
-      const hit = document.elementFromPoint(e.clientX, e.clientY);
-      const tile = hit && hit.closest ? hit.closest('[data-tile-id]') : null;
-      if (!tile) return;
-      const id = tile.dataset.tileId;
-      if (id === activeIdRef.current) return;
-      activeIdRef.current = id;
+      const tile = e.target && e.target.closest ? e.target.closest('[data-tile-id]') : null;
+      if (!tile) {
+        hoveredColRef.current = -1;
+        return;
+      }
       hoveredColRef.current = Number(tile.dataset.col);
-      setActiveId(id);
     },
     [parallax, reduced]
   );
@@ -338,7 +387,7 @@ const DriftWall = ({
     );
 
     const commonProps = {
-      className: `drift-wall__tile${activeId === id ? ' is-active' : ''}`,
+      className: 'drift-wall__tile',
       'data-tile-id': id,
       'data-col': colIndex,
       onFocus: () => activate(id, colIndex),

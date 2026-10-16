@@ -27,7 +27,7 @@
 .our-work-card:is(:hover,:focus-visible) .our-work-card-action{color:#8d3d20;border-color:#aa68484d;background:#fff9ed66}
 .our-work-card-copy{position:absolute;left:30px;right:26px;bottom:28px;z-index:3}
 .our-work-card h3{font:clamp(28px,2.5vw,41px)/1.08 var(--serif);letter-spacing:-.6px;color:#fff6ed;text-wrap:balance;margin:0}
-.our-work-card-action{display:inline-flex;align-items:center;margin-top:18px;padding:9px 14px;border-radius:30px;border:1px solid #ffffff4d;color:#fff6ed;font-size:11px;line-height:1.3;background:#ffffff0b}
+.our-work-card-action{display:inline-flex;align-items:center;margin-top:18px;padding:9px 14px;border-radius:30px;border:1px solid #ffffff4d;color:#fff6ed;font-size:12px;font-weight:600;line-height:1.3;background:#ffffff0b}
 .our-work-spotlight{position:absolute;inset:0;z-index:4;border-radius:inherit;pointer-events:none;opacity:0;background:radial-gradient(300px circle at var(--spot-x,50%) var(--spot-y,50%),#f78c4c38,transparent 70%);transition:opacity .35s}
 .our-work-card:hover .our-work-spotlight,.our-work-card:focus-visible .our-work-spotlight{opacity:1}
 .our-work-card:hover,.our-work-card:focus-visible{border-color:#e7794277;box-shadow:0 18px 46px #5f3b211a}
